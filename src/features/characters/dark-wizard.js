@@ -8,7 +8,7 @@ const initialState = {
   strength: 18,
   agility: 18,
   stamina: 15,
-  energy: 1400,
+  energy: 30,
   maxSpeed: 284
 };
 
