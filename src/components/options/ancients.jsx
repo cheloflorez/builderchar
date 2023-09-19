@@ -26,9 +26,8 @@ export default function Ancients({ item, setItem }) {
   };
 
   return (
-    <div className="grid grid-cols-4">
-      <h3>Ancient</h3>
-      <div>
+    <div className="flex">
+      <div className="p-2">
         <label>
           Excellent:
           <input
@@ -41,7 +40,7 @@ export default function Ancients({ item, setItem }) {
       </div>
       {item.ancient.map((value, index) => {
         return (
-          <div key={value}>
+          <div className="p-2" key={value}>
             <label>
               {value}:
               <input

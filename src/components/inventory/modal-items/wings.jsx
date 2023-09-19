@@ -157,9 +157,9 @@ export default function Wings({ item, setItem, resetOptions, optionsWings, modal
           </>
         )}
       </div>
-      <div className="text-white col-span-2">
+      <div className="text-white col-span-2 flex flex-col justify-center items-center">
         {item?.ancient?.length > 0 ? <Ancients item={item} setItem={setItem} /> : null}
-        <h2 className="mb-2">Opciones</h2>
+        {item?.name ? <h2 className="mb-2">Opciones</h2> : null}
         <form className="flex flex-col justify-center items-center gap-y-4">
           <BasicOptions resetOptions={resetOptions} item={item} setItem={setItem} optionsWings={optionsWings} />
           {optionsWings?.optionsAdvanced

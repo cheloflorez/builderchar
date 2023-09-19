@@ -7,6 +7,7 @@ export default function Inventory() {
   const [modalActive, setModalActive] = useState(false);
 
   const itemsSelected = useSelector((state) => state.charSelected);
+  
   const handleClick = (item) => {
     setModalActive(item);
   };

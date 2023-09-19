@@ -45,11 +45,8 @@ export default function Modal({ modalActive, setModalActive }) {
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 z-10 flex justify-center items-center bg-black/50 duration-300">
-      <div className="text-center justify-center w-3/4 h-3/4 bg-black rounded-lg">
+      <div className="text-center justify-center p-2 min-w-[30%] min-h-[30%] w-max h-max bg-[url('/src/assets/windows-stats/back.png')] rounded-lg">
         <div>
-          <h2>
-            <span className="text-white font-extrabold text-3xl">Select {modalActive}</span>
-          </h2>
           <select name="select" onChange={(e) => handleChange(e.target.value)} className="h-8 mt-3 rounded">
             <option value="select">Select {modalActive}</option>
             {itemFilter.map((value, index) => {
@@ -61,7 +58,7 @@ export default function Modal({ modalActive, setModalActive }) {
             })}
           </select>
         </div>
-        <div className="grid grid-cols-4 justify-center">
+        <div className="p-4 grid grid-cols-4 justify-center">
           <Wings
             item={item}
             setItem={setItem}
@@ -70,8 +67,8 @@ export default function Modal({ modalActive, setModalActive }) {
             modalActive={modalActive}
           />
         </div>
-        <button className="absolute bottom-24 text-white pb-4" onClick={handleClick}>
-          Select Item
+        <button onClick={handleClick} className="mt-2 bg-[url('/src/assets/windows-stats/save.png')] bg-cover bg-center  w-[115px] h-[45px] ">
+          <span className="text-orange-400">Guardar</span>
         </button>
       </div>
     </div>
