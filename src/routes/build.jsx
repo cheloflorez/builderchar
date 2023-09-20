@@ -12,7 +12,7 @@ export default function Build() {
   const { charName } = selectChar(params.char);
   const dispatch = useDispatch();
   const character = useSelector((state) => state.characters[charName]);
-
+  console.log(character)
   useEffect(() => {
     dispatch(addChar(character));
   }, [character,dispatch]);
