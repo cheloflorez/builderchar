@@ -18,13 +18,12 @@ export default function Build() {
   }, [character,dispatch]);
 
   return (
-    <div className="bg-slate-800 h-screen overflow-hidden">
+    <div className="bg-[url('src/assets/screen.jpg')] bg-no-repeat bg-cover h-screen overflow-hidden">
       <div className="flex justify-between px-4 pt-1">
         <CWindows />
         <Inventory />
       </div>
       <div className="flex items-end justify-around text-white -mt-4 text-xs">
-        <BarStats />
       </div>
     </div>
   );
