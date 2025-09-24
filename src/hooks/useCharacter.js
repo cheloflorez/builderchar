@@ -15,7 +15,7 @@ export const useSelectedCharacter = () => {
     increaseStats: charSelectedStore.increaseStats,
     decreaseStats: charSelectedStore.decreaseStats,
     update3rdTreeSkill: charSelectedStore.update3rdTreeSkill,
-    updateStatsBar: charSelectedStore.updateStatsBar 
+    updateStatsBar: charSelectedStore.updateStatsBar // <- Nuevo método
   };
 };
 
