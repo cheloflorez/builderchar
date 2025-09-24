@@ -1,133 +1,127 @@
+// components/C/stats/energy.jsx
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import formulasEne from "../../../functions/formulas/formulasEnergy";
+import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 
 export default function Energy() {
-  const character = useSelector((state) => state.charSelected[0]);
-  const setAncient = useSelector((state) => state.setAncient);
-
+  const { character, increaseStats, decreaseStats } = useSelectedCharacter();
   const [formulasEnergy, setFormulasEnergy] = useState({});
   const [specialization, setSpecialization] = useState({});
 
+  // Click izquierdo - restar
+  const handleLeftClick = (e) => {
+    e.preventDefault();
+    const pointsToRemove = e.shiftKey ? 10 : 1;
+    if (character && character.stats.energy > character.baseStats.energy + pointsToRemove - 1) {
+      decreaseStats({ stat: 'energy', points: pointsToRemove, baseStats: character.baseStats });
+    }
+  };
+
+  // Click derecho - sumar
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    const pointsToAdd = e.shiftKey ? 10 : 1;
+    if (character && character.points >= pointsToAdd) {
+      increaseStats({ stat: 'energy', points: pointsToAdd });
+    }
+  };
+
   useEffect(() => {
-    if (character) formulasEne(character, setFormulasEnergy, setSpecialization, setAncient);
+    if (character) formulasEne(character, setFormulasEnergy, setSpecialization, {});
   }, [character]);
+
+  // Early return DESPUÉS de hooks
+  if (!character || !character.stats) {
+    return null;
+  }
+
+  // 🔥 CALCULAR BONUS DEL 3RD TREE
+  const bonus3rdTree = calculate3rdTreeBonus(character);
+  const energyBonus = bonus3rdTree.energy;
+
+  const canIncrease = character.points >= 1;
+  const canDecrease = character.stats.energy > character.baseStats.energy;
 
   return (
     <>
-      {character && (
+      <dt className="flex items-center justify-between">
+        <span>Energy</span>
+        <button
+          onClick={handleLeftClick}
+          onContextMenu={handleRightClick}
+          disabled={!canIncrease && !canDecrease}
+          className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
+          title="Left: -1 | Right: +1 | Shift+Left: -10 | Shift+Right: +10"
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            width: 'auto',
+            height: 'auto'
+          }}
+        >
+          {/* Imagen del botón */}
+          <img
+            src="/src/assets/windows-stats/button.png"
+            alt="stat button"
+            className={`transition-all duration-150 ${!canIncrease && !canDecrease
+              ? 'opacity-50 grayscale'
+              : 'hover:brightness-110 active:brightness-90'
+              }`}
+            style={{
+              imageRendering: 'pixelated',
+              display: 'block'
+            }}
+          />
+        </button>
+      </dt>
+
+      <dd>
+        <span className="text-amber-300">{energyBonus > 0 ? `${energyBonus + character.stats.energy}` : character.stats.energy}</span>
+      </dd>
+
+      <dd className="text-center">
+        <span className="text-blue-300">
+          -
+        </span>
+      </dd>
+
+      {formulasEnergy.wizMin && (
         <>
-          <dt>Energy</dt>
-          <dd>
-            <span className="text-amber-300">{character.energy}</span>
-          </dd>
-          <dd className="text-center">
-            <span className="text-blue-300">
-              {formulasEnergy.energyStatsBlue === 0 ? "-" : <>(+{formulasEnergy.energyStatsBlue})</>}
+          <dt>
+            <span className="text-violet-500">* SPl Wiz Dmg</span>
+          </dt>
+          <dd className="col-span-2">
+            <span className="text-violet-500">
+              {specialization.splWizMax < 1 ? (
+                "-"
+              ) : (
+                <>
+                  {specialization.splWizMin} ~ {specialization.splWizMax}
+                </>
+              )}
             </span>
           </dd>
-          {formulasEnergy.wizMin && (
-            <>
-              <dt>
-                <span className="text-violet-500">* SPl Wiz Dmg</span>
-              </dt>
-              <dd className="col-span-2">
-                <span className="text-violet-500">
-                  {specialization.splWizMax < 1 ? (
-                    "-"
-                  ) : (
-                    <>
-                      {specialization.splWizMin} ~ {specialization.splWizMax}
-                    </>
-                  )}
-                </span>
-              </dd>
-              {formulasEnergy.curseMin && (
-                <>
-                  {" "}
-                  <dt>
-                    <span className="text-violet-500">* SPl Curse</span>
-                  </dt>
-                  <dd className="col-span-2">
-                    <span className="text-violet-500">
-                      {specialization.splCurseMax < 1 ? (
-                        "-"
-                      ) : (
-                        <>
-                          {specialization.splCurseMin} ~ {specialization.splCurseMax}
-                        </>
-                      )}
-                    </span>
-                  </dd>
-                </>
-              )}
-              <dt>* Wizardry Dmg</dt>
-              <dd>
-                <span className="text-amber-300">
-                  {formulasEnergy.wizMin} ~ {formulasEnergy.wizMax}
-                </span>
-              </dd>
-              <dd>
-                <span className="text-amber-300"></span>
-              </dd>
-              {formulasEnergy.magicPower && (
-                <>
-                  <dt>* Magic Power(%)</dt>
-                  <dd>
-                    <span className="text-amber-300">{formulasEnergy.magicPower}%</span>
-                  </dd>
-                  <dd>
-                    <span className="text-amber-300"></span>
-                  </dd>
-                </>
-              )}
-              {formulasEnergy.curseMax && (
-                <>
-                  <dt>* Curse</dt>
-                  <dd>
-                    <span className="text-amber-300">
-                      {formulasEnergy.curseMin} ~ {formulasEnergy.curseMax}
-                    </span>
-                  </dd>
-                  <dd>
-                    <span className="text-amber-300"></span>
-                  </dd>
-                </>
-              )}
-            </>
-          )}
-          {formulasEnergy.skillPwr && (
-            <>
-              <dt>* Skill Atk Pwr(%)</dt>
-              <dd className="col-span-2">
-                <span className="text-amber-300">{formulasEnergy.skillPwr}%</span>
-              </dd>
-            </>
-          )}
-          {formulasEnergy.AOEAtkPwr && (
-            <>
-              <dt>* Div Atk Pwr(%)</dt>
-              <dd className="col-span-2">
-                <span className="text-amber-300">{formulasEnergy.divAtkPwr}%</span>
-              </dd>
-              <dt>* AOE Atk Pwr(%)</dt>
-              <dd>
-                <span className="text-amber-300">{formulasEnergy.AOEAtkPwr}%</span>
-              </dd>
-            </>
-          )}
-          {formulasEnergy.retAtkPwr && (
-            <>
-              <dt>* Ret Atk Pwr(%)</dt>
-              <dd className="col-span-2">
-                <span className="text-amber-300">{formulasEnergy.retAtkPwr}%</span>
-              </dd>
-              <dt>* Rage Atk Pwr(%)</dt>
-              <dd>
-                <span className="text-amber-300">{formulasEnergy.rageAtkPwr}%</span>
-              </dd>
-            </>
-          )}
+
+          <dt>* Wizardry Dmg</dt>
+          <dd>
+            <span className="text-amber-300">
+              {formulasEnergy.wizMin} ~ {formulasEnergy.wizMax}
+            </span>
+          </dd>
+          <dd>
+            <span className="text-amber-300"></span>
+          </dd>
+        </>
+      )}
+
+      {formulasEnergy.skillPwr && (
+        <>
+          <dt>* Skill Atk Pwr(%)</dt>
+          <dd className="col-span-2">
+            <span className="text-amber-300">{formulasEnergy.skillPwr}%</span>
+          </dd>
         </>
       )}
     </>

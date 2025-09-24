@@ -1,6 +1,5 @@
-import { useState } from "react";
 import "../../styles/scroll-bar.css";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const extendsOptions = [
   { value: "*Crit dmg (%)", opt: "criticalDamageRate", rate: "%", decimal: true },
@@ -42,43 +41,14 @@ const extendsOptions = [
   { value: "*Weapon blck(%)", opt: "weaponBlockRate", rate: "%", decimal: true },
   { value: "*Zen ob inc (%)", opt: "increaseObtainingZenRate", rate: "%" },
 ];
+
 export default function CExtends() {
+
   const [isActive, setIsActive] = useState(false);
 
-  const character = useSelector((state) => state.charSelected[0]);
-  const setAncient = useSelector((state) => state.setAncient);
-  const statsBar = useSelector((state) => state.statsBarSlice);
-
   const valueCExtends = (options) => {
-    let valueTest = character.items.map((value) => {
-      return value[options.opt];
-    });
 
-    if (setAncient.length > 0) {
-      setAncient.forEach((value) => {
-        if (value[options.opt] > 0) valueTest[0] = valueTest[0] || 0 + value[options.opt];
-      });
-    }
-    const filteredValueTest = valueTest.filter((value) => value !== undefined);
-
-    let result = filteredValueTest.length > 0 ? filteredValueTest[0] : 0;
-
-    if (options.opt === "lifeRecoveryRate") {
-      result = statsBar.hp * (result / 100);
-    }
-    if (options.opt === "manaRecoveryRate") {
-      result = statsBar.mana / 27;
-    }
-    if (options.opt === "recoveryAGRate") {
-      result = Math.floor(2 + statsBar.ag / 20);
-    }
-    if (options.opt === "recoverySDRate") {
-      result = statsBar.sd * 0.0127;
-    }
-
-    if (options.decimal && result >= 0) {
-      result = result.toFixed(2);
-    }
+    let result = 0;
 
     return (
       <span className="text-amber-300 pr-3">

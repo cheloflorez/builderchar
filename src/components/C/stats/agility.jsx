@@ -1,122 +1,192 @@
+// components/C/stats/agility.jsx
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import formulasAgi from "../../../functions/formulas/formulasAgility";
 import specializationAgility from "../../../functions/formulas/Specialization/specializationAgility";
+import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 
 export default function Agility() {
-  const character = useSelector((state) => state.charSelected[0]);
+  const { character, increaseStats, decreaseStats } = useSelectedCharacter();
 
   const [formulasAgility, setFormulasAgility] = useState({});
   const [specialization, setSpecialization] = useState({});
 
+  // Click izquierdo - restar
+  const handleLeftClick = (e) => {
+    e.preventDefault();
+    const pointsToRemove = e.shiftKey ? 10 : 1;
+    if (character?.stats.agility > character.baseStats.agility) {
+      decreaseStats({ stat: 'agility', points: pointsToRemove, baseStats: character.baseStats });
+    }
+  };
+
+  // Click derecho - sumar
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    const pointsToAdd = e.shiftKey ? 10 : 1;
+    if (character?.points >= pointsToAdd) {
+      increaseStats({ stat: 'agility', points: pointsToAdd });
+    }
+  };
+
+  // useEffect solo se ejecuta cuando character existe
   useEffect(() => {
-    if (character) {
+    if (character && character.stats) {
       formulasAgi(character, setFormulasAgility, setSpecialization);
       specializationAgility(character, setSpecialization);
     }
   }, [character]);
 
+  // Early return si no hay character o no tiene stats
+  if (!character || !character.stats) {
+    return null;
+  }
+
+  // 🔥 CALCULAR BONUS DEL 3RD TREE
+  const bonus3rdTree = calculate3rdTreeBonus(character);
+  const agilityBonus = bonus3rdTree.agility;
+
+  const canIncrease = character.points >= 1;
+  const canDecrease = character.stats.agility > character.baseStats.agility;
+
   return (
     <>
-      {character && (
+      <dt className="flex items-center justify-between">
+        <span>Agility</span>
+        <button
+          onClick={handleLeftClick}
+          onContextMenu={handleRightClick}
+          disabled={!canIncrease && !canDecrease}
+          className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
+          title="Left: -1 | Right: +1 | Shift+Left: -10 | Shift+Right: +10"
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: 0,
+            width: 'auto',
+            height: 'auto'
+          }}
+        >
+          {/* Imagen del botón */}
+          <img
+            src="/src/assets/windows-stats/button.png"
+            alt="stat button"
+            className={`transition-all duration-150 ${!canIncrease && !canDecrease
+              ? 'opacity-50 grayscale'
+              : 'hover:brightness-110 active:brightness-90'
+              }`}
+            style={{
+              imageRendering: 'pixelated',
+              display: 'block'
+            }}
+          />
+        </button>
+      </dt>
+
+      <dd>
+        <span className="text-amber-300">{agilityBonus > 0 ? `${agilityBonus + character.stats.agility}` : character.stats.agility}</span>
+      </dd>
+
+      <dd className="text-center">
+        <span className="text-blue-300">
+          -
+        </span>
+      </dd>
+
+      {specialization.splAtkMax >= 0 && (
         <>
-          <dt>Agility</dt>
-          <dd>
-            <span className="text-amber-300">{character.agility}</span>
-          </dd>
-          <dd className="text-center">
-            <span className="text-blue-300">-</span>
-          </dd>
-          {specialization.splAtkMax >= 0 && (
-            <>
-              <dt>
-                <span className="text-violet-500">* Spl Atk Pwr</span>
-              </dt>
-              <dd className="col-span-2">
-                <span className="text-violet-500">
-                  {specialization.splAtkMax < 1 ? (
-                    "-"
-                  ) : (
-                    <>
-                      {specialization.splAtkMin} ~ {specialization.splAtkMax}
-                    </>
-                  )}
-                </span>
-              </dd>
-            </>
-          )}
-          {specialization.splDef >= 0 && (
-            <>
-              <dt>
-                <span className="text-violet-500">* Spl Def</span>
-              </dt>
-              <dd className="col-span-2">
-                <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
-              </dd>
-            </>
-          )}
-          {specialization.splDefRate >= 0 && (
-            <>
-              <dt>
-                <span className="text-violet-500">* Spl Def rate</span>
-              </dt>
-              <dd className="col-span-2">
-                <span className="text-violet-500">
-                  {specialization.splDefRate < 1 ? "-" : specialization.splDefRate}
-                </span>
-              </dd>
-              {specialization.splPVPAtkRate >= 0 && (
+          <dt>
+            <span className="text-violet-500">* Spl Atk Pwr</span>
+          </dt>
+          <dd className="col-span-2">
+            <span className="text-violet-500">
+              {specialization.splAtkMax < 1 ? (
+                "-"
+              ) : (
                 <>
-                  <dt>
-                    <span className="text-violet-500">* Spl PVP Atk(%)</span>
-                  </dt>
-                  <dd className="col-span-2">
-                    <span className="text-violet-500">
-                      {specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}
-                    </span>
-                  </dd>
+                  {specialization.splAtkMin} ~ {specialization.splAtkMax}
                 </>
               )}
-              {specialization.splPVPDefRate >= 0 && (
-                <>
-                  <dt>
-                    <span className="text-violet-500">* Spl PVP Def rate</span>
-                  </dt>
-                  <dd className="col-span-2">
-                    <span className="text-violet-500">
-                      {specialization.splPVPDefRate < 1 ? "-" : specialization.splPVPDefRate}
-                    </span>
-                  </dd>
-                </>
-              )}
-            </>
-          )}
-          <dt>* Defense</dt>
-          <dd className="col-span-2">
-            <span className="text-amber-300">{formulasAgility.defense}</span>
-          </dd>
-          <dt>* Attack Speed</dt>
-          <dd className="col-span-2">
-            <span className="text-amber-300">
-              {formulasAgility.speed} / {character.maxSpeed}
             </span>
-          </dd>
-          <dt>* Defense (%)</dt>
-          <dd>
-            <span className="text-amber-300">{formulasAgility.defenseRate}</span>
-          </dd>
-          <dd className="text-center">
-            <span className="text-amber-300">-</span>
-          </dd>
-          <dt>* PvP Def (%)</dt>
-          <dd>
-            <span className="text-amber-300">{formulasAgility.defenseRatePVP}</span>
-          </dd>
-          <dd className="text-center">
-            <span className="text-amber-300">-</span>
           </dd>
         </>
       )}
+
+      {specialization.splDef >= 0 && (
+        <>
+          <dt>
+            <span className="text-violet-500">* Spl Def</span>
+          </dt>
+          <dd className="col-span-2">
+            <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
+          </dd>
+        </>
+      )}
+
+      {specialization.splDefRate >= 0 && (
+        <>
+          <dt>
+            <span className="text-violet-500">* Spl Def rate</span>
+          </dt>
+          <dd className="col-span-2">
+            <span className="text-violet-500">
+              {specialization.splDefRate < 1 ? "-" : specialization.splDefRate}
+            </span>
+          </dd>
+          {specialization.splPVPAtkRate >= 0 && (
+            <>
+              <dt>
+                <span className="text-violet-500">* Spl PVP Atk(%)</span>
+              </dt>
+              <dd className="col-span-2">
+                <span className="text-violet-500">
+                  {specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}
+                </span>
+              </dd>
+            </>
+          )}
+          {specialization.splPVPDefRate >= 0 && (
+            <>
+              <dt>
+                <span className="text-violet-500">* Spl PVP Def rate</span>
+              </dt>
+              <dd className="col-span-2">
+                <span className="text-violet-500">
+                  {specialization.splPVPDefRate < 1 ? "-" : specialization.splPVPDefRate}
+                </span>
+              </dd>
+            </>
+          )}
+        </>
+      )}
+
+      <dt>* Defense</dt>
+      <dd className="col-span-2">
+        <span className="text-amber-300">{formulasAgility.defense}</span>
+      </dd>
+
+      <dt>* Attack Speed</dt>
+      <dd className="col-span-2">
+        <span className="text-amber-300">
+          {formulasAgility.speed} / {character.maxSpeed}
+        </span>
+      </dd>
+
+      <dt>* Defense Rate</dt>
+      <dd>
+        <span className="text-amber-300">{formulasAgility.defenseRate}</span>
+      </dd>
+      <dd className="text-center">
+        <span className="text-amber-300">-</span>
+      </dd>
+
+      <dt>* PvP Def Rate</dt>
+      <dd>
+        <span className="text-amber-300">{formulasAgility.defenseRatePVP}</span>
+      </dd>
+      <dd className="text-center">
+        <span className="text-amber-300">-</span>
+      </dd>
     </>
   );
 }

@@ -1,20 +1,29 @@
+// functions/formulas/formulasStrength.js
+import { getTotalStats, calculate3rdTreeBonus } from '../../utils/3rdTreeUtils.js';
+
 export default function formulasStr(character, setFormulasStrength, setSpecialization) {
+  // ✅ CENTRALIZADO: Obtener todos los bonus de una vez
+  const bonus = calculate3rdTreeBonus(character);
+  const totalStats = getTotalStats(character);
+  
+  // Usar stats totales en lugar de base
+  const strength = totalStats.strength;
+  const agility = totalStats.agility;
+  const stamina = totalStats.stamina;
+  const energy = totalStats.energy;
+  const level = character.level;
+  const command = totalStats.command;
+  const classChar = character.class[0];
+  
+  // ✅ Para attack damage, buscar skills del 3rd tree con tipo 'AtkDmg'
   let Dmg = 0;
-
-  character.items.map((value) => {
-    const { optionLifeDmg } = value;
-    if (value.optionLifeDmg) {
-      Dmg = Dmg + parseInt(optionLifeDmg);
-    }
-  });
-
-  const strength = character.strength,
-    agility = character.agility,
-    stamina = character.stamina,
-    energy = character.energy,
-    level = character.level,
-    command = character.command,
-    classChar = character.class[0];
+  if (character['3rdTree']) {
+    character['3rdTree'].forEach(skill => {
+      if (skill.valueType === 'AtkDmg') {
+        Dmg += skill.value;
+      }
+    });
+  }
 
   let specialization;
   if (strength <= 1500) specialization = strength / 15000;

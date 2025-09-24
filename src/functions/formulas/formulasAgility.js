@@ -1,17 +1,22 @@
+import { getTotalStats, calculate3rdTreeBonus } from '../../utils/3rdTreeUtils.js';
+
 export default function formulasAgi(character, setFormulasAgility, setSpecialization) {
   let defense = 0,
     defenseRate = 1;
 
-  character.items.map((value) => {
-    if (value.defense) defense = defense + value.defense;
-    if (value.optionLifeDefense) defense = defense + parseInt(value.optionLifeDefense);
-    if (value.DefRate > 0 && defenseRate !== 1) defenseRate = defenseRate * (value.DefRate / 100 + 1);
-    if (value.DefRate > 0 && defenseRate === 1) defenseRate = defenseRate + value.DefRate / 100;
-  });
-  const strength = character.strength,
-    agility = character.agility,
-    level = character.level,
-    classChar = character.class[0];
+  const bonus = calculate3rdTreeBonus(character);
+  const totalStats = getTotalStats(character);
+
+
+  // ✅ Usar stats totales incluyendo blue stats
+  const strength = totalStats.strength;
+  const agility = totalStats.agility;
+  const level = character.level;
+  const classChar = character.class[0];
+
+  // 🔥 AQUÍ TIENES EL DefenseRatePVP del 3rd tree
+  const defenseRatePVPBonus = bonus.DefenseRatePVP || 0;
+
   let specialization;
   if (agility <= 1500) specialization = agility / 15000;
   if (agility > 1500 && agility <= 2000) specialization = 0.1 + (agility - 1500) / 2500;
@@ -24,7 +29,7 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
         defense: Math.floor(agility / 4) + defense,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor(Math.floor(agility / 3) * defenseRate),
-        defenseRatePVP: Math.floor(level * 2 + agility / 4),
+        defenseRatePVP: Math.floor(level * 2 + agility / 4) + defenseRatePVPBonus,
       });
       break;
     case "Dark Knight":
@@ -159,13 +164,6 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
       });
       break;
     case "Illusion Knight":
-      /*       let test
-                  if (agility <= 1800) test = agility / 18000;
-      if (agility > 1800 && agility <= 2100) test = 0.1 + (agility - 1800) / 1500;
-      if (agility > 2100 && agility <= 3000) test = 0.3 + (agility - 2100) / 6000; */
-      /*             if (agility <= 1800) test = agility / 18000;
-      if (agility > 1800 && agility <= 2500) test = 0.1 + (agility - 1800) / 3500;
-      if (agility > 2500 && agility <= 3000) test = 0.3 + (agility - 2000) / 3333; */
       setFormulasAgility({
         defense: Math.floor(agility / 7) + defense,
         speed: Math.floor(agility / 10),
@@ -177,11 +175,6 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
         splAtkMax: 0,
         splDef: 0,
       });
-      /*       setSpecialization({
-        splAtkMin: Math.floor((strength / 11 + agility / 9) * specialization),
-        splAtkMax: Math.floor((strength / 9 + agility / 6) * specialization),
-        splDef: Math.floor((strength / 9 + agility / 6) * specialization),
-      }); */
       break;
   }
 }
