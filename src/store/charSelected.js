@@ -8,6 +8,59 @@ export const charSelectedStore = proxy({
 
   // Añadir un personaje seleccionado
   addChar: (characterData) => {
+    const mergeItems = (incomingItems) => {
+      const defaultItems = {
+        set: {
+          helm: null,
+          armor: null,
+          pants: null,
+          gloves: null,
+          boots: null,
+          weapon1: null,
+          weapon2: null
+        },
+        earrings: {
+          left: null,
+          right: null
+        },
+        rings: {
+          left: null,
+          right: null
+        },
+        pet: null,
+        wings: null,
+        pendant: null,
+        artifact: null,
+        pentagram: null
+      };
+
+      if (!incomingItems) return defaultItems;
+
+      return {
+        set: {
+          helm: incomingItems.set?.helm || null,
+          armor: incomingItems.set?.armor || null,
+          pants: incomingItems.set?.pants || null,
+          gloves: incomingItems.set?.gloves || null,
+          boots: incomingItems.set?.boots || null,
+          weapon1: incomingItems.set?.weapon1 || null,
+          weapon2: incomingItems.set?.weapon2 || null
+        },
+        earrings: {
+          left: incomingItems.earrings?.left || null,
+          right: incomingItems.earrings?.right || null
+        },
+        rings: {
+          left: incomingItems.rings?.left || null,
+          right: incomingItems.rings?.right || null
+        },
+        pet: incomingItems.pet || null,
+        wings: incomingItems.wings || null,
+        pendant: incomingItems.pendant || null,
+        artifact: incomingItems.artifact || null,
+        pentagram: incomingItems.pentagram || null
+      };
+    };
     // Crear baseStats con las stats iniciales del personaje
     const baseStats = {
       strength: characterData.stats?.strength || characterData.strength || 18,
@@ -43,35 +96,10 @@ export const charSelectedStore = proxy({
     charSelectedStore.selectedCharacter = {
       ...characterData,
       stats: characterStats, // ← OBJETO NUEVO, no referencia
-      items: {
-        set: {
-          helm: null,
-          armor: null,
-          pants: null,
-          gloves: null,
-          boots: null,
-          weapon1: null,
-          weapon2: null
-        },
-        earrings: {
-          left: null,
-          right: null
-        },
-        rings: {
-          left: null,
-          right: null
-        },
-        pet: null,
-        wings: null,
-        pendant: null,
-        artifact: null,
-        pentagram: null
-      },
+      items: mergeItems(characterData.items),
       baseStats,
-      '3rdTree': []
+      '3rdTree': Array.isArray(characterData['3rdTree']) ? [...characterData['3rdTree']] : []
     };
-
-    console.log('🎯 CHARACTER ADDED - stats:', charSelectedStore.selectedCharacter.stats);
   },
 
   // Equipar item
@@ -161,7 +189,6 @@ export const charSelectedStore = proxy({
   // Incrementar stats
   increaseStats: ({ stat, points }) => {
     if (!charSelectedStore.selectedCharacter) {
-      console.log('❌ No selectedCharacter');
       return;
     }
 
@@ -170,20 +197,10 @@ export const charSelectedStore = proxy({
     if (char.points >= points) {
       // Verificar que stats existe
       if (!char.stats) {
-        console.log('❌ No stats object');
         return;
       }
-
       char.stats[stat] += points;
       char.points -= points;
-
-      // Debug logs
-      console.log(`✅ INCREASED ${stat} by ${points}`);
-      console.log(`New ${stat}:`, char.stats[stat]);
-      console.log(`Remaining points:`, char.points);
-      console.log('Full stats object:', char.stats);
-    } else {
-      console.log(`❌ Not enough points. Have: ${char.points}, Need: ${points}`);
     }
   },
 
@@ -201,13 +218,6 @@ export const charSelectedStore = proxy({
     if (maxDecrease > 0) {
       char.stats[stat] -= maxDecrease;
       char.points += maxDecrease;
-
-      // Debug logs
-      console.log(`✅ DECREASED ${stat} by ${maxDecrease}`);
-      console.log(`New ${stat}:`, char.stats[stat]);
-      console.log(`Remaining points:`, char.points);
-    } else {
-      console.log(`❌ Cannot decrease ${stat}. At base value: ${baseValue}`);
     }
   },
 
@@ -236,21 +246,23 @@ export const charSelectedStore = proxy({
       } else {
         // Actualizar el valor con el valor calculado
         char['3rdTree'][existingSkillIndex].value = calculatedValue;
+        char['3rdTree'][existingSkillIndex].level = level; // ← Esto debe estar
       }
     } else if (level > 0) {
       // Agregar nuevo skill con el valor calculado
       const newSkill = {
         id: skillId,
         valueType,
-        value: calculatedValue
+        value: calculatedValue,
+        level: level // AGREGAR ESTA LÍNEA
       };
       char['3rdTree'].push(newSkill);
     }
   },
-    // Nuevo método para actualizar stats bar
+  // Nuevo método para actualizar stats bar
   updateStatsBar: (statsBarData) => {
     if (!charSelectedStore.selectedCharacter) return;
-    
+
     charSelectedStore.selectedCharacter.statsBar = {
       hp: statsBarData.hp,
       sd: statsBarData.sd,

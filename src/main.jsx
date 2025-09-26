@@ -11,7 +11,7 @@ const router = createBrowserRouter([
     element: <Root />,
   },
   {
-    path: "/:char",
+    path: "/build/:buildId", // <- Cambio aquí
     element: <Build />,
   },
 ]);

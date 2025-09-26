@@ -51,3 +51,43 @@ export const getAvailableExcellentOptions = (itemType) => {
     EXCELLENT_OPTIONS[optionId].applicableTypes.includes(itemType)
   );
 };
+
+// src/database/excellentOptions.js - AGREGAR al final del archivo:
+
+export const LUCK_OPTIONS = {
+  weapons: {
+    label: 'Additional Damage',
+    values: [
+      { level: 1, display: '+4', value: 4 },
+      { level: 2, display: '+8', value: 8 },
+      { level: 3, display: '+12', value: 12 },
+      { level: 4, display: '+16', value: 16 }
+    ]
+  },
+  armor: {
+    label: 'Additional Defense',
+    values: [
+      { level: 1, display: '+4', value: 4 },
+      { level: 2, display: '+8', value: 8 },
+      { level: 3, display: '+12', value: 12 },
+      { level: 4, display: '+16', value: 16 }
+    ]
+  },
+  defense: {
+    label: 'Life Recovery',
+    values: [
+      { level: 1, display: '1%', value: 1 },
+      { level: 2, display: '2%', value: 2 },
+      { level: 3, display: '3%', value: 3 },
+      { level: 4, display: '4%', value: 4 }
+    ]
+  }
+};
+
+export const getLuckOption = (itemType) => {
+  if (itemType === 'weapon') return LUCK_OPTIONS.weapons;
+  if (['helm', 'armor', 'pants', 'gloves', 'boots', 'wings'].includes(itemType)) {
+    return LUCK_OPTIONS.armor; // Por defecto defense
+  }
+  return null;
+};

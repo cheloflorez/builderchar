@@ -10,24 +10,23 @@ export default function Strength() {
   const [formulasStrength, setFormulasStrength] = useState({});
   const [specialization, setSpecialization] = useState({});
 
-  // Click izquierdo - restar
+  // Click izquierdo - SUMAR (cambio aquí)
   const handleLeftClick = (e) => {
     e.preventDefault();
-    const pointsToRemove = e.shiftKey ? 10 : 1;
-    if (character && character.stats.strength > character.baseStats.strength + pointsToRemove - 1) {
-      decreaseStats({ stat: 'strength', points: pointsToRemove, baseStats: character.baseStats });
-    }
-  };
-
-  // Click derecho - sumar
-  const handleRightClick = (e) => {
-    e.preventDefault();
     const pointsToAdd = e.shiftKey ? 10 : 1;
-    if (character && character.points >= pointsToAdd) {
+    if (character?.points >= pointsToAdd) {
       increaseStats({ stat: 'strength', points: pointsToAdd });
     }
   };
 
+  // Click derecho - RESTAR (cambio aquí)
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    const pointsToRemove = e.shiftKey ? 10 : 1;
+    if (character?.stats.strength > character.baseStats.strength) {
+      decreaseStats({ stat: 'strength', points: pointsToRemove, baseStats: character.baseStats });
+    }
+  };
   useEffect(() => {
     if (character) formulasStr(character, setFormulasStrength, setSpecialization);
   }, [character]);
@@ -67,8 +66,8 @@ export default function Strength() {
             src="/src/assets/windows-stats/button.png"
             alt="stat button"
             className={`transition-all duration-150 ${!canIncrease && !canDecrease
-                ? 'opacity-50 grayscale'
-                : 'hover:brightness-110 active:brightness-90'
+              ? 'opacity-50 grayscale'
+              : 'hover:brightness-110 active:brightness-90'
               }`}
             style={{
               imageRendering: 'pixelated',

@@ -1,262 +1,181 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import dw from "../assets/characters/dark-wizard.png";
-import dk from "../assets/characters/dark-knight.png";
-import elf from "../assets/characters/elf.png";
-import mg from "../assets/characters/magic-gladiator.png";
-import dl from "../assets/characters/dark-lord.png";
-import sum from "../assets/characters/summoner.png";
-import rf from "../assets/characters/rage-fighter.png";
-import gl from "../assets/characters/grow-lancer.png";
-import rw from "../assets/characters/rune-wizard.png";
-import sl from "../assets/characters/slayer.png";
-import gc from "../assets/characters/gun-crusher.png";
-import ww from "../assets/characters/white-wizard.png";
-import lm from "../assets/characters/mage.png";
-import ik from "../assets/characters/ilusion-knight.png";
-
-const chars = [
-  { 
-    src: dw, 
-    alt: "dark-wizard", 
-    name: "Dark Wizard",
-    description: "Master of destructive magic",
-    type: "Magical",
-    difficulty: "Medium"
-  },
-  { 
-    src: dk, 
-    alt: "dark-knight", 
-    name: "Dark Knight",
-    description: "Mighty warrior with sword and shield",
-    type: "Physical",
-    difficulty: "Easy"
-  },
-  { 
-    src: elf, 
-    alt: "elf", 
-    name: "Fairy Elf",
-    description: "Agile archer with nature magic",
-    type: "Physical",
-    difficulty: "Medium"
-  },
-  { 
-    src: mg, 
-    alt: "magic-gladiator", 
-    name: "Magic Gladiator",
-    description: "Balanced fighter with magic abilities",
-    type: "Hybrid",
-    difficulty: "Hard"
-  },
-  { 
-    src: dl, 
-    alt: "dark-lord", 
-    name: "Dark Lord",
-    description: "Commander with dark powers",
-    type: "Physical",
-    difficulty: "Hard"
-  },
-  { 
-    src: sum, 
-    alt: "summoner", 
-    name: "Summoner",
-    description: "Calls forth creatures and curses",
-    type: "Magical",
-    difficulty: "Medium"
-  },
-  { 
-    src: rf, 
-    alt: "rage-fighter", 
-    name: "Rage Fighter",
-    description: "Martial artist with devastating combos",
-    type: "Physical",
-    difficulty: "Medium"
-  },
-  { 
-    src: gl, 
-    alt: "grow-lancer", 
-    name: "Grow Lancer",
-    description: "Spear master with tactical skills",
-    type: "Physical",
-    difficulty: "Hard"
-  },
-  { 
-    src: rw, 
-    alt: "rune-wizard", 
-    name: "Rune Wizard",
-    description: "Ancient magic and rune power",
-    type: "Magical",
-    difficulty: "Hard"
-  },
-  { 
-    src: sl, 
-    alt: "slayer", 
-    name: "Slayer",
-    description: "Swift assassin with deadly precision",
-    type: "Physical",
-    difficulty: "Medium"
-  },
-  { 
-    src: gc, 
-    alt: "gun-crusher", 
-    name: "Gun Crusher",
-    description: "Ranged fighter with magical guns",
-    type: "Magical",
-    difficulty: "Hard"
-  },
-  { 
-    src: ww, 
-    alt: "white-wizard", 
-    name: "White Wizard",
-    description: "Healer and light magic specialist",
-    type: "Magical",
-    difficulty: "Medium"
-  },
-  { 
-    src: lm, 
-    alt: "mage", 
-    name: "Mage",
-    description: "Elemental magic and spellcasting",
-    type: "Magical",
-    difficulty: "Easy"
-  },
-  { 
-    src: ik, 
-    alt: "illusion-knight", 
-    name: "Illusion Knight",
-    description: "Mysterious warrior with illusion magic",
-    type: "Hybrid",
-    difficulty: "Hard"
-  },
-];
-
-const typeColors = {
-  Physical: "from-red-600 to-red-800",
-  Magical: "from-blue-600 to-blue-800", 
-  Hybrid: "from-purple-600 to-purple-800"
-};
-
-const difficultyColors = {
-  Easy: "text-green-400",
-  Medium: "text-yellow-400",
-  Hard: "text-red-400"
-};
+import CreateBuildModal from "../components/modal/CreateBuildModal";
 
 export default function Root() {
-  const [selectedFilter, setSelectedFilter] = useState("All");
-  const [hoveredChar, setHoveredChar] = useState(null);
+  const [builds, setBuilds] = useState([]);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
-  const filteredChars = chars.filter(char => 
-    selectedFilter === "All" || char.type === selectedFilter
-  );
+  // Cargar builds del localStorage al montar
+  useEffect(() => {
+    const savedBuilds = localStorage.getItem('mubuilds');
+    if (savedBuilds) {
+      setBuilds(JSON.parse(savedBuilds));
+    }
+  }, []);
+
+  const handleCreateBuild = (buildData) => {
+    const newBuild = {
+      id: Date.now().toString(),
+      name: buildData.name,
+      character: buildData.character,
+      class: buildData.characterData.class[0],
+      level: 1,
+      createdAt: new Date().toISOString(),
+      lastModified: new Date().toISOString()
+    };
+
+    const updatedBuilds = [...builds, newBuild];
+    setBuilds(updatedBuilds);
+    localStorage.setItem('mubuilds', JSON.stringify(updatedBuilds));
+    setShowCreateModal(false);
+  };
+
+  const handleDeleteBuild = (buildId) => {
+    const updatedBuilds = builds.filter(build => build.id !== buildId);
+    setBuilds(updatedBuilds);
+    localStorage.setItem('mubuilds', JSON.stringify(updatedBuilds));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black">
-      {/* Background effects */}
       <div className="absolute inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
-      
+
       {/* Header */}
       <div className="relative z-10 text-center py-8">
         <h1 className="text-5xl font-bold text-amber-300 mb-4 drop-shadow-lg">
-          Character Selection
+          MU Character Builds
         </h1>
         <p className="text-xl text-amber-200/80 mb-8">
-          Choose your destiny, forge your legend
+          Manage your character builds
         </p>
-        
-        {/* Filters */}
-        <div className="flex justify-center gap-4 mb-8">
-          {["All", "Physical", "Magical", "Hybrid"].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setSelectedFilter(filter)}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 ${
-                selectedFilter === filter
-                  ? "bg-amber-600 text-white shadow-lg"
-                  : "bg-gray-700/50 text-gray-300 hover:bg-gray-600/50"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
       </div>
 
-      {/* Character Grid */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 pb-12">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {filteredChars.map((char, index) => (
-            <Link 
-              key={char.alt} 
-              to={`/${char.alt}`}
-              className="group"
-              onMouseEnter={() => setHoveredChar(char.alt)}
-              onMouseLeave={() => setHoveredChar(null)}
-            >
-              <div className="relative bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50 transition-all duration-300 transform hover:scale-105 hover:bg-gradient-to-b hover:from-gray-700/80 hover:to-gray-800/80 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/20">
-                
-                {/* Character Image */}
-                <div className="relative mb-4 overflow-hidden rounded-lg">
-                  <img 
-                    src={char.src} 
-                    alt={char.alt} 
-                    className="w-full h-48 object-cover object-center transition-transform duration-300 group-hover:scale-110"
-                    style={{ imageRendering: 'pixelated' }}
-                  />
-                  
-                  {/* Type badge */}
-                  <div className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${typeColors[char.type]} shadow-lg`}>
-                    {char.type}
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pb-12">
+
+        {/* Create Build Button */}
+        <div className="text-center mb-8">
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="group relative px-8 py-4 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105 active:scale-95"
+          >
+            <span className="flex items-center gap-3">
+              <span className="text-2xl">⚔️</span>
+              <span>Create New Build</span>
+            </span>
+            <div className="absolute inset-0 rounded-lg bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+          </button>
+        </div>
+
+        {/* Builds Grid mejorado */}
+        {builds.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {builds.map((build) => (
+              <div
+                key={build.id}
+                className="relative group bg-gradient-to-b from-gray-800/90 to-gray-900/90 backdrop-blur-sm rounded-lg border border-gray-700/50 hover:border-amber-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-500/20 overflow-hidden"
+              >
+
+                {/* Background pattern sutil */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,193,7,0.05),transparent_50%)]"></div>
+
+                {/* Contenido principal */}
+                <div className="relative z-10 p-4">
+
+                  {/* Header con imagen y nombre */}
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="relative">
+                      <img
+                        src={`/src/assets/characters/${build.character}.png`}
+                        alt={build.class}
+                        className="w-25 h-25 object-cover rounded-lg border-2 border-amber-500/50 bg-gray-800/50 p-2"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-amber-300 font-bold text-lg truncate group-hover:text-amber-200 transition-colors">
+                        {build.name}
+                      </h3>
+                    </div>
                   </div>
-                  
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div>
+                    <h3 className="text-amber-300 font-bold text-lg truncate group-hover:text-amber-200 transition-colors text-center">
+                      {build.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm font-medium text-center">{build.class}</p>
+                  </div>
+                  {/* Stats info */}
+                  <div className="space-y-2 mb-4 text-xs">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Created:</span>
+                      <span className="text-gray-300">{new Date(build.createdAt).toLocaleDateString()}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-500">Modified:</span>
+                      <span className="text-gray-300">{new Date(build.lastModified).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+
+                  {/* Barra de progreso del level (opcional) */}
+                  <div className="mb-4">
+                    <div className="flex justify-between text-xs mb-1">
+                      <span className="text-gray-500">Level Progress</span>
+                      <span className="text-amber-400">{build.level}/1500</span>
+                    </div>
+                    <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-amber-500 to-amber-600 h-full rounded-full transition-all duration-500"
+                        style={{ width: `${Math.min((build.level / 1500) * 100, 100)}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/build/${build.id}`}
+                      className="flex-1 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 hover:scale-105 text-center text-sm shadow-lg hover:shadow-green-500/20"
+                    >
+                      Continue Build
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteBuild(build.id)}
+                      className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-semibold py-2.5 px-3 rounded-lg transition-all duration-200 hover:scale-105 text-sm shadow-lg hover:shadow-red-500/20"
+                      title="Delete build"
+                    >
+                      🗑️
+                    </button>
+                  </div>
                 </div>
 
-                {/* Character Info */}
-                <div className="text-center">
-                  <h3 className="text-lg font-bold text-amber-300 mb-2 group-hover:text-amber-200 transition-colors">
-                    {char.name}
-                  </h3>
-                  
-                  <p className="text-sm text-gray-400 mb-3 leading-relaxed group-hover:text-gray-300 transition-colors">
-                    {char.description}
-                  </p>
-                  
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-gray-500">Difficulty:</span>
-                    <span className={`font-semibold ${difficultyColors[char.difficulty]}`}>
-                      {char.difficulty}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Selection indicator */}
-                <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-amber-400/50 transition-all duration-300 pointer-events-none" />
-                
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-amber-400/0 via-amber-400/5 to-amber-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                {/* Efecto de brillo en hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
-            </Link>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          /* Empty State mejorado */
+          <div className="text-center py-20">
+            <div className="relative mb-6">
+              <div className="text-8xl opacity-30 filter drop-shadow-lg">⚔️</div>
+              <div className="absolute inset-0 bg-amber-400/10 rounded-full blur-xl"></div>
+            </div>
+            <h3 className="text-3xl text-gray-400 mb-3 font-bold">No builds yet</h3>
+            <p className="text-gray-500 text-lg mb-6">Create your first character build to start your MU journey</p>
+            <div className="text-sm text-amber-400/60">
+              Click "Create New Build" above to get started
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Footer info */}
-      <div className="relative z-10 text-center pb-8">
-        <p className="text-gray-500 text-sm">
-          Click on any character to start building your adventure
-        </p>
-      </div>
-
-      {/* Animated particles */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-amber-400/20 rounded-full animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400/30 rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-pulse delay-2000"></div>
-        <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-green-400/25 rounded-full animate-pulse delay-500"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-2 h-2 bg-red-400/15 rounded-full animate-pulse delay-1500"></div>
-      </div>
+      {/* Create Build Modal */}
+      {showCreateModal && (
+        <CreateBuildModal
+          onClose={() => setShowCreateModal(false)}
+          onCreateBuild={handleCreateBuild}
+        />
+      )}
     </div>
   );
 }

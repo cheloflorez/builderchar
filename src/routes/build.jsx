@@ -1,36 +1,39 @@
-// routes/build.jsx - VERSIÓN COMPLETA CON TODAS LAS MEJORAS
-import React, { useEffect, useState } from "react";
+// routes/build.jsx - VERSIÓN CON SISTEMA DE BUILDS
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 import CWindows from "../components/C/c";
 import Inventory from "../components/inventory/inventory";
 import ModalInventory from "../components/inventory/modal-inventory";
 import Main3rd from "../components/3rdtree/Main3rd";
-import { selectChar } from "../utils/characterUtils";
-import { useSelectedCharacter, useCharacter } from "../hooks/useCharacter";
+import { useSelectedCharacter, useCharacters } from "../hooks/useCharacter";
 import StatsBar from "../components/statsbar/statsbar";
 import NotificationSystem from "../components/ui/NotificationSystem";
 import { useNotifications } from "../hooks/useNotifications";
-import ActionButton from "../components/ui/ActionButton";
 import { CharacterLoadingState } from "../components/ui/LoadingStates";
 
+
+
 export default function Build() {
+
+  const FEATURES = {
+    INVENTORY_ENABLED: false, // Cambiar a true cuando esté listo
+    FOURTH_TREE_ENABLED: false,
+    ABILITY_CARDS_ENABLED: false
+  };
+
   const params = useParams();
-  const { charName } = selectChar(params.char);
+  const buildId = params.buildId; // <- Cambio principal
 
   // Usar hooks de Valtio
   const { character: selectedCharacter, addChar } = useSelectedCharacter();
-  const character = useCharacter(charName);
+  const characters = useCharacters();
 
-  // Estados del modal a nivel global
+  // Estados
+  const [buildData, setBuildData] = useState(null);
   const [inventoryModalActive, setInventoryModalActive] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
-  // Estado del modal de skills
   const [skillsModalOpen, setSkillsModalOpen] = useState(false);
-
-  // 🆕 Estado para panel de ayuda colapsable en móviles
   const [helperPanelCollapsed, setHelperPanelCollapsed] = useState(false);
-
-  // 🆕 Estados de loading
   const [isLoading, setIsLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState({
     save: false,
@@ -39,120 +42,105 @@ export default function Build() {
     analysis: false
   });
 
-  // 🆕 Sistema de notificaciones
+  // Sistema de notificaciones
   const {
     notifications,
     removeNotification,
     notifySuccess,
     notifyError,
-    notifyWarning,
-    notifyInfo,
-    notifyBuildSaved,
     notifyBuildReset,
     notifyLevelRequired
   } = useNotifications();
 
-  useEffect(() => {
-    if (character) {
-      setIsLoading(false);
-      addChar(character);
-      // 🆕 Notificar cuando se carga un personaje
-      notifySuccess(
-        'Character Loaded',
-        `${character.class[0]} ready for building`,
-        { duration: 2000, icon: '🎮' }
-      );
+  const saveBuildToStorage = useCallback(() => {
+    if (!selectedCharacter || !buildData) return;
+
+    const updatedBuildData = {
+      ...buildData,
+      level: selectedCharacter.level,
+      lastModified: new Date().toISOString(),
+      characterData: selectedCharacter
+    };
+
+    const savedBuilds = localStorage.getItem('mubuilds');
+    const builds = savedBuilds ? JSON.parse(savedBuilds) : [];
+    const buildIndex = builds.findIndex(build => build.id === buildId);
+
+    if (buildIndex !== -1) {
+      builds[buildIndex] = updatedBuildData;
+      localStorage.setItem('mubuilds', JSON.stringify(builds));
     }
-  }, [character, addChar, notifySuccess]);
+  }, [selectedCharacter, buildData, buildId]);
 
-  // Manejar click en slot del inventario
-  const handleInventorySlotClick = (slotType) => {
-    setSelectedSlot(slotType);
-    setInventoryModalActive(true);
-  };
-
-  // 🆕 Handlers mejorados para los botones de acción
-  const handleSave = async () => {
-    setActionLoading(prev => ({ ...prev, save: true }));
-    
-    try {
-      // Simular proceso de guardado
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Simular posibles errores ocasionalmente
-      if (Math.random() < 0.1) {
-        throw new Error('Network error');
-      }
-      
-      notifyBuildSaved();
-      
-      // Agregar datos del build guardado
-      const buildData = {
-        character: selectedCharacter?.class[0] || 'Unknown',
-        level: selectedCharacter?.level || 0,
-        points: selectedCharacter?.points || 0,
-        skills: selectedCharacter?.['3rdTree']?.length || 0
-      };
-      
-      notifyInfo('Build Details', 'Build data exported successfully', {
-        duration: 3000,
-        details: [
-          `Class: ${buildData.character}`,
-          `Level: ${buildData.level}`,
-          `Remaining Points: ${buildData.points}`,
-          `Active Skills: ${buildData.skills}`
-        ]
-      });
-      
-    } catch (error) {
-      notifyError('Save Failed', 'Could not save your build. Please try again.', {
-        duration: 5000
-      });
-    } finally {
-      setActionLoading(prev => ({ ...prev, save: false }));
-    }
-  };
-
-  const handleReset = async () => {
-    setActionLoading(prev => ({ ...prev, reset: true }));
-    
-    try {
-      // Simular proceso de reset
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      notifyBuildReset();
-      // Aquí iría la lógica real de reset
-      
-    } finally {
-      setActionLoading(prev => ({ ...prev, reset: false }));
-    }
-  };
-
-  const handleSkillTreeOpen = () => {
+  const handleSkillTreeOpen = useCallback(() => {
     if (!selectedCharacter || selectedCharacter.level < 400) {
       notifyLevelRequired(400);
       return;
     }
     setSkillsModalOpen(true);
-  };
+  }, [selectedCharacter, notifyLevelRequired]);
 
-  // Listener para teclas
+  // Cargar build desde localStorage
+  useEffect(() => {
+    const loadBuild = () => {
+      const savedBuilds = localStorage.getItem('mubuilds');
+      if (savedBuilds) {
+        const builds = JSON.parse(savedBuilds);
+        const currentBuild = builds.find(build => build.id === buildId);
+        if (currentBuild) {
+          setBuildData(currentBuild);
+
+          // Si el build tiene datos de personaje guardados, cargarlos
+          if (currentBuild.characterData) {
+
+            addChar(currentBuild.characterData);
+          } else {
+            // Si es un build nuevo, crear desde template
+            const template = Object.values(characters).find(char =>
+              char.class[0] === currentBuild.class
+            );
+            if (template) {
+              addChar(template);
+            }
+          }
+
+          setIsLoading(false);
+          notifySuccess(
+            'Build Loaded',
+            `${currentBuild.name} ready for building`,
+            { duration: 2000, icon: '🎮' }
+          );
+        } else {
+          window.location.href = '/';
+        }
+      } else {
+        window.location.href = '/';
+      }
+    };
+
+    loadBuild();
+  }, [buildId, addChar, characters, notifySuccess]);
+
+
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key.toLowerCase() === 'a' && !inventoryModalActive) {
         event.preventDefault();
-        handleSkillTreeOpen();
+        // Toggle del skill tree: si está abierto lo cierra, si está cerrado lo abre
+        if (skillsModalOpen) {
+          setSkillsModalOpen(false);
+        } else {
+          handleSkillTreeOpen();
+        }
       }
       if (event.key === 'Escape') {
         setSkillsModalOpen(false);
         setInventoryModalActive(false);
       }
-      // 🆕 Tecla H para toggle del helper panel
       if (event.key.toLowerCase() === 'h' && !inventoryModalActive && !skillsModalOpen) {
         event.preventDefault();
         setHelperPanelCollapsed(prev => !prev);
       }
-      // 🆕 Teclas rápidas para acciones
       if (event.ctrlKey || event.metaKey) {
         switch (event.key.toLowerCase()) {
           case 's':
@@ -169,10 +157,61 @@ export default function Build() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [inventoryModalActive, skillsModalOpen, selectedCharacter]);
+  }, [inventoryModalActive, skillsModalOpen, selectedCharacter, handleSkillTreeOpen]);
 
-  // Loading state mientras se carga el personaje
-  if (isLoading || !selectedCharacter) {
+  const handleInventorySlotClick = (slotType) => {
+    setSelectedSlot(slotType);
+    setInventoryModalActive(true);
+  };
+
+  // Handlers mejorados para los botones de acción
+  const handleSave = async () => {
+    setActionLoading(prev => ({ ...prev, save: true }));
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 500));
+      saveBuildToStorage();
+      // ✅ AGREGAR: Actualizar buildData local para que se vea la nueva hora
+      setBuildData(prev => ({
+        ...prev,
+        lastModified: new Date().toISOString()
+      }));
+
+      notifySuccess('Build Saved', `${buildData.name} saved successfully!`);
+
+    } catch (error) {
+      notifyError('Save Failed', 'Could not save your build. Please try again.');
+    } finally {
+      setActionLoading(prev => ({ ...prev, save: false }));
+    }
+  };
+
+  const handleReset = async () => {
+    if (!window.confirm('Are you sure you want to reset your character? This will clear all stats and skills.')) {
+      return;
+    }
+
+    setActionLoading(prev => ({ ...prev, reset: true }));
+
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (buildData && characters) {
+        const template = Object.values(characters).find(char =>
+          char.class[0] === buildData.class
+        );
+        if (template) {
+          addChar(template);
+        }
+      }
+
+      notifyBuildReset();
+
+    } finally {
+      setActionLoading(prev => ({ ...prev, reset: false }));
+    }
+  };
+
+  if (isLoading || !selectedCharacter || !buildData) {
     return (
       <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black">
         <div className="absolute inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
@@ -182,7 +221,6 @@ export default function Build() {
       </div>
     );
   }
-
   return (
     <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black">
       {/* Overlay con textura sutil */}
@@ -191,36 +229,99 @@ export default function Build() {
       {/* Contenedor principal con centrado mejorado */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-3 sm:p-5 gap-3 sm:gap-5">
 
-        {/* 🔥 Header dinámico mejorado */}
-        <div className="text-center mb-2 sm:mb-4 p-3 sm:p-4 bg-black/20 rounded-xl backdrop-blur-sm w-full max-w-4xl">
-          <h1 className="text-2xl sm:text-3xl xl:text-4xl font-bold text-amber-300 mb-2 drop-shadow-lg">
-            Character Builder
-          </h1>
-          {selectedCharacter && (
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
-              <div className="flex items-center gap-3">
-                <img 
-                  src={`/src/assets/characters/${params.char}.png`} 
-                  alt={selectedCharacter.class[0]}
-                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain rounded border-2 border-amber-500/50"
-                  style={{ imageRendering: 'pixelated' }}
-                />
-                <div className="text-center sm:text-left">
-                  <p className="text-lg sm:text-xl text-amber-200/80 font-semibold">
-                    {selectedCharacter.class[0]} - Level {selectedCharacter.level}
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-1 sm:gap-4 text-xs sm:text-sm text-gray-400">
-                    <span>Points: <span className="text-amber-300 font-medium">{selectedCharacter.points}</span></span>
-                    <span>3rd Tree: <span className="text-purple-400 font-medium">{selectedCharacter['3rdTree']?.length || 0} skills</span></span>
-                    <span className="text-cyan-400 sm:hidden">Press H for help</span>
-                  </div>
+        {/* Header rediseñado con controles integrados */}
+        <div className="mb-2 sm:mb-4 p-4 bg-black/20 rounded-xl backdrop-blur-sm w-full max-w-6xl">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+
+            {/* Sección izquierda - Info del build y personaje */}
+            <div className="flex items-center gap-4">
+              <img
+                src={`/src/assets/characters/${buildData.character}.png`}
+                alt={selectedCharacter.class[0]}
+                className="w-12 h-12 sm:w-17 sm:h-14 object-contain rounded-lg border-2 border-amber-500/50 bg-gray-800/30 p-1"
+              />
+              <div className="text-left">
+                <h1 className="text-xl sm:text-2xl font-bold text-amber-300 mb-1">
+                  {buildData.name}
+                </h1>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm text-gray-400">
+                  <span>{selectedCharacter.class[0]} - Level {selectedCharacter.level}</span>
                 </div>
               </div>
             </div>
-          )}
+
+            {/* Sección central - Info adicional */}
+            <div className="flex items-center gap-3 bg-gray-800/50 rounded-lg px-3 py-2 border border-gray-600/50">
+              <span className="text-xs text-gray-400">Last saved:</span>
+              <span className="text-xs text-amber-300">
+                {buildData?.lastModified
+                  ? new Date(buildData.lastModified).toLocaleTimeString()
+                  : 'Never'
+                }
+              </span>
+            </div>
+
+            {/* Sección derecha - Botones de acción */}
+            <div className="flex gap-2">
+
+              {/* Back Button */}
+              <button
+                onClick={() => window.location.href = '/'}
+                className="group relative px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm"
+              >
+                <span className="flex items-center gap-2">
+                  🏠 <span className="hidden sm:inline">Back</span>
+                </span>
+                <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+              </button>
+
+              {/* Save Button */}
+              <button
+                onClick={handleSave}
+                disabled={actionLoading.save}
+                className={`group relative px-3 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-white font-medium rounded-lg shadow-md text-sm ${actionLoading.save ? 'opacity-70 cursor-not-allowed' : ''}`}
+              >
+                <span className="flex items-center gap-2">
+                  {actionLoading.save ? (
+                    <>
+                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span className="hidden sm:inline">Saving...</span>
+                    </>
+                  ) : (
+                    <>
+                      💾 <span className="hidden sm:inline">Save</span>
+                    </>
+                  )}
+                </span>
+                <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+              </button>
+
+              {/* Reset Button */}
+              <button
+                onClick={handleReset}
+                disabled={actionLoading.reset}
+                className={`group relative px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-sm ${actionLoading.reset ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
+              >
+                <span className="flex items-center gap-2">
+                  {actionLoading.reset ? (
+                    <>
+                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span className="hidden sm:inline">Reset...</span>
+                    </>
+                  ) : (
+                    <>
+                      🔄 <span className="hidden sm:inline">Reset</span>
+                    </>
+                  )}
+                </span>
+                <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* 🔥 LAYOUT RESPONSIVE MEJORADO */}
+        {/* LAYOUT RESPONSIVE MEJORADO */}
         <div className="flex flex-col xl:flex-row justify-center items-start gap-3 sm:gap-6 w-full max-w-7xl">
 
           {/* Panel izquierdo - Character Stats (siempre primero en móvil) */}
@@ -229,18 +330,48 @@ export default function Build() {
           </div>
 
           {/* Panel central - Inventory (segundo en móvil) */}
+          {/* Panel central - Inventory */}
           <div className="order-2 xl:order-2 transform transition-all duration-300 hover:scale-[1.02] w-full xl:w-auto flex justify-center">
-            <Inventory onSlotClick={handleInventorySlotClick} />
+
+            {FEATURES.INVENTORY_ENABLED ? (
+              <Inventory onSlotClick={handleInventorySlotClick} />
+            ) : (
+              // Mantener el mismo contenedor con la imagen de fondo
+              <div className="relative bg-[url('./assets/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
+
+                {/* Overlay semi-transparente */}
+                <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
+
+                  {/* Contenido "Coming Soon" */}
+                  <div className="text-center p-6">
+                    <div className="text-4xl mb-3 opacity-80">⚔️</div>
+                    <h3 className="text-amber-300 font-bold text-lg mb-2">Equipment System</h3>
+                    <p className="text-gray-300 text-sm mb-3 leading-relaxed">
+                      Advanced item management<br />
+                      and customization
+                    </p>
+                    <div className="px-3 py-1 bg-amber-600/20 border border-amber-600/50 rounded-full">
+                      <span className="text-amber-300 text-xs font-medium">Coming Soon</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Opcional: Efecto de "construcción" */}
+                <div className="absolute top-2 right-2">
+                  <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Panel derecho - Helper/Skills Navigator (tercero en móvil) */}
           <div className="order-3 xl:order-3 w-full xl:w-auto flex flex-col gap-4 max-w-[300px] xl:max-w-none mx-auto xl:mx-0">
-            
+
             {/* Panel de ayuda colapsable mejorado */}
             <div className="bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-2xl">
-              
+
               {/* Header colapsable (solo visible en móviles/tablets) */}
-              <button 
+              <button
                 onClick={() => setHelperPanelCollapsed(!helperPanelCollapsed)}
                 className="xl:hidden w-full p-3 flex items-center justify-between text-amber-300 hover:bg-amber-600/10 transition-colors"
               >
@@ -251,14 +382,14 @@ export default function Build() {
                   ▼
                 </span>
               </button>
-              
+
               {/* Contenido del panel (siempre visible en desktop) */}
               <div className={`${helperPanelCollapsed ? 'hidden xl:block' : 'block'} p-4 xl:pt-4`}>
-                
+
                 {/* Título en desktop */}
                 <h3 className="hidden xl:block text-lg font-bold text-amber-300 mb-4 text-center">Skill Trees</h3>
 
-                {/* 3rd Skill Tree Button mejorado */}
+                {/* 3rd Skill Tree Button con cálculo correcto de puntos */}
                 <button
                   onClick={handleSkillTreeOpen}
                   disabled={!selectedCharacter || selectedCharacter.level < 400}
@@ -269,8 +400,19 @@ export default function Build() {
                     <div className="flex-1 text-left">
                       <div className="text-sm sm:text-base">Master Skill Tree</div>
                       <div className="text-xs opacity-80">
-                        {selectedCharacter?.level >= 400 
-                          ? `${Math.min(selectedCharacter.level - 399, 400)} pts available`
+                        {selectedCharacter?.level >= 400
+                          ? (() => {
+                            const totalPoints = Math.min(selectedCharacter.level - 399, 400);
+
+                            // CORRECCIÓN: Sumar los NIVELES de cada skill, no contar skills
+                            const spentPoints = selectedCharacter['3rdTree']?.reduce((total, skill) => {
+                              return total + (skill.level || 0);
+                            }, 0) || 0;
+
+                            const remainingPoints = totalPoints - spentPoints;
+
+                            return `${remainingPoints} pts remaining (${spentPoints}/${totalPoints})`;
+                          })()
                           : 'Requires Level 400'
                         }
                       </div>
@@ -312,34 +454,6 @@ export default function Build() {
             </div>
           </div>
         </div>
-
-        {/* 🔥 Botones de acción completamente rediseñados */}
-        <div className="flex flex-wrap gap-2 sm:gap-4 mt-4 sm:mt-6 justify-center px-4 w-full max-w-4xl">
-          
-          {/* Save Build */}
-          <ActionButton
-            icon="💾"
-            title="Save Build"
-            subtitle="Export build data"
-            onClick={handleSave}
-            color="amber"
-            loading={actionLoading.save}
-            className="flex-1 sm:flex-initial min-w-[120px]"
-          />
-          
-          {/* Reset Build */}
-          <ActionButton
-            icon="🔄"
-            title="Reset Build"
-            subtitle="Clear all progress"
-            onClick={handleReset}
-            color="gray"
-            loading={actionLoading.reset}
-            confirmAction={true}
-            confirmMessage="Are you sure you want to reset your character? This will clear all stats and skills."
-            className="flex-1 sm:flex-initial min-w-[100px]"
-          />
-        </div>
       </div>
 
       {/* Efectos de partículas sutiles mejorados */}
@@ -349,25 +463,27 @@ export default function Build() {
         <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-purple-400/20 rounded-full animate-pulse delay-2000"></div>
         <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-green-400/25 rounded-full animate-pulse delay-500"></div>
         <div className="absolute bottom-1/4 left-1/2 w-2 h-2 bg-red-400/15 rounded-full animate-pulse delay-1500"></div>
-        {/* Partículas adicionales para más atmósfera */}
         <div className="absolute top-1/6 left-1/6 w-1 h-1 bg-cyan-400/20 rounded-full animate-pulse delay-3000"></div>
         <div className="absolute bottom-1/3 right-1/6 w-1.5 h-1.5 bg-pink-400/15 rounded-full animate-pulse delay-2500"></div>
       </div>
 
-      {/* 🔥 Sistema de Notificaciones */}
-      <NotificationSystem 
+      {/* Sistema de Notificaciones */}
+      <NotificationSystem
         notifications={notifications}
         removeNotification={removeNotification}
       />
 
-      {/* Modal de Inventario - NIVEL SUPERIOR */}
-      {inventoryModalActive && (
-        <ModalInventory
-          modalActive={inventoryModalActive}
-          setModalActive={setInventoryModalActive}
-          slotType={selectedSlot}
-        />
-      )}
+      {
+        inventoryModalActive && (
+          <>
+            <ModalInventory
+              modalActive={inventoryModalActive}
+              setModalActive={setInventoryModalActive}
+              slotType={selectedSlot}
+            />
+          </>
+        )
+      }
 
       {/* Skills Modal - se abre con tecla "A" */}
       <Main3rd

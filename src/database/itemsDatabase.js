@@ -19,8 +19,9 @@ export const ITEMS_DATABASE = {
     },
     excellentOptions: ['exc_mana_5', 'exc_zen_30', 'exc_dmg_dec_4', 'exc_life_5'],
     maxExcellentOptions: 2,
-    ancientSets: ["barnake"],
     canHaveLuck: true,
+    hasMastery: true,
+    masteryName: "BloodAngel",
     canHaveJewelOfLife: true,
     maxUpgrade: 15
   },
@@ -42,9 +43,10 @@ export const ITEMS_DATABASE = {
       defense: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42]
     },
     excellentOptions: ['exc_mana_5', 'exc_zen_30', 'exc_dmg_dec_4', 'exc_life_5', 'exc_def_success_15'],
-    maxExcellentOptions: 3,
-    ancientSets: ["barnake"],
-    canHaveLuck: false,
+    maxExcellentOptions: 2,
+    hasMastery: true,
+    masteryName: "BloodAngel",
+    canHaveLuck: true,
     canHaveJewelOfLife: true,
     maxUpgrade: 15
   },
@@ -67,7 +69,8 @@ export const ITEMS_DATABASE = {
     },
     excellentOptions: ['exc_mana_5', 'exc_zen_30', 'exc_dmg_dec_4', 'exc_life_5'],
     maxExcellentOptions: 2,
-    ancientSets: ["barnake"],
+    hasMastery: true,
+    masteryName: "BloodAngel",
     canHaveLuck: true,
     canHaveJewelOfLife: true,
     maxUpgrade: 15
@@ -91,8 +94,9 @@ export const ITEMS_DATABASE = {
     },
     excellentOptions: ['exc_mana_5', 'exc_zen_30', 'exc_dmg_dec_4', 'exc_life_5'],
     maxExcellentOptions: 2,
-    ancientSets: ["barnake"],
     canHaveLuck: true,
+    hasMastery: true,
+    masteryName: "BloodAngel",
     canHaveJewelOfLife: true,
     maxUpgrade: 15
   },
@@ -154,7 +158,7 @@ export const ITEMS_DATABASE = {
     class: ["Dark Knight", "Dark Lord", "Magic Gladiator"],
     durability: 25,
     url: "/src/assets/items/kris.png",
-    baseStats: { 
+    baseStats: {
       attackMin: 1,
       attackMax: 4
     },
@@ -179,7 +183,7 @@ export const ITEMS_DATABASE = {
     class: ["Dark Knight", "Dark Lord", "Magic Gladiator"],
     durability: 30,
     url: "/src/assets/items/short_sword.png",
-    baseStats: { 
+    baseStats: {
       attackMin: 2,
       attackMax: 6
     },
@@ -204,7 +208,7 @@ export const ITEMS_DATABASE = {
     class: ["Dark Wizard", "Summoner"],
     durability: 20,
     url: "/src/assets/items/skull_staff.png",
-    baseStats: { 
+    baseStats: {
       attackMin: 1,
       attackMax: 3
     },

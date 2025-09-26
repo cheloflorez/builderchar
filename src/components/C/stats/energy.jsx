@@ -9,24 +9,23 @@ export default function Energy() {
   const [formulasEnergy, setFormulasEnergy] = useState({});
   const [specialization, setSpecialization] = useState({});
 
-  // Click izquierdo - restar
+  // Click izquierdo - SUMAR (cambio aquí)
   const handleLeftClick = (e) => {
     e.preventDefault();
-    const pointsToRemove = e.shiftKey ? 10 : 1;
-    if (character && character.stats.energy > character.baseStats.energy + pointsToRemove - 1) {
-      decreaseStats({ stat: 'energy', points: pointsToRemove, baseStats: character.baseStats });
-    }
-  };
-
-  // Click derecho - sumar
-  const handleRightClick = (e) => {
-    e.preventDefault();
     const pointsToAdd = e.shiftKey ? 10 : 1;
-    if (character && character.points >= pointsToAdd) {
+    if (character?.points >= pointsToAdd) {
       increaseStats({ stat: 'energy', points: pointsToAdd });
     }
   };
 
+  // Click derecho - RESTAR (cambio aquí)
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    const pointsToRemove = e.shiftKey ? 10 : 1;
+    if (character?.stats.energy > character.baseStats.energy) {
+      decreaseStats({ stat: 'energy', points: pointsToRemove, baseStats: character.baseStats });
+    }
+  };
   useEffect(() => {
     if (character) formulasEne(character, setFormulasEnergy, setSpecialization, {});
   }, [character]);

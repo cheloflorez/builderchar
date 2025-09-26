@@ -38,7 +38,7 @@ const extendsOptions = [
   { value: "*Basic Def", opt: "basicDefense" },
   { value: "*Shield absorb", opt: "shieldAbsorb" },
   { value: "*Shield blck(%)", opt: "shieldBlockRate", rate: "%" },
-  { value: "*Weapon blck(%)", opt: "weaponBlockRate", rate: "%", decimal: true },
+  { value: "*Weapon blck(%)", opt: "weaponBlockRate", rate: "%" },
   { value: "*Zen ob inc (%)", opt: "increaseObtainingZenRate", rate: "%" },
 ];
 

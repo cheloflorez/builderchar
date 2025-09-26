@@ -112,7 +112,7 @@ const Main3rd = ({ isOpen, onClose, character }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-      <div className="relative mx-4 overflow-hidden" style={{ width: 'fit-content' }}>
+      <div className="relative z-0 flex flex-col h-full"> // Cambiar z-10 por z-0
         {/* Header del modal con background de imagen */}
         <div
           className="relative p-3 text-center"

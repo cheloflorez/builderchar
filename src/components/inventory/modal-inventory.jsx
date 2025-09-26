@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSelectedCharacter } from "../../hooks/useCharacter";
 import { ITEMS_DATABASE } from "../../database/itemsDatabase";
-import { EXCELLENT_OPTIONS } from "../../database/excellentOptions";
-import { ANCIENT_SETS } from "../../database/ancientSets";
+import ArmorModal from "./modal-items/ArmorModal";
 
 export default function ModalInventory({ modalActive, setModalActive, slotType }) {
   const { character, addItem } = useSelectedCharacter();
@@ -14,7 +13,7 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
     activeExcellentOptions: [],
     activeAncientSet: null,
     hasLuck: false,
-    hasJewelOfLife: false
+    hasJewelOfLife: false,
   });
 
   // Obtener item template por ID
@@ -25,9 +24,9 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
   // Obtener item actualmente equipado
   const getCurrentEquippedItem = () => {
     if (!character?.items) return null;
-    
+
     const items = character.items;
-    
+
     switch (slotType) {
       case "helm":
       case "armor":
@@ -66,11 +65,11 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
     const items = Object.values(ITEMS_DATABASE).filter(item => {
       // Filtrar por tipo de slot
       let isCorrectType = false;
-      
+
       // Mapear slot types correctamente
       switch (slotType) {
         case "helm":
-        case "armor":  
+        case "armor":
         case "pants":
         case "gloves":
         case "boots":
@@ -99,14 +98,14 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
         default:
           isCorrectType = false;
       }
-      
+
       if (!isCorrectType) return false;
 
       // Filtrar por clase del personaje
       if (item.class && item.class.length > 0) {
         const characterClass = character.class[0];
-        return item.class.some(allowedClass => 
-          characterClass.includes(allowedClass) || 
+        return item.class.some(allowedClass =>
+          characterClass.includes(allowedClass) ||
           allowedClass.includes(characterClass) ||
           characterClass === allowedClass
         );
@@ -119,6 +118,7 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
   }, [character, slotType]);
 
   const handleItemSelect = (itemId) => {
+    if (!itemId) return; // Agregar esta validación
     const item = getItemTemplate(itemId);
     if (item) {
       setSelectedItem(item);
@@ -126,54 +126,16 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
       setItemConfiguration({
         upgradeLevel: 0,
         activeExcellentOptions: [],
+        enhancementMode: null,
         activeAncientSet: null,
+        hasMastery: false,
         hasLuck: false,
-        hasJewelOfLife: false
+        hasJewelOfLife: false,
+        lifeType: item.type === 'weapon' ? 'damage' : 'defense',
+        lifeLevel: 1,
+        lifeValue: item.type === 'weapon' ? 4 : 4,
       });
     }
-  };
-
-  const handleUpgradeChange = (level) => {
-    const maxUpgrade = selectedItem?.maxUpgrade || 15;
-    const upgradeLevel = Math.max(0, Math.min(level, maxUpgrade));
-    setItemConfiguration(prev => ({ ...prev, upgradeLevel }));
-  };
-
-  const handleExcellentOptionToggle = (optionId) => {
-    setItemConfiguration(prev => {
-      const current = prev.activeExcellentOptions;
-      const maxOptions = selectedItem?.maxExcellentOptions || 6;
-      
-      if (current.includes(optionId)) {
-        // Remover opción
-        return {
-          ...prev,
-          activeExcellentOptions: current.filter(id => id !== optionId)
-        };
-      } else if (current.length < maxOptions) {
-        // Agregar opción
-        return {
-          ...prev,
-          activeExcellentOptions: [...current, optionId]
-        };
-      }
-      
-      return prev;
-    });
-  };
-
-  const handleAncientSetChange = (setName) => {
-    setItemConfiguration(prev => ({
-      ...prev,
-      activeAncientSet: setName === '' ? null : setName
-    }));
-  };
-
-  const handleSpecialOptionToggle = (option) => {
-    setItemConfiguration(prev => ({
-      ...prev,
-      [option]: !prev[option]
-    }));
   };
 
   const handleEquip = () => {
@@ -206,7 +168,7 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
   const getSlotDisplayName = () => {
     const names = {
       helm: "Casco",
-      armor: "Armadura", 
+      armor: "Armadura",
       pants: "Pantalones",
       gloves: "Guantes",
       boots: "Botas",
@@ -214,7 +176,7 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
       weapon2: "Arma Secundaria",
       earringL: "Arete Izquierdo",
       earringR: "Arete Derecho",
-      ringL: "Anillo Izquierdo", 
+      ringL: "Anillo Izquierdo",
       ringR: "Anillo Derecho",
       wings: "Alas",
       pet: "Mascota",
@@ -226,39 +188,22 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
     return names[slotType] || slotType;
   };
 
-  const renderItemStats = () => {
-    if (!selectedItem) return null;
+  // Agregar esta función después de getSlotDisplayName():
+  const getModalComponent = () => {
+    const armorTypes = ["helm", "armor", "pants", "gloves", "boots"];
 
-    const stats = [];
-    
-    // Stats base + upgrade
-    Object.keys(selectedItem.upgradeValues || {}).forEach(statKey => {
-      const upgradeArray = selectedItem.upgradeValues[statKey];
-      const value = upgradeArray[itemConfiguration.upgradeLevel] || upgradeArray[0];
-      
-      if (statKey === 'defense') {
-        stats.push(['Defensa', value]);
-      } else if (statKey === 'attackMin' && selectedItem.upgradeValues.attackMax) {
-        const maxValue = selectedItem.upgradeValues.attackMax[itemConfiguration.upgradeLevel] || selectedItem.upgradeValues.attackMax[0];
-        stats.push(['Ataque', `${value}~${maxValue}`]);
-      }
-    });
-
-    if (selectedItem.level) {
-      stats.push(['Nivel Requerido', selectedItem.level]);
+    if (armorTypes.includes(slotType)) {
+      return ArmorModal;
     }
 
-    if (selectedItem.durability) {
-      stats.push(['Durabilidad', selectedItem.durability]);
-    }
-
-    return stats;
+    // Por ahora, return null para otros tipos (seguimos con la lógica actual)
+    return null;
   };
 
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/70 backdrop-blur-sm">
       <div className="bg-gradient-to-b from-gray-800 to-gray-900 border border-amber-600/50 rounded-lg shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
-        
+
         {/* Header del modal */}
         <div className="flex justify-between items-center p-4 border-b border-amber-600/30 bg-gradient-to-r from-amber-900/20 to-amber-800/20">
           <div className="flex items-center space-x-3">
@@ -286,14 +231,14 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
 
         {/* Content del modal */}
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
-          
+
           {/* Selector de items */}
           <div className="mb-6">
             <label className="block text-sm font-medium text-amber-300 mb-2">
               Seleccionar {getSlotDisplayName()}:
             </label>
-            <select 
-              onChange={(e) => handleItemSelect(e.target.value)} 
+            <select
+              onChange={(e) => handleItemSelect(e.target.value)}
               className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none"
               defaultValue=""
             >
@@ -303,7 +248,6 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
               {availableItems.map((item) => (
                 <option value={item.id} key={item.id}>
                   {item.name}
-                  {item.level && ` (Req: Level ${item.level})`}
                 </option>
               ))}
             </select>
@@ -311,135 +255,46 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
 
           {/* Configuración del item seleccionado */}
           {selectedItem && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              
-              {/* Panel izquierdo - Stats y Preview */}
-              <div className="space-y-4">
-                <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-600">
-                  <h3 className="text-lg font-semibold text-amber-300 mb-3 flex items-center gap-2">
-                    <img 
-                      src={selectedItem.url} 
-                      alt={selectedItem.name}
-                      className="w-8 h-8 object-contain"
-                      style={{ imageRendering: 'pixelated' }}
-                    />
-                    {selectedItem.name}
-                  </h3>
-                  
-                  {/* Stats del item */}
-                  <div className="space-y-2 text-sm">
-                    {renderItemStats().map(([label, value], index) => (
-                      <div key={index} className="flex justify-between">
-                        <span className="text-gray-400">{label}:</span>
-                        <span className="text-white">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+            (() => {
+              const ModalComponent = getModalComponent();
 
-                {/* Upgrade Level */}
-                <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-600">
-                  <label className="block text-sm font-medium text-amber-300 mb-2">
-                    Nivel de Upgrade: +{itemConfiguration.upgradeLevel}
-                  </label>
-                  <input
-                    type="range"
-                    min="0"
-                    max={selectedItem.maxUpgrade || 15}
-                    value={itemConfiguration.upgradeLevel}
-                    onChange={(e) => handleUpgradeChange(parseInt(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+              if (ModalComponent) {
+                // Usar el modal específico
+                return (
+                  <ModalComponent
+                    selectedItem={selectedItem}
+                    itemConfiguration={itemConfiguration}
+                    setItemConfiguration={setItemConfiguration}
+                    currentEquippedItem={currentEquippedItem}
+                    character={character}
                   />
-                  <div className="flex justify-between text-xs text-gray-400 mt-1">
-                    <span>+0</span>
-                    <span>+{selectedItem.maxUpgrade || 15}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Panel derecho - Opciones */}
-              <div className="space-y-4">
-                
-                {/* Excellent Options */}
-                {selectedItem.excellentOptions && selectedItem.excellentOptions.length > 0 && (
-                  <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-600">
-                    <h4 className="text-sm font-medium text-purple-400 mb-3">
-                      Opciones Excellent ({itemConfiguration.activeExcellentOptions.length}/{selectedItem.maxExcellentOptions || 6})
-                    </h4>
-                    <div className="space-y-2 max-h-40 overflow-y-auto">
-                      {selectedItem.excellentOptions.map((optionId) => {
-                        const option = EXCELLENT_OPTIONS[optionId];
-                        if (!option) return null;
-                        
-                        return (
-                          <label key={optionId} className="flex items-center space-x-2 text-xs cursor-pointer">
-                            <input
-                              type="checkbox"
-                              checked={itemConfiguration.activeExcellentOptions.includes(optionId)}
-                              onChange={() => handleExcellentOptionToggle(optionId)}
-                              className="rounded border-gray-300"
-                            />
-                            <span className="text-gray-300">{option.name}</span>
-                          </label>
-                        );
-                      })}
+                );
+              } else {
+                // Usar la lógica original para tipos que aún no están modularizados
+                return (
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                    {/* TODO: Tu contenido original para weapons, wings, jewelry, etc. */}
+                    <div className="lg:col-span-3">
+                      <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-600">
+                        <p className="text-gray-400">
+                          Modal específico para {getSlotDisplayName()} coming soon...
+                        </p>
+                      </div>
+                    </div>
+                    <div className="lg:col-span-2">
+                      <div className="p-4 bg-gray-900/50 rounded-lg border border-gray-600 text-center">
+                        <img
+                          src={selectedItem.url}
+                          alt={selectedItem.name}
+                          className="w-16 h-16 mx-auto object-contain"
+                          style={{ imageRendering: 'pixelated' }}
+                        />
+                      </div>
                     </div>
                   </div>
-                )}
-
-                {/* Ancient Sets */}
-                {selectedItem.ancientSets && selectedItem.ancientSets.length > 0 && (
-                  <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-600">
-                    <h4 className="text-sm font-medium text-orange-400 mb-3">Ancient Set</h4>
-                    <select
-                      value={itemConfiguration.activeAncientSet || ''}
-                      onChange={(e) => handleAncientSetChange(e.target.value)}
-                      className="w-full p-2 bg-gray-700 border border-gray-600 rounded text-white text-xs"
-                    >
-                      <option value="">Sin Ancient Set</option>
-                      {selectedItem.ancientSets.map((setName) => {
-                        const setData = ANCIENT_SETS[setName];
-                        return (
-                          <option key={setName} value={setName}>
-                            {setData?.name || setName}
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
-                )}
-
-                {/* Special Options */}
-                <div className="p-4 bg-gray-800/50 rounded-lg border border-gray-600">
-                  <h4 className="text-sm font-medium text-cyan-400 mb-3">Opciones Especiales</h4>
-                  <div className="space-y-2">
-                    {selectedItem.canHaveLuck && (
-                      <label className="flex items-center space-x-2 text-xs cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={itemConfiguration.hasLuck}
-                          onChange={() => handleSpecialOptionToggle('hasLuck')}
-                          className="rounded border-gray-300"
-                        />
-                        <span className="text-cyan-400">Luck +4</span>
-                      </label>
-                    )}
-                    
-                    {selectedItem.canHaveJewelOfLife && (
-                      <label className="flex items-center space-x-2 text-xs cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={itemConfiguration.hasJewelOfLife}
-                          onChange={() => handleSpecialOptionToggle('hasJewelOfLife')}
-                          className="rounded border-gray-300"
-                        />
-                        <span className="text-pink-400">Jewel of Life +12</span>
-                      </label>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+                );
+              }
+            })()
           )}
 
           {/* Mensaje si no hay items disponibles */}
@@ -453,7 +308,7 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
 
         {/* Footer con botones */}
         <div className="flex justify-between items-center p-4 border-t border-amber-600/30 bg-gray-800/50">
-          
+
           {/* Botón para remover item actual */}
           {currentEquippedItem && (
             <button
@@ -463,10 +318,10 @@ export default function ModalInventory({ modalActive, setModalActive, slotType }
               Desequipar
             </button>
           )}
-          
+
           {/* Espaciador */}
           <div className="flex-1"></div>
-          
+
           {/* Botones principales */}
           <div className="flex space-x-3">
             <button

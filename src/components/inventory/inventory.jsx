@@ -144,9 +144,11 @@ export default function Inventory({ onSlotClick }) {
   };
 
   const getEquippedItem = (slotType) => {
-    if (!character?.items) return null;
-
+    if (!character?.items) {
+      return null;
+    }
     const items = character.items;
+    let result = null;
 
     // Mapear tipos de slot a la nueva estructura
     switch (slotType) {
@@ -178,7 +180,7 @@ export default function Inventory({ onSlotClick }) {
         return items[slotType];
 
       default:
-        return null;
+        return result;
     }
   };
 
@@ -190,18 +192,18 @@ export default function Inventory({ onSlotClick }) {
     }
     // Slots en la parte inferior -> tooltip arriba
     if (['gloves', 'ringR', 'pants', 'ringL', 'boots', 'artifact', 'pentagram'].includes(slotId)) {
-      return 'top';
+      return 'right';
     }
     // Slots del lado izquierdo -> tooltip a la derecha
     if (['weapon1', 'earringL'].includes(slotId)) {
-      return 'right';
+      return 'bottom';
     }
     // Slots del lado derecho -> tooltip a la izquierda
     if (['weapon2', 'earringR'].includes(slotId)) {
-      return 'left';
+      return 'bottom';
     }
     // Default
-    return 'top';
+    return 'bottom';
   };
 
   const SlotButton = ({ slot }) => {
@@ -220,8 +222,9 @@ export default function Inventory({ onSlotClick }) {
       const buttonSize = slot.id === 'wings' ? 'w-[60px] h-[60px]' : size;
 
       return (
-        <ItemTooltip 
-          item={equippedItem} 
+        <ItemTooltip
+          item={equippedItem}
+          character={character} // <--- aquí
           position={getTooltipPosition(slot.id)}
         >
           <button
@@ -291,8 +294,9 @@ export default function Inventory({ onSlotClick }) {
     // Si hay un item equipado, envolver en ItemTooltip
     if (equippedItem) {
       return (
-        <ItemTooltip 
-          item={equippedItem} 
+        <ItemTooltip
+          item={equippedItem}
+          character={character} // <--- aquí
           position={getTooltipPosition(slot.id)}
         >
           {buttonContent}

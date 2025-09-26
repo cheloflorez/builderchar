@@ -1,5 +1,5 @@
 // utils/extendedStatsSystem.js
-import { getAllEquippedItems, calculateItemStats, calculateAncientSetBonuses } from '../helpers/itemHelpers.js';
+import { getAllEquippedItems, calculateItemStats, calculateAncientSetBonuses , calculateMasterySetBonuses } from '../helpers/itemHelpers.js';
 
 // ✅ DEFINICIÓN DE TODAS LAS OPCIONES EXTENDIDAS
 export const EXTENDED_STATS_CONFIG = {
@@ -225,7 +225,7 @@ export const EXTENDED_STATS_CONFIG = {
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
   },
-    zenObtainIncreaseRate: {
+  zenObtainIncreaseRate: {
     label: "*Zen obtain increase rate(%)",
     suffix: "%",
     decimal: true,
@@ -236,12 +236,12 @@ export const EXTENDED_STATS_CONFIG = {
 // ✅ FUNCIÓN PRINCIPAL PARA CALCULAR TODAS LAS EXTENDED STATS
 export const calculateExtendedStats = (character) => {
   const extendedStats = {};
-  
+
   // Inicializar todas las stats en 0
   Object.keys(EXTENDED_STATS_CONFIG).forEach(statKey => {
     extendedStats[statKey] = 0;
   });
-  
+
   // ✅ 1. BONUS DEL 3RD TREE
   if (character['3rdTree']) {
     character['3rdTree'].forEach(skill => {
@@ -251,7 +251,7 @@ export const calculateExtendedStats = (character) => {
       }
     });
   }
-  
+
   // ✅ 2. BONUS DEL 4TH TREE (cuando lo agregues)
   if (character['4thTree']) {
     character['4thTree'].forEach(skill => {
@@ -261,7 +261,7 @@ export const calculateExtendedStats = (character) => {
       }
     });
   }
-  
+
   // ✅ 3. BONUS DE ITEMS
   if (character.items) {
     // Items individuales
@@ -274,7 +274,7 @@ export const calculateExtendedStats = (character) => {
         }
       });
     });
-    
+
     // Ancient set bonuses
     const ancientBonuses = calculateAncientSetBonuses(character);
     Object.keys(ancientBonuses).forEach(statKey => {
@@ -282,8 +282,16 @@ export const calculateExtendedStats = (character) => {
         extendedStats[statKey] += ancientBonuses[statKey];
       }
     });
+
+    // 🔹 Mastery set bonuses
+    const masteryBonuses = calculateMasterySetBonuses(character);
+    Object.keys(masteryBonuses).forEach(statKey => {
+      if (extendedStats.hasOwnProperty(statKey)) {
+        extendedStats[statKey] += masteryBonuses[statKey];
+      }
+    });
   }
-  
+
   return extendedStats;
 };
 
@@ -329,7 +337,7 @@ const getExtendedStatKey = (valueType) => {
     'WeaponBlockRate': 'weaponBlockRate',
     'ZenIncRate': 'increaseObtainingZenRate'
   };
-  
+
   return mapping[valueType] || null;
 };
 
@@ -349,16 +357,16 @@ const addItemBonuses = (item, extendedStats) => {
 export const formatExtendedStatValue = (statKey, value) => {
   const config = EXTENDED_STATS_CONFIG[statKey];
   if (!config) return "-";
-  
+
   if (value === 0) return "-";
-  
+
   let formattedValue = value;
-  
+
   // Aplicar decimales si es necesario
   if (config.decimal && value % 1 !== 0) {
     formattedValue = value.toFixed(1);
   }
-  
+
   // Agregar sufijo
   return `${formattedValue}${config.suffix}`;
 };

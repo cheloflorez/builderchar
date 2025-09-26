@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+/* Tooltip positioning */
+.tooltip-top {
+  transform: translateX(-50%) translateY(-100%);
+  top: -8px;
+  left: 50%;
+}
+
+.tooltip-bottom {
+  transform: translateX(-50%) translateY(100%);
+  bottom: -8px;
+  left: 50%;
+}
+
+/* Asegurar que tooltips no se corten */
+.group:hover .tooltip-top,
+.group:hover .tooltip-bottom {
+  position: fixed;
+  z-index: 9999;
+}

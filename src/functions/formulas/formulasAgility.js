@@ -1,4 +1,7 @@
 import { getTotalStats, calculate3rdTreeBonus } from '../../utils/3rdTreeUtils.js';
+import { calculateTotalLifeBonuses, getLifeBonus } from '../../helpers/itemHelpers.js';
+
+
 
 export default function formulasAgi(character, setFormulasAgility, setSpecialization) {
   let defense = 0,
@@ -7,6 +10,7 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
   const bonus = calculate3rdTreeBonus(character);
   const totalStats = getTotalStats(character);
 
+  const totalDefenseBonus = getLifeBonus(character, 'defense'); // 20
 
   // ✅ Usar stats totales incluyendo blue stats
   const strength = totalStats.strength;
@@ -15,7 +19,7 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
   const classChar = character.class[0];
 
   // 🔥 AQUÍ TIENES EL DefenseRatePVP del 3rd tree
-  const defenseRatePVPBonus = bonus.DefenseRatePVP || 0;
+  const defenseRatePVPBonus = bonus.DefenseratePVP || 0;
 
   let specialization;
   if (agility <= 1500) specialization = agility / 15000;
@@ -26,7 +30,7 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
   switch (classChar) {
     case "Dark Wizard":
       setFormulasAgility({
-        defense: Math.floor(agility / 4) + defense,
+        defense: Math.floor(agility / 4) + defense + totalDefenseBonus,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor(Math.floor(agility / 3) * defenseRate),
         defenseRatePVP: Math.floor(level * 2 + agility / 4) + defenseRatePVPBonus,

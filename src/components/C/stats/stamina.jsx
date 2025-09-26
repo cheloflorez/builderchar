@@ -8,21 +8,21 @@ export default function Stamina() {
   const { character, increaseStats, decreaseStats } = useSelectedCharacter();
   const [formulasStamina, setFormulasStamina] = useState({});
 
-  // Click izquierdo - restar
+  // Click izquierdo - SUMAR (cambio aquí)
   const handleLeftClick = (e) => {
     e.preventDefault();
-    const pointsToRemove = e.shiftKey ? 10 : 1;
-    if (character && character.stats.stamina > character.baseStats.stamina + pointsToRemove - 1) {
-      decreaseStats({ stat: 'stamina', points: pointsToRemove, baseStats: character.baseStats });
+    const pointsToAdd = e.shiftKey ? 10 : 1;
+    if (character?.points >= pointsToAdd) {
+      increaseStats({ stat: 'stamina', points: pointsToAdd });
     }
   };
 
-  // Click derecho - sumar
+  // Click derecho - RESTAR (cambio aquí)
   const handleRightClick = (e) => {
     e.preventDefault();
-    const pointsToAdd = e.shiftKey ? 10 : 1;
-    if (character && character.points >= pointsToAdd) {
-      increaseStats({ stat: 'stamina', points: pointsToAdd });
+    const pointsToRemove = e.shiftKey ? 10 : 1;
+    if (character?.stats.stamina > character.baseStats.stamina) {
+      decreaseStats({ stat: 'stamina', points: pointsToRemove, baseStats: character.baseStats });
     }
   };
 
@@ -37,7 +37,7 @@ export default function Stamina() {
     return null;
   }
 
-    // 🔥 CALCULAR BONUS DEL 3RD TREE
+  // 🔥 CALCULAR BONUS DEL 3RD TREE
   const bonus3rdTree = calculate3rdTreeBonus(character);
   const staminaBonus = bonus3rdTree.stamina;
 
@@ -67,8 +67,8 @@ export default function Stamina() {
             src="/src/assets/windows-stats/button.png"
             alt="stat button"
             className={`transition-all duration-150 ${!canIncrease && !canDecrease
-                ? 'opacity-50 grayscale'
-                : 'hover:brightness-110 active:brightness-90'
+              ? 'opacity-50 grayscale'
+              : 'hover:brightness-110 active:brightness-90'
               }`}
             style={{
               imageRendering: 'pixelated',

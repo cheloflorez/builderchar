@@ -11,21 +11,21 @@ export default function Agility() {
   const [formulasAgility, setFormulasAgility] = useState({});
   const [specialization, setSpecialization] = useState({});
 
-  // Click izquierdo - restar
+  // Click izquierdo - SUMAR (cambio aquí)
   const handleLeftClick = (e) => {
-    e.preventDefault();
-    const pointsToRemove = e.shiftKey ? 10 : 1;
-    if (character?.stats.agility > character.baseStats.agility) {
-      decreaseStats({ stat: 'agility', points: pointsToRemove, baseStats: character.baseStats });
-    }
-  };
-
-  // Click derecho - sumar
-  const handleRightClick = (e) => {
     e.preventDefault();
     const pointsToAdd = e.shiftKey ? 10 : 1;
     if (character?.points >= pointsToAdd) {
       increaseStats({ stat: 'agility', points: pointsToAdd });
+    }
+  };
+
+  // Click derecho - RESTAR (cambio aquí)
+  const handleRightClick = (e) => {
+    e.preventDefault();
+    const pointsToRemove = e.shiftKey ? 10 : 1;
+    if (character?.stats.agility > character.baseStats.agility) {
+      decreaseStats({ stat: 'agility', points: pointsToRemove, baseStats: character.baseStats });
     }
   };
 
