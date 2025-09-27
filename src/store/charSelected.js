@@ -1,6 +1,7 @@
 // store/charSelected.js
 import { proxy } from 'valtio';
 import { charactersStore } from './characters.js';
+import { fruitsPoints } from '../utils/characterUtils.js';
 
 // Store principal para el personaje seleccionado
 export const charSelectedStore = proxy({
@@ -158,7 +159,10 @@ export const charSelectedStore = proxy({
       (char.stats.energy - baseStats.energy) +
       (char.stats.command ? (char.stats.command - (baseStats.command || 0)) : 0);
 
-    char.level = level > 1500 ? 1500 : level;
+    char.level = level > 1700 ? 1700 : level;
+
+    // ✅ AGREGAR ESTA LÍNEA: Resetear fruits cuando cambia el nivel
+    char.fruits = 0;
 
     // Calcular puntos según nivel
     let points = 0;
@@ -175,6 +179,9 @@ export const charSelectedStore = proxy({
     }
     if (char.level >= 800) {
       points = 2365 - totalAddedStats;
+    }
+    if (char.level >= 1200) {
+      points = 2565 - totalAddedStats;
     }
     if (char.level <= 1 || char.level === "") {
       points = "-";
@@ -269,5 +276,28 @@ export const charSelectedStore = proxy({
       mana: statsBarData.mana,
       ag: statsBarData.ag
     };
-  }
+  },
+  // Incrementar fruits (agrega 1 fruit y 1 point)
+  increaseFruits: (amount = 1) => {
+    if (!charSelectedStore.selectedCharacter) return;
+
+    const char = charSelectedStore.selectedCharacter;
+    const maxFruits = fruitsPoints(char);
+
+    if (char.fruits + amount <= maxFruits) {
+      char.fruits += amount;
+      char.points += amount;
+    }
+  },
+  decreaseFruits: (amount = 1) => {
+    if (!charSelectedStore.selectedCharacter) return;
+
+    const char = charSelectedStore.selectedCharacter;
+    const actualAmount = Math.min(amount, char.fruits);
+
+    if (actualAmount > 0) {
+      char.fruits -= actualAmount;
+      char.points -= actualAmount;
+    }
+  },
 });

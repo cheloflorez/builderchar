@@ -131,10 +131,10 @@ export default function statsBar(character, updateStatsBar) {
       defense = Math.floor((defense + Math.floor(agility / 10)) * 0.5);
 
       updateStatsBar({
-        hp: Math.floor((85 + Math.floor(stamina * 3 + (level - 1) * 1.5) + hpMax) * hpRate),
+        hp: Math.floor((85 + Math.floor(stamina * 3 + (level - 1) * 1.15) + hpMax) * hpRate),
         sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
-        mana: Math.floor((energy + (level - 1) + manaMax) * manaRate),
-        ag: Math.floor(strength * 0.2 + agility * 0.4 + stamina * 0.3 + energy) + agMax,
+        mana: Math.floor((energy + (level - 1) * 1.8  + manaMax) * manaRate),
+        ag: Math.floor(4 + energy + (agility / 5) + (strength / 7))
       })
 
       break;

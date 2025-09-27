@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import GreenTree from './GreenTree';
 import BlueTree from './BlueTree';
 import RedTree from './RedTree';
+import { classChar } from '../../utils/characterUtils';
 
 // ========================================
 // 🎮 MAIN 3RD SKILL TREE COMPONENT - SIN LOOP INFINITO
@@ -14,6 +15,8 @@ const Main3rd = ({ isOpen, onClose, character }) => {
   // ✅ MEMOIZAR el character.id para evitar cambios constantes
   const characterId = character?.id;
   const characterLevel = character?.level;
+
+  const currentClass = classChar(character);
 
   // ✅ Manejar tecla ESC para cerrar el modal
   useEffect(() => {
@@ -129,7 +132,7 @@ const Main3rd = ({ isOpen, onClose, character }) => {
           {/* Contenido del header */}
           <div className="pl-6  relative z-10 h-full flex items-center justify-between">
             <div className="text-left">
-              <p className="text-amber-200 text-xs drop-shadow">Master Level Skills - {character.class[0]}</p>
+              <p className="text-amber-200 text-xs drop-shadow">Master Level Skills - {currentClass}</p>
             </div>
 
             {/* Información central de puntos */}

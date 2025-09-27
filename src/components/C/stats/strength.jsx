@@ -9,6 +9,7 @@ export default function Strength() {
 
   const [formulasStrength, setFormulasStrength] = useState({});
   const [specialization, setSpecialization] = useState({});
+  const [combatpower, setCombatPower] = useState({});
 
   // Click izquierdo - SUMAR (cambio aquí)
   const handleLeftClick = (e) => {
@@ -28,7 +29,7 @@ export default function Strength() {
     }
   };
   useEffect(() => {
-    if (character) formulasStr(character, setFormulasStrength, setSpecialization);
+    if (character) formulasStr(character, setFormulasStrength, setSpecialization, setCombatPower);
   }, [character]);
 
   // Early return DESPUÉS de hooks
@@ -88,17 +89,10 @@ export default function Strength() {
         </span>
       </dd>
 
-      <dt>* Attack Power</dt>
-      <dd className="col-span-2">
-        <span className="text-amber-300">
-          {formulasStrength.attackMin} ~ {formulasStrength.attackMax}
-        </span>
-      </dd>
-
       {specialization.splAtkMax >= 0 && (
         <>
           <dt>
-            <span className="text-violet-500">* Spl Atk Pwr</span>
+            <span className="text-violet-500">(S) ATK Power</span>
           </dt>
           <dd className="col-span-2">
             <span className="text-violet-500">
@@ -113,6 +107,13 @@ export default function Strength() {
           </dd>
         </>
       )}
+
+      <dt>* Attack Power</dt>
+      <dd className="col-span-2">
+        <span className="text-amber-300">
+          {formulasStrength.attackMin} ~ {formulasStrength.attackMax}
+        </span>
+      </dd>
 
       <dt>* Atk Succ rate</dt>
       <dd>
@@ -129,6 +130,18 @@ export default function Strength() {
       <dd className="text-center">
         <span className="text-amber-300">-</span>
       </dd>
+
+      {combatpower.CombatPower >= 0 && (
+        <>
+          <dt>
+           * Combat Power
+          </dt>
+          <dd className="col-span-2">
+            <span className="text-amber-300">{combatpower.CombatPower} %</span>
+          </dd>
+        </>
+      )}
+
     </>
   );
 }

@@ -1,7 +1,7 @@
 // functions/formulas/formulasStrength.js
 import { getTotalStats, calculate3rdTreeBonus } from '../../utils/3rdTreeUtils.js';
 
-export default function formulasStr(character, setFormulasStrength, setSpecialization) {
+export default function formulasStr(character, setFormulasStrength, setSpecialization , setCombatPower) {
   // ✅ CENTRALIZADO: Obtener todos los bonus de una vez
   const bonus = calculate3rdTreeBonus(character);
   const totalStats = getTotalStats(character);
@@ -51,6 +51,9 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
         splAtkMin: Math.floor((strength / 6) * specialization),
         splAtkMax: Math.floor((strength / 4) * specialization),
       });
+      setCombatPower({
+        CombatPower: 0
+      })
       break;
     case "Fairy Elf":
       setFormulasStrength({

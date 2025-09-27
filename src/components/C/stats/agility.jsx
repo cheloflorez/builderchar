@@ -96,7 +96,7 @@ export default function Agility() {
       {specialization.splAtkMax >= 0 && (
         <>
           <dt>
-            <span className="text-violet-500">* Spl Atk Pwr</span>
+            <span className="text-violet-500">* (S) ATK Power</span>
           </dt>
           <dd className="col-span-2">
             <span className="text-violet-500">
@@ -115,7 +115,7 @@ export default function Agility() {
       {specialization.splDef >= 0 && (
         <>
           <dt>
-            <span className="text-violet-500">* Spl Def</span>
+            <span className="text-violet-500">* (S) DEF</span>
           </dt>
           <dd className="col-span-2">
             <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
@@ -126,7 +126,7 @@ export default function Agility() {
       {specialization.splDefRate >= 0 && (
         <>
           <dt>
-            <span className="text-violet-500">* Spl Def rate</span>
+            <span className="text-violet-500">* (S) DEF Rate</span>
           </dt>
           <dd className="col-span-2">
             <span className="text-violet-500">
@@ -136,7 +136,7 @@ export default function Agility() {
           {specialization.splPVPAtkRate >= 0 && (
             <>
               <dt>
-                <span className="text-violet-500">* Spl PVP Atk(%)</span>
+                <span className="text-violet-500">* (S) PVP Atk(%)</span>
               </dt>
               <dd className="col-span-2">
                 <span className="text-violet-500">
@@ -148,7 +148,7 @@ export default function Agility() {
           {specialization.splPVPDefRate >= 0 && (
             <>
               <dt>
-                <span className="text-violet-500">* Spl PVP Def rate</span>
+                <span className="text-violet-500">* (S) PvP DEF Rate</span>
               </dt>
               <dd className="col-span-2">
                 <span className="text-violet-500">

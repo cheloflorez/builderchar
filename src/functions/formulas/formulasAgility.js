@@ -22,6 +22,7 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
   const defenseRatePVPBonus = bonus.DefenseratePVP || 0;
 
   let specialization;
+  
   if (agility <= 1500) specialization = agility / 15000;
   if (agility > 1500 && agility <= 2000) specialization = 0.1 + (agility - 1500) / 2500;
   if (agility > 2000 && agility <= 3000) specialization = 0.3 + (agility - 2000) / 6666;
@@ -117,6 +118,7 @@ export default function formulasAgi(character, setFormulasAgility, setSpecializa
       if (agility <= 1800) specializationDef = agility / 18000;
       if (agility > 1800 && agility <= 2500) specializationDef = 0.1 + (agility - 1800) / 3500;
       if (agility > 2500 && agility <= 3000) specializationDef = 0.3 + (agility - 2000) / 3333;
+      
       setFormulasAgility({
         defense: Math.floor(agility / 10) + defense,
         speed: Math.floor(agility / 10),

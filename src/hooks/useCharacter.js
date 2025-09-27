@@ -6,7 +6,7 @@ import { charactersStore } from '../store/characters.js';
 // Hook para el personaje seleccionado
 export const useSelectedCharacter = () => {
   const snap = useSnapshot(charSelectedStore);
-  
+
   return {
     character: snap.selectedCharacter,
     addChar: charSelectedStore.addChar,
@@ -15,7 +15,9 @@ export const useSelectedCharacter = () => {
     increaseStats: charSelectedStore.increaseStats,
     decreaseStats: charSelectedStore.decreaseStats,
     update3rdTreeSkill: charSelectedStore.update3rdTreeSkill,
-    updateStatsBar: charSelectedStore.updateStatsBar // <- Nuevo método
+    updateStatsBar: charSelectedStore.updateStatsBar, // <- Nuevo método
+    increaseFruits: charSelectedStore.increaseFruits, // ← Agregar esta línea
+    decreaseFruits: charSelectedStore.decreaseFruits  // ← Agregar
   };
 };
 
