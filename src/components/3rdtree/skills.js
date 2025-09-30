@@ -9,7 +9,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Sin requisitos específicos
         rowRequirements: { minRow: 0, minLevel: 0 }, // Fila 0, sin requisitos
-        image: '/src/assets/3rd/green/DefenseRatePVP.png',
+        image: '/3rd/green/DefenseRatePVP.png',
         description: 'Incrementa el PVP defense rate del personaje.',
         valueType: 'DefenseratePVP',
         values: [0, 614, 1029, 1415, 1774, 2106, 2413, 2695, 2954, 3190, 3405, 3600, 3775, 3931, 4070, 4193, 4301, 4394, 4474, 4541, 4598]
@@ -20,7 +20,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: { minRow: 0, minLevel: 0 }, // Fila 0, sin requisitos
-        image: '/src/assets/3rd/green/DurabilityReduction.png',
+        image: '/3rd/green/DurabilityReduction.png',
         description: 'La velocidad de reducción de durabilidad de las armas y armaduras equipadas disminuye en un %',
         valueType: 'DurabilityReductionRate',
         values: [0, 18.06, 30.27, 41.64, 52.19, 61.97, 70.99, 79.29, 86.90, 93.85, 100.17, 105.89, 111.03, 115.64, 119.73, 123.34, 126.50, 129.24, 131.59, 133.58, 135.24]
@@ -31,7 +31,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 1, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/MaximumSDIncrease.png',
+        image: '/3rd/green/MaximumSDIncrease.png',
         description: 'Incrementa el SD máximo del personaje.',
         valueType: 'MaximumSDIncrease',
         values: [0, 511, 857, 1179, 1478, 1755, 2011, 2246, 2462, 2659, 2838, 3000, 3145, 3276, 3392, 3494, 3584, 3661, 3728, 3784, 3831]
@@ -42,7 +42,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 1, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/recoveryMana.png',
+        image: '/3rd/green/recoveryMana.png',
         description: 'Aumenta la recuperacion de mana.',
         valueType: 'autoManaRecoveryRate',
         values: [
@@ -75,7 +75,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 2, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 2, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/DurabilityReduction2.png',
+        image: '/3rd/green/DurabilityReduction2.png',
         description: 'Durability reduction speed of equipped accessories (necklace & rings) decreases by %',
         valueType: 'DurabilityReduction2Rate',
         values: [
@@ -108,7 +108,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 3, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 2, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/SDRecoverySpeedIncrease.png',
+        image: '/3rd/green/SDRecoverySpeedIncrease.png',
         description: 'Automatic SD recovery increases by %',
         valueType: 'SDRecoverySpeedIncreaseRate',
         values: [
@@ -141,7 +141,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 4, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 2, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/recoveryHP.png',
+        image: '/3rd/green/recoveryHP.png',
         description: 'Automatic HP recovery increases by %',
         valueType: 'AutomaticHPRecoveryIncreaseRate',
         values: [
@@ -174,7 +174,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 3, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/DefenseIncrease.png',
+        image: '/3rd/green/DefenseIncrease.png',
         description: 'Defense Increase by',
         valueType: 'DefenseIncrease',
         values: [
@@ -207,7 +207,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 10,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 3, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/ElementalDEFIncrease.png',
+        image: '/3rd/green/ElementalDEFIncrease.png',
         description: 'Elemental DEF Increase by',
         valueType: 'ElementalDEFIncrease',
         values: [
@@ -230,7 +230,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 4, requiredLevel: 10 }, { skillId: 7, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 3, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/AutomaticAGRecoveryIncrease.png',
+        image: '/3rd/green/AutomaticAGRecoveryIncrease.png',
         description: 'Automatic AG Recovery Increase by %',
         valueType: 'AutomaticAGRecoveryIncreaseRate',
         values: [
@@ -263,7 +263,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 5, requiredLevel: 10 }, { skillId: 2, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 4, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/DurabilityReduction3.png',
+        image: '/3rd/green/DurabilityReduction3.png',
         description: 'Durability reduction speed of the consumable items (Satan, Guardian Angel, Dinorant ,Fenrir) decreases by %',
         valueType: 'DurabilityReduction3Rate',
         values: [
@@ -296,7 +296,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 8, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 4, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/DefenseSuccessRateIncrease.png',
+        image: '/3rd/green/DefenseSuccessRateIncrease.png',
         description: 'Defense success rate increases by %',
         valueType: 'DefenseSuccessRateIncrease',
         values: [
@@ -329,7 +329,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 5, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/ArmorSetBonusIncrease.png',
+        image: '/3rd/green/ArmorSetBonusIncrease.png',
         description: 'Defense increases by X when a full armor set (helm, armor, pants, gloves and boots) is equipped',
         valueType: 'ArmorSetBonusIncrease',
         values: [
@@ -362,7 +362,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 13, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 5, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/Revenge.png',
+        image: '/3rd/green/Revenge.png',
         description: 'Returns 1 incoming damage to the dealer with % chance when hit',
         valueType: 'returnDamageRate',
         values: [
@@ -395,7 +395,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 6, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/energy.png',
+        image: '/3rd/green/energy.png',
         description: 'Energy Increase by',
         valueType: 'energy',
         values: [
@@ -428,7 +428,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 6, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/vitality.png',
+        image: '/3rd/green/vitality.png',
         description: 'Stamina Increase by',
         valueType: 'stamina',
         values: [
@@ -461,7 +461,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 6, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/agility.png',
+        image: '/3rd/green/agility.png',
         description: 'Agility Increase by',
         valueType: 'agility',
         values: [
@@ -494,7 +494,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 6, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/strength.png',
+        image: '/3rd/green/strength.png',
         description: 'Strength Increase by',
         valueType: 'strength',
         values: [
@@ -527,7 +527,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 5, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/command.png',
+        image: '/3rd/green/command.png',
         description: 'Command Increase by',
         valueType: 'command',
         values: [
@@ -560,7 +560,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 7, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/wings3def.png',
+        image: '/3rd/green/wings3def.png',
         description: 'Wings 3rd is equiped , defense increase by',
         valueType: 'wings3def',
         values: [
@@ -593,7 +593,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 7, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/ProtectionShield.png',
+        image: '/3rd/green/ProtectionShield.png',
         description: 'While equipped with a shield, you have % chance to reduce incoming damage by 1000% of shield block value. If all damage is blocked when this passive is activated, it will be shown as absorbed',
         valueType: 'ProtectionShieldRate',
         values: [
@@ -626,7 +626,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 19, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/wings3atk.png',
+        image: '/3rd/green/wings3atk.png',
         description: 'Wings 3rd is equiped , attack increase by',
         valueType: 'wings3atk',
         values: [
@@ -659,7 +659,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/SteelArmor.png',
+        image: '/3rd/green/SteelArmor.png',
         description: 'You have X base armor that is impenetrable, and this armor is not ignored',
         valueType: 'SteelArmor',
         values: [
@@ -692,7 +692,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/ShieldBlock.png',
+        image: '/3rd/green/ShieldBlock.png',
         description: 'While equipped with a shield, you have % chance to block with a shield and reduce all incoming damage. When this passive is activated, it will be shown as Block',
         valueType: 'shieldBlockRate',
         values: [
@@ -725,7 +725,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 7, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/src/assets/3rd/green/WeaponBlockRate.png',
+        image: '/3rd/green/WeaponBlockRate.png',
         description: 'While equipped with a Sword, Mace, Spear, Axe, etc, you have a % chance to block physical attack, and when this passive is activated, it will be shown as Parry',
         valueType: 'weaponBlockRate',
         values: [

@@ -95,7 +95,7 @@ export default function CreateBuildModal({ onClose, onCreateBuild }) {
                   }`}
                 >
                   <img
-                    src={`/src/assets/characters/${char.img}.png`}
+                    src={`/characters/${char.img}.png`}
                     alt={char.name}
                     className="w-24 h-24 md:w-28 md:h-28 object-contain mb-2"
                     style={{ imageRendering: 'pixelated' }}

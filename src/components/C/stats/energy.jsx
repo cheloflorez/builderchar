@@ -62,7 +62,7 @@ export default function Energy() {
         >
           {/* Imagen del botón */}
           <img
-            src="/src/assets/windows-stats/button.png"
+            src="/windows-stats/button.png"
             alt="stat button"
             className={`transition-all duration-150 ${!canIncrease && !canDecrease
               ? 'opacity-50 grayscale'

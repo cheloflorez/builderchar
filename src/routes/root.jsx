@@ -87,7 +87,7 @@ export default function Root() {
                   <div className="flex items-center gap-4 mb-3">
                     <div className="relative">
                       <img
-                        src={`/src/assets/characters/${build.character}.png`}
+                        src={`/characters/${build.character}.png`}
                         alt={build.class}
                         className="w-25 h-25 object-cover rounded-lg border-2 border-amber-500/50 bg-gray-800/50 p-2"
                       />

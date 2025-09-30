@@ -252,7 +252,7 @@ export default function Build() {
                   {/* Sección izquierda - Info del build y personaje */}
                   <div className="flex items-center gap-4">
                     <img
-                      src={`/src/assets/characters/${buildData.character}.png`}
+                      src={`/characters/${buildData.character}.png`}
                       alt={currentClass}
                       className="w-12 h-12 sm:w-17 sm:h-14 object-contain rounded-lg border-2 border-amber-500/50 p-1"
                     />

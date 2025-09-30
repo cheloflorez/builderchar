@@ -49,7 +49,7 @@ const StatsBar = () => {
 
   return (
     <div 
-      className="relative bg-[url('/src/assets/windows-stats/statsbar.png')] bg-cover bg-center"
+      className="relative bg-[url('/windows-stats/statsbar.png')] bg-cover bg-center"
       style={{ width: '924px', height: '103px' }}
     >
       {statsConfig.map(stat => (
