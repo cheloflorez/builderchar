@@ -7,27 +7,35 @@ export default function Points() {
   
   if (!character) return null;
 
+  
+  
   const handleLeftClick = (e) => {
     e.preventDefault();
     const amount = e.shiftKey ? 10 : 1;
     increaseFruits(amount);
+    
   };
 
   const handleRightClick = (e) => {
     e.preventDefault();
     const amount = e.shiftKey ? 10 : 1;
     decreaseFruits(amount);
+
   };
 
   const maxFruits = fruitsPoints(character);
   const canIncrease = character.fruits < maxFruits;
   const canDecrease = character.fruits > 0;
 
+  // ✅ ASEGURAR que points nunca sea NaN
+  const points = character.points;
+  const displayPoints = (points === undefined || points === null || isNaN(points)) ? "-" : (points === 0 ? "-" : points);
+
   return (
     <ul className="absolute grid pt-1 pl-1 grid-cols-3 w-full col-span-2 top-44 left-6">
       <li>Pts Remaining</li>
       <li className="col-span-2">
-        <span className="text-amber-300">{character.points === 0 ? "-" : character.points}</span>
+        <span className="text-amber-300">{displayPoints}</span>
       </li>
       <li>Fruit Create</li>
       <li className="col-span-2 flex items-center gap-2">
@@ -59,7 +67,7 @@ export default function Points() {
           />
         </button>
         <span className="text-amber-300 whitespace-nowrap min-w-0">
-          {character.fruits} / {maxFruits}
+          {character.fruits || 0} / {maxFruits || 0}
         </span>
       </li>
     </ul>

@@ -1,11 +1,12 @@
 // functions/formulas/formulasStrength.js
 import { getTotalStats, calculate3rdTreeBonus } from '../../utils/3rdTreeUtils.js';
 
-export default function formulasStr(character, setFormulasStrength, setSpecialization , setCombatPower) {
+
+export default function formulasStr(character, setFormulasStrength, setSpecialization, setCombatPower) {
   // ✅ CENTRALIZADO: Obtener todos los bonus de una vez
   const bonus = calculate3rdTreeBonus(character);
   const totalStats = getTotalStats(character);
-  
+
   // Usar stats totales en lugar de base
   const strength = totalStats.strength;
   const agility = totalStats.agility;
@@ -14,7 +15,7 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
   const level = character.level;
   const command = totalStats.command;
   const classChar = character.class[0];
-  
+
   // ✅ Para attack damage, buscar skills del 3rd tree con tipo 'AtkDmg'
   let Dmg = 0;
   if (character['3rdTree']) {
@@ -36,24 +37,38 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       setFormulasStrength({
         attackMin: Math.floor(strength / 8) + Dmg,
         attackMax: Math.floor(strength / 4) + Dmg,
-        attackRate: Math.floor((level * 5 + agility * 1.5 + strength / 4) * (specialization + 1)),
-        attackRatePVP: Math.floor((level * 3 + agility * 4) * (specialization + 1)),
+        attackRate: Math.floor((level * 5 + agility * 1.5 + strength / 4) + specialization),
+        attackRatePVP: Math.floor((level * 3 + agility * 4)),
       });
       break;
     case "Dark Knight":
+      // Primero calcular los valores en variables locales
+      const attackMin = Math.floor((strength / 6) * (specialization + 1)) + Dmg;
+      const attackMax = Math.floor((strength / 4) * (specialization + 1)) + Dmg;
+      const attackRate = Math.floor(level * 5 + agility * 1.5 + strength / 4);
+      const attackRatePVP = level * 3 + agility * 4.5;
+
+      const combatPowerValue = Math.floor(10 + (strength / 80));
+
+      // Ahora sí podemos usar attackMin y attackMax para calcular CPL
+      const cplValue = Math.floor(0.162 * ((attackMin + attackMax) / 2) + 0.130 * combatPowerValue - 13.23);
+      // Luego establecer todos los estados
       setFormulasStrength({
-        attackMin: Math.floor((strength / 6) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor((strength / 4) * (specialization + 1)) + Dmg,
-        attackRate: Math.floor(level * 5 + agility * 1.5 + strength / 4),
-        attackRatePVP: level * 3 + agility * 4.5,
+        attackMin,
+        attackMax,
+        attackRate,
+        attackRatePVP,
       });
+
       setSpecialization({
         splAtkMin: Math.floor((strength / 6) * specialization),
         splAtkMax: Math.floor((strength / 4) * specialization),
       });
+
       setCombatPower({
-        CombatPower: 0
-      })
+        CombatPower: combatPowerValue,
+        CPL: cplValue
+      });
       break;
     case "Fairy Elf":
       setFormulasStrength({
@@ -67,7 +82,7 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       setFormulasStrength({
         attackMin: Math.floor(strength / 6 + (energy / 12) * (specialization + 1)) + Dmg,
         attackMax: Math.floor(strength / 4 + (energy / 8) * (specialization + 1)) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 2.5) + Math.floor(strength / 4),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
         attackRatePVP: level * 3 + agility * 3.5,
       });
       setSpecialization({
@@ -79,7 +94,7 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       setFormulasStrength({
         attackMin: Math.floor((strength / 7 + energy / 14) * (specialization + 1)) + Dmg,
         attackMax: Math.floor((strength / 5 + energy / 10) * (specialization + 1)) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 3) + Math.floor(strength / 4) + Math.floor(command / 10),
+        attackRate: Math.floor(level * 5 + Math.floor(agility * 2) / 3 + Math.floor(strength / 4) + Math.floor(command / 15)),
         attackRatePVP: level * 3 + agility * 4,
       });
       setSpecialization({
@@ -124,9 +139,8 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
         attackMin: Math.floor(strength / 8) + Dmg,
         attackMax: Math.floor(strength / 4) + Dmg,
         attackRate: Math.floor(
-          (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4)) * (specialization + 1)
-        ),
-        attackRatePVP: Math.floor((level * 3 + Math.floor(agility * 4)) * (specialization + 1)),
+          (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4))),
+        attackRatePVP: Math.floor((level * 3 + Math.floor(agility * 4))),
       });
       break;
     case "Slayer":
@@ -138,25 +152,21 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       });
       break;
     case "Gun Crusher":
-      if (agility <= 1500) specialization = agility / 15000;
-      if (agility > 1500 && agility <= 2000) specialization = 0.1 + (agility - 1500) / 2500;
-      if (agility > 2000 && agility <= 3000) specialization = 0.3 + (agility - 2000) / 6666;
-      if (agility > 3000) specialization = 0.45;
       setFormulasStrength({
         attackMin: Math.floor(strength / 8) + Dmg,
         attackMax: Math.floor(strength / 4) + Dmg,
         attackRate: Math.floor(
-          (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4)) * (specialization + 1)
+          (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4))
         ),
-        attackRatePVP: Math.floor(level * 3 + agility * 3 + (level * 3 + agility * 4) * specialization),
+        attackRatePVP: Math.floor(level * 3 + agility * 3),
       });
       break;
     case "White Wizard":
       setFormulasStrength({
         attackMin: Math.floor(strength / 8) + Dmg,
         attackMax: Math.floor(strength / 4) + Dmg,
-        attackRate: Math.floor((level * 5 + Math.floor(agility * 1.5 + strength / 4)) * (specialization + 1)),
-        attackRatePVP: Math.floor((level * 3 + agility * 4) * (specialization + 1)),
+        attackRate: Math.floor((level * 5 + Math.floor(agility * 1.5 + strength / 4))),
+        attackRatePVP: Math.floor((level * 3 + agility * 4)),
       });
       break;
     case "Mage":

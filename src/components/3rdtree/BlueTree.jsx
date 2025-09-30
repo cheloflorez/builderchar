@@ -9,7 +9,7 @@ import { useSelectedCharacter } from '../../hooks/useCharacter';
 const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) => {
     const [skillLevels, setSkillLevels] = useState({});
     const { update3rdTreeSkill } = useSelectedCharacter();
-    
+
     // ✅ MEMOIZAR SKILLS para evitar recalculos constantes
     const skills = useMemo(() => {
         if (!character?.class?.[0]) return [];
@@ -36,10 +36,10 @@ const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =
 
             // ✅ SOLO actualizar si es diferente para evitar loops
             setSkillLevels(prevLevels => {
-                const hasChanged = Object.keys(initialSkillLevels).some(skillId => 
+                const hasChanged = Object.keys(initialSkillLevels).some(skillId =>
                     prevLevels[skillId] !== initialSkillLevels[skillId]
                 );
-                
+
                 if (hasChanged) {
                     return initialSkillLevels;
                 }
@@ -94,7 +94,7 @@ const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =
             const hasRowDependencies = skillsInLaterRows.some(s => {
                 const depLevel = skillLevels[s.id] || 0;
                 if (depLevel === 0) return false; // No hay dependencia si no tiene niveles
-                
+
                 // Si el skill dependiente requiere un nivel mínimo en esta fila
                 if (s.rowRequirements && s.rowRequirements.minRow === skill.row + 1) {
                     // Verificar si este skill es el único que cumple el requisito de fila
@@ -104,7 +104,7 @@ const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =
                         const otherLevel = skillLevels[sk.id] || 0;
                         return otherLevel >= s.rowRequirements.minLevel;
                     });
-                    
+
                     if (!otherSkillsMeetRequirement && currentLevel <= s.rowRequirements.minLevel) {
                         return true; // No se puede reducir porque rompería requisitos de fila
                     }
@@ -133,7 +133,7 @@ const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =
                         const otherSkillsMaxLevel = Math.max(...skillsInThisRow
                             .filter(sk => sk.id !== skillId)
                             .map(sk => skillLevels[sk.id] || 0));
-                        
+
                         if (otherSkillsMaxLevel < laterSkill.rowRequirements.minLevel) {
                             minRequiredLevel = Math.max(minRequiredLevel, laterSkill.rowRequirements.minLevel);
                         }
@@ -196,33 +196,44 @@ const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =
     }, [skills, skillLevels, canIncreaseSkillMemo, isSkillLockedMemo, handleSkillClick]);
 
     return (
-        <div 
+        <div
             className="p-2 flex flex-col relative overflow-visible"
             style={{
                 backgroundImage: 'url(/src/assets/3rd/Tree4002.png)',
-                backgroundSize: '100% 100%', // Ajusta exactamente al contenedor
+                backgroundSize: '100% 100%',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                // Dimensiones fijas basadas en tu imagen (ajusta estos valores)
-                width: '300px',  // Ancho real de tu imagen
-                height: '600px', // Alto real de tu imagen
+                width: '300px',
+                height: '600px',
                 minWidth: '300px',
                 minHeight: '600px',
-                // Alternativa: usar aspect-ratio si conoces la proporción
-                // aspectRatio: '1/2', // Por ejemplo, si es 1:2 (ancho:alto)
             }}
-        >   
-            {/* Contenido del árbol - con z-index para estar encima del background */}
-            <div className="relative z-10 flex flex-col h-full">
-                {/* Header del árbol */}
-                <div className="text-center mb-2 flex-shrink-0">
-                    <div className="text-xs text-gray-200 drop-shadow">Puntos: {spentPoints}</div>
-                </div>
+        >
+            {/* Overlay de "Coming Soon" */}
+            <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                <div className="text-center p-6 bg-gray-800/80 border border-blue-500/50 rounded-xl backdrop-blur-sm">
+                    <div className="text-4xl mb-3">🔒</div>
+                    <h3 className="text-blue-300 font-bold text-lg mb-2">Blue Skills</h3>
+                    <p className="text-gray-300 text-sm mb-3 leading-relaxed">
+                        Advanced blue skill tree<br />
+                        with defensive abilities
+                    </p>
+                    <div className="px-3 py-1 bg-blue-600/20 border border-blue-600/50 rounded-full">
+                        <span className="text-blue-300 text-xs font-medium">Proximamente</span>
+                    </div>
 
-                {/* Grid de skills - ocupa el espacio restante */}
-                <div className="grid grid-cols-4 grid-rows-9 gap-2 flex-1 min-h-0">
-                    {skillGrid}
+                    {/* Efecto de construcción */}
+                    <div className="flex justify-center mt-3 space-x-1">
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-100"></div>
+                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-200"></div>
+                    </div>
                 </div>
+            </div>
+
+            {/* Contenido original del árbol (opacidad reducida) */}
+            <div className="relative z-10 flex flex-col h-full opacity-30">
+                {/* ... resto del contenido original */}
             </div>
         </div>
     );

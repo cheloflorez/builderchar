@@ -12,12 +12,11 @@ import { useNotifications } from "../hooks/useNotifications";
 import { CharacterLoadingState } from "../components/ui/LoadingStates";
 import { classChar } from '../utils/characterUtils';
 import AdSidebar from "../components/ui/AdSidebar";
+import { charSelectedStore } from "../store/charSelected";
 
 
 
 export default function Build() {
-
-
 
   const FEATURES = {
     INVENTORY_ENABLED: false, // Cambiar a true cuando esté listo
@@ -29,7 +28,7 @@ export default function Build() {
   const buildId = params.buildId; // <- Cambio principal
 
   // Usar hooks de Valtio
-  const { character: selectedCharacter, addChar } = useSelectedCharacter();
+  const { character: selectedCharacter, addChar, loadCharacterData } = useSelectedCharacter();
   const characters = useCharacters();
 
   const currentClass = classChar(selectedCharacter);
@@ -58,13 +57,20 @@ export default function Build() {
   } = useNotifications();
 
   const saveBuildToStorage = useCallback(() => {
-    if (!selectedCharacter || !buildData) return;
+    if (!buildData) return;
+
+    // ✅ USAR directamente el proxy store, NO el snapshot
+    const currentCharacter = charSelectedStore.selectedCharacter;
+
+    if (!currentCharacter) return;
+
+    console.log('Saving character stats:', currentCharacter.stats); // ✅ Debug
 
     const updatedBuildData = {
       ...buildData,
-      level: selectedCharacter.level,
+      level: currentCharacter.level,
       lastModified: new Date().toISOString(),
-      characterData: selectedCharacter
+      characterData: currentCharacter // ✅ Usar el proxy directo
     };
 
     const savedBuilds = localStorage.getItem('mubuilds');
@@ -75,7 +81,7 @@ export default function Build() {
       builds[buildIndex] = updatedBuildData;
       localStorage.setItem('mubuilds', JSON.stringify(builds));
     }
-  }, [selectedCharacter, buildData, buildId]);
+  }, [buildData, buildId]); // ✅ Quitar selectedCharacter de las dependencias
 
   const handleSkillTreeOpen = useCallback(() => {
     if (!selectedCharacter || selectedCharacter.level < 400) {
@@ -94,11 +100,9 @@ export default function Build() {
         const currentBuild = builds.find(build => build.id === buildId);
         if (currentBuild) {
           setBuildData(currentBuild);
-
           // Si el build tiene datos de personaje guardados, cargarlos
           if (currentBuild.characterData) {
-
-            addChar(currentBuild.characterData);
+            loadCharacterData(currentBuild.characterData);
           } else {
             // Si es un build nuevo, crear desde template
             const template = Object.values(characters).find(char =>
@@ -228,250 +232,244 @@ export default function Build() {
   }
   return (
     <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black">
-      <div className="flex min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black">
-
-        {/* Área de publicidad izquierda */}
-        <AdSidebar
-          position="left"
-          adImage="/src/assets/ads/mtm_up1600x175.gif"
-          adLink="https://example.com"
-        />
-        {/* Área de publicidad izquierda */}
-        <AdSidebar
-          position="left"
-          adImage="/src/assets/ads/mtm_up1600x175.gif"
-          adLink="https://example.com"
-        />
+      {/* Fondo único que cubre toda la página */}
+      <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black"></div>
+      <div className="fixed inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
+      <div className="hidden xl:flex min-h-screen relative z-10">
         {/* Contenido principal existente */}
-        <div className="flex-1 bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+        <div className="flex-1  from-slate-900 via-gray-900 to-black">
           {/* Overlay con textura sutil */}
-          <div className="absolute inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
+          <div className="absolute inset-0 "></div>
 
           {/* Contenedor principal con centrado mejorado */}
-          <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-3 sm:p-5 gap-3 sm:gap-5">
+          <div className="relative z-10 flex flex-col min-h-screen">
             |
             {/* Header rediseñado con controles integrados */}
-            <div className="mb-2 sm:mb-4 p-4 bg-black/20 rounded-xl backdrop-blur-sm w-full max-w-6xl">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
+            <div className="w-full flex justify-center mb-6">
+              <div className="p-4 rounded-xl w-full max-w-4xl bg-black/40 border border-amber-500/30 shadow-lg backdrop-blur-sm">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
 
-                {/* Sección izquierda - Info del build y personaje */}
-                <div className="flex items-center gap-4">
-                  <img
-                    src={`/src/assets/characters/${buildData.character}.png`}
-                    alt={currentClass}
-                    className="w-12 h-12 sm:w-17 sm:h-14 object-contain rounded-lg border-2 border-amber-500/50 bg-gray-800/30 p-1"
-                  />
-                  <div className="text-left">
-                    <h1 className="text-xl sm:text-2xl font-bold text-amber-300 mb-1">
-                      {buildData.name}
-                    </h1>
-                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm text-gray-400">
-                      <span>{currentClass} - Level {selectedCharacter.level}</span>
+                  {/* Sección izquierda - Info del build y personaje */}
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={`/src/assets/characters/${buildData.character}.png`}
+                      alt={currentClass}
+                      className="w-12 h-12 sm:w-17 sm:h-14 object-contain rounded-lg border-2 border-amber-500/50 p-1"
+                    />
+                    <div className="text-left">
+                      <h1 className="text-xl sm:text-2xl font-bold text-amber-300 mb-1">
+                        {buildData.name}
+                      </h1>
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm text-gray-400">
+                        <span>{currentClass} - Level {selectedCharacter.level}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Sección central - Info adicional */}
-                <div className="flex items-center gap-3 bg-gray-800/50 rounded-lg px-3 py-2 border border-gray-600/50">
-                  <span className="text-xs text-gray-400">Last saved:</span>
-                  <span className="text-xs text-amber-300">
-                    {buildData?.lastModified
-                      ? new Date(buildData.lastModified).toLocaleTimeString()
-                      : 'Never'
-                    }
-                  </span>
-                </div>
-
-                {/* Sección derecha - Botones de acción */}
-                <div className="flex gap-2">
-
-                  {/* Back Button */}
-                  <button
-                    onClick={() => window.location.href = '/'}
-                    className="group relative px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm"
-                  >
-                    <span className="flex items-center gap-2">
-                      🏠 <span className="hidden sm:inline">Back</span>
+                  {/* Sección central - Info adicional */}
+                  <div className="flex items-center gap-3 px-3 py-2 border border-gray-600/50">
+                    <span className="text-xs text-gray-400">Last saved:</span>
+                    <span className="text-xs text-amber-300">
+                      {buildData?.lastModified
+                        ? new Date(buildData.lastModified).toLocaleTimeString()
+                        : 'Never'
+                      }
                     </span>
-                    <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                  </button>
+                  </div>
 
-                  {/* Save Button */}
-                  <button
-                    onClick={handleSave}
-                    disabled={actionLoading.save}
-                    className={`group relative px-3 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-white font-medium rounded-lg shadow-md text-sm ${actionLoading.save ? 'opacity-70 cursor-not-allowed' : ''}`}
-                  >
-                    <span className="flex items-center gap-2">
-                      {actionLoading.save ? (
-                        <>
-                          <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          <span className="hidden sm:inline">Saving...</span>
-                        </>
-                      ) : (
-                        <>
-                          💾 <span className="hidden sm:inline">Save</span>
-                        </>
-                      )}
-                    </span>
-                    <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
-                  </button>
+                  {/* Sección derecha - Botones de acción */}
+                  <div className="flex gap-2">
 
-                  {/* Reset Button */}
-                  <button
-                    onClick={handleReset}
-                    disabled={actionLoading.reset}
-                    className={`group relative px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-sm ${actionLoading.reset ? 'opacity-70 cursor-not-allowed' : ''
-                      }`}
-                  >
-                    <span className="flex items-center gap-2">
-                      {actionLoading.reset ? (
-                        <>
-                          <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          <span className="hidden sm:inline">Reset...</span>
-                        </>
-                      ) : (
-                        <>
-                          🔄 <span className="hidden sm:inline">Reset</span>
-                        </>
-                      )}
-                    </span>
-                    <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
-                  </button>
+                    {/* Back Button */}
+                    <button
+                      onClick={() => window.location.href = '/'}
+                      className="group relative px-3 py-2 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-500 hover:to-gray-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm"
+                    >
+                      <span className="flex items-center gap-2">
+                        🏠 <span className="hidden sm:inline">Back</span>
+                      </span>
+                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    </button>
+
+                    {/* Save Button */}
+                    <button
+                      onClick={handleSave}
+                      disabled={actionLoading.save}
+                      className={`group relative px-3 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-white font-medium rounded-lg shadow-md text-sm ${actionLoading.save ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {actionLoading.save ? (
+                          <>
+                            <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            <span className="hidden sm:inline">Saving...</span>
+                          </>
+                        ) : (
+                          <>
+                            💾 <span className="hidden sm:inline">Save</span>
+                          </>
+                        )}
+                      </span>
+                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+                    </button>
+
+                    {/* Reset Button */}
+                    <button
+                      onClick={handleReset}
+                      disabled={actionLoading.reset}
+                      className={`group relative px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-sm ${actionLoading.reset ? 'opacity-70 cursor-not-allowed' : ''
+                        }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        {actionLoading.reset ? (
+                          <>
+                            <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            <span className="hidden sm:inline">Reset...</span>
+                          </>
+                        ) : (
+                          <>
+                            🔄 <span className="hidden sm:inline">Reset</span>
+                          </>
+                        )}
+                      </span>
+                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* LAYOUT RESPONSIVE MEJORADO */}
-            <div className="flex flex-col xl:flex-row justify-center items-start gap-3 sm:gap-6 w-full max-w-7xl">
+            {/* LAYOUT RESPONSIVE CENTRADO */}
+            <div className="flex-1 flex flex-col items-center justify-center p-4 gap-6">
 
-              {/* Panel izquierdo - Character Stats (siempre primero en móvil) */}
-              <div className="order-1 xl:order-1 transform transition-all duration-300 hover:scale-[1.02] w-full xl:w-auto flex justify-center">
-                <CWindows />
-              </div>
+              {/* Contenedor superior - CWindows e Inventory lado a lado - CENTRADO */}
+              <div className="flex flex-col xl:flex-row justify-center items-start gap-6">
 
-              {/* Panel central - Inventory (segundo en móvil) */}
-              {/* Panel central - Inventory */}
-              <div className="order-2 xl:order-2 transform transition-all duration-300 hover:scale-[1.02] w-full xl:w-auto flex justify-center">
+                {/* Panel izquierdo - Character Stats */}
+                <div className="transform transition-all duration-300 hover:scale-[1.02]">
+                  <CWindows />
+                </div>
 
-                {FEATURES.INVENTORY_ENABLED ? (
-                  <Inventory onSlotClick={handleInventorySlotClick} />
-                ) : (
-                  // Mantener el mismo contenedor con la imagen de fondo
-                  <div className="relative bg-[url('./assets/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
+                {/* Panel derecho - Inventory + Helper Panel debajo */}
+                <div className="flex flex-col gap-4">
 
-                    {/* Overlay semi-transparente */}
-                    <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
-
-                      {/* Contenido "Coming Soon" */}
-                      <div className="text-center p-6">
-                        <div className="text-4xl mb-3 opacity-80">⚔️</div>
-                        <h3 className="text-amber-300 font-bold text-lg mb-2">Equipment System</h3>
-                        <p className="text-gray-300 text-sm mb-3 leading-relaxed">
-                          Advanced item management<br />
-                          and customization
-                        </p>
-                        <div className="px-3 py-1 bg-amber-600/20 border border-amber-600/50 rounded-full">
-                          <span className="text-amber-300 text-xs font-medium">Coming Soon</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Opcional: Efecto de "construcción" */}
-                    <div className="absolute top-2 right-2">
-                      <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Panel derecho - Helper/Skills Navigator (tercero en móvil) */}
-              <div className="order-3 xl:order-3 w-full xl:w-auto flex flex-col gap-4 max-w-[300px] xl:max-w-none mx-auto xl:mx-0">
-
-                {/* Panel de ayuda colapsable mejorado */}
-                <div className="bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-2xl">
-
-                  {/* Header colapsable (solo visible en móviles/tablets) */}
-                  <button
-                    onClick={() => setHelperPanelCollapsed(!helperPanelCollapsed)}
-                    className="xl:hidden w-full p-3 flex items-center justify-between text-amber-300 hover:bg-amber-600/10 transition-colors"
-                  >
-                    <span className="font-bold flex items-center gap-2">
-                      🎮 Quick Actions
-                    </span>
-                    <span className={`transform transition-transform duration-200 ${helperPanelCollapsed ? 'rotate-180' : ''}`}>
-                      ▼
-                    </span>
-                  </button>
-
-                  {/* Contenido del panel (siempre visible en desktop) */}
-                  <div className={`${helperPanelCollapsed ? 'hidden xl:block' : 'block'} p-4 xl:pt-4`}>
-
-                    {/* Título en desktop */}
-                    <h3 className="hidden xl:block text-lg font-bold text-amber-300 mb-4 text-center">Skill Trees</h3>
-
-                    {/* 3rd Skill Tree Button con cálculo correcto de puntos */}
-                    <button
-                      onClick={handleSkillTreeOpen}
-                      disabled={!selectedCharacter || selectedCharacter.level < 400}
-                      className="w-full group relative px-3 sm:px-4 py-3 bg-gradient-to-r from-purple-600/80 to-purple-700/80 disabled:from-gray-600/50 disabled:to-gray-700/50 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:from-purple-500/80 hover:to-purple-600/80 hover:shadow-xl hover:scale-105 active:scale-95 mb-3 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
-                    >
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="text-lg">🌳</span>
-                        <div className="flex-1 text-left">
-                          <div className="text-sm sm:text-base">Master Skill Tree</div>
-                          <div className="text-xs opacity-80">
-                            {selectedCharacter?.level >= 400
-                              ? (() => {
-                                const totalPoints = Math.min(selectedCharacter.level - 399, 400);
-
-                                // CORRECCIÓN: Sumar los NIVELES de cada skill, no contar skills
-                                const spentPoints = selectedCharacter['3rdTree']?.reduce((total, skill) => {
-                                  return total + (skill.level || 0);
-                                }, 0) || 0;
-
-                                const remainingPoints = totalPoints - spentPoints;
-
-                                return `${remainingPoints} pts remaining (${spentPoints}/${totalPoints})`;
-                              })()
-                              : 'Requires Level 400'
-                            }
+                  {/* Inventory arriba */}
+                  <div className="transform transition-all duration-300 hover:scale-[1.02]">
+                    {FEATURES.INVENTORY_ENABLED ? (
+                      <Inventory onSlotClick={handleInventorySlotClick} />
+                    ) : (
+                      // Mantener el mismo contenedor con la imagen de fondo
+                      <div className="relative bg-[url('./assets/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
+                        {/* Overlay semi-transparente */}
+                        <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
+                          {/* Contenido "Coming Soon" */}
+                          <div className="text-center p-6">
+                            <div className="text-4xl mb-3 opacity-80">⚔️</div>
+                            <h3 className="text-amber-300 font-bold text-lg mb-2">Equipment System</h3>
+                            <p className="text-gray-300 text-sm mb-3 leading-relaxed">
+                              Advanced item management<br />
+                              and customization
+                            </p>
+                            <div className="px-3 py-1 bg-amber-600/20 border border-amber-600/50 rounded-full">
+                              <span className="text-amber-300 text-xs font-medium">Coming Soon</span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
-                    </button>
-
-                    {/* Placeholder para futuros árboles con mejor styling */}
-                    <button
-                      disabled
-                      className="w-full px-3 sm:px-4 py-3 bg-gray-600/50 text-gray-400 font-bold rounded-lg shadow-lg cursor-not-allowed mb-3 opacity-50 border border-gray-500/30"
-                    >
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="text-lg">🔮</span>
-                        <div className="flex-1 text-left">
-                          <div className="text-sm sm:text-base">4th Skill Tree</div>
-                          <div className="text-xs opacity-80">Coming Soon</div>
+                        {/* Opcional: Efecto de "construcción" */}
+                        <div className="absolute top-2 right-2">
+                          <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
                         </div>
                       </div>
-                    </button>
-
-                    <button
-                      disabled
-                      className="w-full px-3 sm:px-4 py-3 bg-gray-600/50 text-gray-400 font-bold rounded-lg shadow-lg cursor-not-allowed mb-3 opacity-50 border border-gray-500/30"
-                    >
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="text-lg">⚡</span>
-                        <div className="flex-1 text-left">
-                          <div className="text-sm sm:text-base">Ability Cards</div>
-                          <div className="text-xs opacity-80">Coming Soon</div>
-                        </div>
-                      </div>
-                    </button>
-
-                    {/* Stats Bar - Character Resources */}
-                    <StatsBar />
+                    )}
                   </div>
+
+                  {/* Helper Panel debajo del Inventory - CON ALTURA LIMITADA */}
+                  <div className="w-[310px]"> {/* Mismo ancho que Inventory */}
+                    {/* Panel de ayuda colapsable mejorado */}
+                    <div className="bg-gradient-to-b from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 shadow-2xl h-fit max-h-[280px]">
+
+                      {/* Header colapsable (solo visible en móviles/tablets) */}
+                      <button
+                        onClick={() => setHelperPanelCollapsed(!helperPanelCollapsed)}
+                        className="xl:hidden w-full p-3 flex items-center justify-between text-amber-300 hover:bg-amber-600/10 transition-colors"
+                      >
+                        <span className="font-bold flex items-center gap-2">
+                          🎮 Quick Actions
+                        </span>
+                        <span className={`transform transition-transform duration-200 ${helperPanelCollapsed ? 'rotate-180' : ''}`}>
+                          ▼
+                        </span>
+                      </button>
+
+                      {/* Contenido del panel - CON SCROLL SI ES NECESARIO */}
+                      <div className={`${helperPanelCollapsed ? 'hidden xl:block' : 'block'} p-3 xl:pt-3 overflow-y-auto max-h-[280px]`}>
+
+                        {/* Título en desktop - MÁS COMPACTO */}
+                        <h3 className="hidden xl:block text-base font-bold text-amber-300 mb-3 text-center">Skill Trees</h3>
+
+                        {/* 3rd Skill Tree Button - MÁS COMPACTO */}
+                        <button
+                          onClick={handleSkillTreeOpen}
+                          disabled={!selectedCharacter || selectedCharacter.level < 400}
+                          className="w-full group relative px-2 py-2 bg-gradient-to-r from-purple-600/80 to-purple-700/80 disabled:from-gray-600/50 disabled:to-gray-700/50 text-white font-bold rounded-lg shadow-lg transition-all duration-200 hover:from-purple-500/80 hover:to-purple-600/80 hover:shadow-xl hover:scale-105 active:scale-95 mb-2 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+                        >
+                          <div className="flex items-center justify-center gap-2">
+                            <span className="text-sm">🌳</span>
+                            <div className="flex-1 text-left">
+                              <div className="text-xs font-semibold">Master Skill Tree</div>
+                              <div className="text-xs opacity-80">
+                                {selectedCharacter?.level >= 400
+                                  ? (() => {
+                                    const totalPoints = Math.min(selectedCharacter.level - 399, 400);
+                                    const spentPoints = selectedCharacter['3rdTree']?.reduce((total, skill) => {
+                                      return total + (skill.level || 0);
+                                    }, 0) || 0;
+                                    const remainingPoints = totalPoints - spentPoints;
+                                    return `${remainingPoints} pts remaining`;
+                                  })()
+                                  : 'Requires Level 400'
+                                }
+                              </div>
+                            </div>
+                          </div>
+                          <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+                        </button>
+
+                        {/* Placeholder para futuros árboles - MÁS COMPACTOS */}
+                        <button
+                          disabled
+                          className="w-full px-2 py-2 bg-gray-600/50 text-gray-400 font-bold rounded-lg shadow-lg cursor-not-allowed mb-2 opacity-50 border border-gray-500/30"
+                        >
+                          <div className="flex items-center justify-center gap-2">
+                            <span className="text-sm">🔮</span>
+                            <div className="flex-1 text-left">
+                              <div className="text-xs font-semibold">4th Skill Tree</div>
+                              <div className="text-xs opacity-80">Coming Soon</div>
+                            </div>
+                          </div>
+                        </button>
+
+                        <button
+                          disabled
+                          className="w-full px-2 py-2 bg-gray-600/50 text-gray-400 font-bold rounded-lg shadow-lg cursor-not-allowed opacity-50 border border-gray-500/30"
+                        >
+                          <div className="flex items-center justify-center gap-2">
+                            <span className="text-sm">⚡</span>
+                            <div className="flex-1 text-left">
+                              <div className="text-xs font-semibold">Ability Cards</div>
+                              <div className="text-xs opacity-80">Coming Soon</div>
+                            </div>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats Bar - Abajo CENTRADO con el ancho de los componentes superiores */}
+              <div className="flex justify-center">
+                <div className="">
+                  <StatsBar character={selectedCharacter} />
                 </div>
               </div>
             </div>
@@ -488,13 +486,6 @@ export default function Build() {
             <div className="absolute bottom-1/3 right-1/6 w-1.5 h-1.5 bg-pink-400/15 rounded-full animate-pulse delay-2500"></div>
           </div>
         </div> {/* Cierre del contenido principal */}
-        {/* Área de publicidad izquierda */}
-        <AdSidebar
-          position="right"
-          adImage="/src/assets/ads/mtm_up1600x175.gif"
-          adLink="https://example.com"
-        />
-
       </div> {/* Cierre del flex container */}
 
       {/* Sistema de Notificaciones */}

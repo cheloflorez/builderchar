@@ -521,6 +521,39 @@ export const SKILLS_DATABASE = {
             108   // Level 20
         ]
     },
+    command: {
+        id: 25,
+        name: 'Command',
+        maxLevel: 20,
+        requires: [], // Requisito específico
+        rowRequirements: { minRow: 5, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
+        image: '/src/assets/3rd/green/command.png',
+        description: 'Command Increase by',
+        valueType: 'command',
+        values: [
+            0,    // Level 0 (base)
+            14,   // Level 1
+            24,   // Level 2
+            33,   // Level 3
+            41,   // Level 4
+            49,   // Level 5
+            56,   // Level 6
+            63,   // Level 7
+            69,   // Level 8
+            75,   // Level 9
+            80,   // Level 10
+            84,   // Level 11
+            88,   // Level 12
+            92,   // Level 13
+            95,   // Level 14
+            98,   // Level 15
+            101,  // Level 16
+            103,  // Level 17
+            105,  // Level 18
+            106,  // Level 19
+            108   // Level 20
+        ]
+    },
     wings3def: {
         id: 19,
         name: 'Wings 3rd Defense',

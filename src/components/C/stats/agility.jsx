@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import formulasAgi from "../../../functions/formulas/formulasAgility";
-import specializationAgility from "../../../functions/formulas/Specialization/specializationAgility";
 import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 
 export default function Agility() {
@@ -33,7 +32,6 @@ export default function Agility() {
   useEffect(() => {
     if (character && character.stats) {
       formulasAgi(character, setFormulasAgility, setSpecialization);
-      specializationAgility(character, setSpecialization);
     }
   }, [character]);
 
@@ -41,13 +39,13 @@ export default function Agility() {
   if (!character || !character.stats) {
     return null;
   }
-
   // 🔥 CALCULAR BONUS DEL 3RD TREE
   const bonus3rdTree = calculate3rdTreeBonus(character);
   const agilityBonus = bonus3rdTree.agility;
 
   const canIncrease = character.points >= 1;
   const canDecrease = character.stats.agility > character.baseStats.agility;
+
 
   return (
     <>
@@ -92,74 +90,221 @@ export default function Agility() {
           -
         </span>
       </dd>
+      {
+        character.class[0] === "Dark Wizard" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S)ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splAtkRate < 1 ? "-" : specialization.splAtkRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}</span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "Dark Knight" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) DEF</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
+            </dd>
 
-      {specialization.splAtkMax >= 0 && (
-        <>
-          <dt>
-            <span className="text-violet-500">* (S) ATK Power</span>
-          </dt>
-          <dd className="col-span-2">
-            <span className="text-violet-500">
-              {specialization.splAtkMax < 1 ? (
-                "-"
-              ) : (
-                <>
-                  {specialization.splAtkMin} ~ {specialization.splAtkMax}
-                </>
-              )}
-            </span>
-          </dd>
-        </>
-      )}
+          </>
+        )
+      }
+      {
+        character.class[0] === "Fairy Elf" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) ATK Power</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">
+                {specialization.splAtkMax < 1 ? (
+                  "-"
+                ) : (
+                  <>
+                    {specialization.splAtkMin} ~ {specialization.splAtkMax}
+                  </>
+                )}
+              </span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S) DEF Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDefRate < 1 ? "-" : specialization.splDefRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)PvP DEF Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPDefRate < 1 ? "-" : specialization.splPVPDefRate}</span>
+            </dd>
 
-      {specialization.splDef >= 0 && (
-        <>
-          <dt>
-            <span className="text-violet-500">* (S) DEF</span>
-          </dt>
-          <dd className="col-span-2">
-            <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
-          </dd>
-        </>
-      )}
+          </>
+        )
+      }
+      {
+        character.class[0] === "Grow Lancer" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) DEF</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
+            </dd>
 
-      {specialization.splDefRate >= 0 && (
-        <>
-          <dt>
-            <span className="text-violet-500">* (S) DEF Rate</span>
-          </dt>
-          <dd className="col-span-2">
-            <span className="text-violet-500">
-              {specialization.splDefRate < 1 ? "-" : specialization.splDefRate}
-            </span>
-          </dd>
-          {specialization.splPVPAtkRate >= 0 && (
-            <>
-              <dt>
-                <span className="text-violet-500">* (S) PVP Atk(%)</span>
-              </dt>
-              <dd className="col-span-2">
-                <span className="text-violet-500">
-                  {specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}
-                </span>
-              </dd>
-            </>
-          )}
-          {specialization.splPVPDefRate >= 0 && (
-            <>
-              <dt>
-                <span className="text-violet-500">* (S) PvP DEF Rate</span>
-              </dt>
-              <dd className="col-span-2">
-                <span className="text-violet-500">
-                  {specialization.splPVPDefRate < 1 ? "-" : specialization.splPVPDefRate}
-                </span>
-              </dd>
-            </>
-          )}
-        </>
-      )}
+          </>
+        )
+      }
+      {
+        character.class[0] === "Dark Lord" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) DEF</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
+            </dd>
 
+          </>
+        )
+      }
+      {
+        character.class[0] === "Rune Mage" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S)ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splAtkRate < 1 ? "-" : specialization.splAtkRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)PvP ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}</span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "Slayer" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) ATK Power</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">
+                {specialization.splAtkMax < 1 ? (
+                  "-"
+                ) : (
+                  <>
+                    {specialization.splAtkMin} ~ {specialization.splAtkMax}
+                  </>
+                )}
+              </span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S) DEF Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDefRate < 1 ? "-" : specialization.splDefRate}</span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "Gun Crusher" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S)ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splAtkRate < 1 ? "-" : specialization.splAtkRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)PvP ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}</span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "White Wizard" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S)ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splAtkRate < 1 ? "-" : specialization.splAtkRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)PvP ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}</span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "Mage" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) DEF Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDefRate < 1 ? "-" : specialization.splDefRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)PvP DEF Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPDefRate < 1 ? "-" : specialization.splPVPDefRate}</span>
+            </dd>
+
+          </>
+        )
+      }
+      {
+        character.class[0] === "Illusion Knight" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S) ATK Power</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">
+                {specialization.splAtkMax < 1 ? (
+                  "-"
+                ) : (
+                  <>
+                    {specialization.splAtkMin} ~ {specialization.splAtkMax}
+                  </>
+                )}
+              </span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S) DEF</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
+            </dd>
+          </>
+        )
+      }
       <dt>* Defense</dt>
       <dd className="col-span-2">
         <span className="text-amber-300">{formulasAgility.defense}</span>

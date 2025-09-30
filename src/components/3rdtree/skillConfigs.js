@@ -164,7 +164,367 @@ export const skillConfigs = {
     ],
 
   },
+  'Dark Lord': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      { skillId: 'command', row: 5, col: 0 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+      { skillId: 'ProtectionShield', row: 7, col: 3 },
+      { skillId: 'WeaponBlockRate', row: 7, col: 2 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+      { skillId: 'shieldBlockRate', row: 8, col: 3 },
+
+    ],
+
+  },
+  'Summoner': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+    ],
+
+  },
+  'Rage Fighter': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+    ],
+
+  },
+  'Grow Lancer': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+      { skillId: 'ProtectionShield', row: 7, col: 3 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+      { skillId: 'shieldBlockRate', row: 8, col: 3 },
+
+    ],
+
+  },
+  'Rune Wizard': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+      { skillId: 'ProtectionShield', row: 7, col: 3 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+      { skillId: 'shieldBlockRate', row: 8, col: 3 },
+
+    ],
+
+  },
   'Slayer': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+      { skillId: 'ProtectionShield', row: 7, col: 3 },
+      { skillId: 'WeaponBlockRate', row: 7, col: 2 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+      { skillId: 'shieldBlockRate', row: 8, col: 3 },
+
+    ],
+
+  },
+  'Gun Crusher': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+    ],
+
+  },
+  'White Wizard': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+    ],
+
+  },
+  'Mage': {
+    green: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'DefenseRatePVP', row: 0, col: 3 },
+      { skillId: 'DurabilityReduction', row: 0, col: 0 },
+
+      // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'MaximumSDIncrease', row: 1, col: 1 },
+      { skillId: 'autoManaRecovery', row: 1, col: 3 },
+      // FILA 3
+      { skillId: 'DurabilityReduction2', row: 2, col: 0 },
+      { skillId: 'SDRecoverySpeedIncrease', row: 2, col: 1 },
+      { skillId: 'AutomaticHPRecoveryIncrease', row: 2, col: 3 },
+      // FILA 4
+      { skillId: 'DefenseIncrease', row: 3, col: 1 },
+      { skillId: 'ElementalDEFIncrease', row: 3, col: 2 },
+      { skillId: 'AutomaticAGRecoveryIncrease', row: 3, col: 3 },
+      // FILA 5
+      { skillId: 'DurabilityReduction3', row: 4, col: 0 },
+      { skillId: 'DefenseSuccessRateIncrease', row: 4, col: 1 },
+      // FILA 6
+      { skillId: 'ArmorSetBonusIncrease', row: 5, col: 2 },
+      { skillId: 'Revenge', row: 5, col: 3 },
+      // FILA 7
+      { skillId: 'energy', row: 6, col: 0 },
+      { skillId: 'stamina', row: 6, col: 1 },
+      { skillId: 'agility', row: 6, col: 2 },
+      { skillId: 'strength', row: 6, col: 3 },
+
+      //FILA 8
+      { skillId: 'wings3def', row: 7, col: 1 },
+      { skillId: 'ProtectionShield', row: 7, col: 3 },
+
+      // FILA 9
+      { skillId: 'wings3atk', row: 8, col: 1 },
+      { skillId: 'SteelArmor', row: 8, col: 2 },
+      { skillId: 'shieldBlockRate', row: 8, col: 3 },
+
+    ],
+
+  },
+  'Illusion Knight': {
     green: [
       // FILA 1 (Skills iniciales)
       { skillId: 'DefenseRatePVP', row: 0, col: 3 },

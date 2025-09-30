@@ -1,6 +1,5 @@
 // store/charSelected.js
 import { proxy } from 'valtio';
-import { charactersStore } from './characters.js';
 import { fruitsPoints } from '../utils/characterUtils.js';
 
 // Store principal para el personaje seleccionado
@@ -62,26 +61,13 @@ export const charSelectedStore = proxy({
         pentagram: incomingItems.pentagram || null
       };
     };
-    // Crear baseStats con las stats iniciales del personaje
-    const baseStats = {
-      strength: characterData.stats?.strength || characterData.strength || 18,
-      agility: characterData.stats?.agility || characterData.agility || 18,
-      stamina: characterData.stats?.stamina || characterData.stamina || 15,
-      energy: characterData.stats?.energy || characterData.energy || 30,
-    };
 
-    // Agregar command solo si es Dark Lord
-    if (characterData.class[0] === "Dark Lord") {
-      baseStats.command = characterData.stats?.command || characterData.command || 25;
-    }
-
-    // Asegurar que el character tenga la estructura stats correcta
+    // ✅ PRIMERO: Crear characterStats con valores correctos de la clase
     const characterStats = {
-      strength: characterData.stats?.strength || characterData.strength || 18,
-      agility: characterData.stats?.agility || characterData.agility || 18,
-      stamina: characterData.stats?.stamina || characterData.stamina || 15,
-      energy: characterData.stats?.energy || characterData.energy || 30,
-      // ✅ NUEVO: Blue stats para 3rd y 4th tree
+      strength: characterData.stats?.strength || characterData.baseStats?.strength || 18,
+      agility: characterData.stats?.agility || characterData.baseStats?.agility || 18,
+      stamina: characterData.stats?.stamina || characterData.baseStats?.stamina || 15,
+      energy: characterData.stats?.energy || characterData.baseStats?.energy || 30,
       strengthBlue: 0,
       agilityBlue: 0,
       staminaBlue: 0,
@@ -89,9 +75,31 @@ export const charSelectedStore = proxy({
     };
 
     if (characterData.class[0] === "Dark Lord") {
-      characterStats.command = characterData.stats?.command || characterData.command || 25;
+      characterStats.command = characterData.stats?.command || characterData.baseStats?.command || 25;
       characterStats.commandBlue = 0;
     }
+
+    // Crear baseStats con las stats iniciales del personaje
+    const baseStats = {
+      strength: characterData.baseStats?.strength,
+      agility: characterData.baseStats?.agility,
+      stamina: characterData.baseStats?.stamina,
+      energy: characterData.baseStats?.energy,
+    };
+
+    // Agregar command solo si es Dark Lord
+    if (characterData.class[0] === "Dark Lord") {
+      baseStats.command = characterData.baseStats?.command
+    }
+
+    console.log('🔍 Stats al crear personaje:', {
+      characterName: characterData.name || 'Sin nombre',
+      characterClass: characterData.class[0],
+      baseStats: baseStats,
+      characterStats: characterStats,
+      hasOriginalBaseStats: !!characterData.baseStats,
+      hasOriginalStats: !!characterData.stats
+    });
 
     // IMPORTANTE: Crear el objeto completo de una vez
     charSelectedStore.selectedCharacter = {
@@ -102,7 +110,6 @@ export const charSelectedStore = proxy({
       '3rdTree': Array.isArray(characterData['3rdTree']) ? [...characterData['3rdTree']] : []
     };
   },
-
   // Equipar item
   addItem: (newItem) => {
     if (!charSelectedStore.selectedCharacter || !newItem) return;
@@ -143,56 +150,89 @@ export const charSelectedStore = proxy({
       }
     }
   },
-
   // Cambiar nivel
   selectLevel: (level) => {
     if (!charSelectedStore.selectedCharacter) return;
 
     const char = charSelectedStore.selectedCharacter;
     const baseStats = char.baseStats;
+    const previousLevel = char.level;
 
-    // Calcular stats añadidas (sin incluir blue stats)
-    const totalAddedStats =
+    // ✅ DETECTAR si el nivel bajó
+    const levelDecreased = level < previousLevel;
+
+    // ✅ SI BAJÓ EL NIVEL: Resetear stats a baseStats
+    if (levelDecreased) {
+      char.stats = {
+        strength: baseStats.strength,
+        agility: baseStats.agility,
+        stamina: baseStats.stamina,
+        energy: baseStats.energy,
+        command: baseStats.command || 0
+      };
+    }
+
+    // ✅ ACTUALIZAR el nivel ANTES de calcular puntos
+    char.level = level > 1700 ? 1700 : level;
+    char.fruits = 0;
+
+    // ✅ CALCULAR stats añadidas DESPUÉS de resetear/actualizar nivel
+    const totalAddedStats = (
       (char.stats.strength - baseStats.strength) +
       (char.stats.agility - baseStats.agility) +
       (char.stats.stamina - baseStats.stamina) +
       (char.stats.energy - baseStats.energy) +
-      (char.stats.command ? (char.stats.command - (baseStats.command || 0)) : 0);
+      (char.stats.command ? (char.stats.command - (baseStats.command || 0)) : 0)
+    );
 
-    char.level = level > 1700 ? 1700 : level;
-
-    // ✅ AGREGAR ESTA LÍNEA: Resetear fruits cuando cambia el nivel
-    char.fruits = 0;
-
-    // Calcular puntos según nivel
+    // ✅ CALCULAR puntos según el NUEVO nivel
     let points = 0;
-    if (char.level < 150 && char.level > 1) {
-      points = (char.level - 1) * 5 - totalAddedStats;
-    } else if (char.level >= 150) {
-      points = (char.level - 1) * 5 + 20 - totalAddedStats;
+
+    // ✅ Verificar si es Dark Lord o Magic Gladiator
+    console.log(char.class)
+    const isDLorMG = char.class[0] === "Dark Lord" || char.class[0] === "Magic Gladiator";
+
+    if (isDLorMG) {
+      // Sistema especial para DL y MG
+      if (char.level < 150 && char.level > 1) {
+        points = (char.level - 1) * 7 - totalAddedStats;
+      } else if (char.level >= 150 && char.level < 220) {
+        points = (char.level - 1) * 7 + 20 - totalAddedStats;
+      } else if (char.level >= 220 && char.level < 400) {
+        points = 1553 + (char.level - 220) * 7 - totalAddedStats;
+      } else if (char.level >= 400 && char.level < 800) {
+        points = 2793 + 70 - totalAddedStats;
+      } else if (char.level >= 800 && char.level < 1200) {
+        points = 2793 + 70 + 100 - totalAddedStats;
+      } else if (char.level >= 1200) {
+        points = 2793 + 70 + 100 + 200 - totalAddedStats;
+      }
+    } else {
+      // Sistema normal para otros personajes
+      if (char.level < 150 && char.level > 1) {
+        points = (char.level - 1) * 5 - totalAddedStats;
+      } else if (char.level >= 150 && char.level < 220) {
+        points = (char.level - 1) * 5 + 20 - totalAddedStats;
+      } else if (char.level >= 220 && char.level < 400) {
+        points = 1115 + (char.level - 220) * 6 - totalAddedStats;
+      } else if (char.level >= 400 && char.level < 800) {
+        points = 2265 - totalAddedStats;
+      } else if (char.level >= 800 && char.level < 1200) {
+        points = 2365 - totalAddedStats;
+      } else if (char.level >= 1200) {
+        points = 2565 - totalAddedStats;
+      }
     }
-    if (char.level > 220 && char.level <= 400) {
-      points = 1115 + (char.level - 220) * 6 - totalAddedStats;
-    }
-    if (char.level >= 400) {
-      points = 2265 - totalAddedStats;
-    }
-    if (char.level >= 800) {
-      points = 2365 - totalAddedStats;
-    }
-    if (char.level >= 1200) {
-      points = 2565 - totalAddedStats;
-    }
+
+    // Casos especiales para nivel <= 1
     if (char.level <= 1 || char.level === "") {
       points = "-";
     }
     if (totalAddedStats > 0 && char.level <= 1) {
       points = -totalAddedStats;
     }
-
-    char.points = points;
+    char.points = points
   },
-
   // Incrementar stats
   increaseStats: ({ stat, points }) => {
     if (!charSelectedStore.selectedCharacter) {
@@ -200,7 +240,6 @@ export const charSelectedStore = proxy({
     }
 
     const char = charSelectedStore.selectedCharacter;
-
     if (char.points >= points) {
       // Verificar que stats existe
       if (!char.stats) {
@@ -210,7 +249,6 @@ export const charSelectedStore = proxy({
       char.points -= points;
     }
   },
-
   // Decrementar stats
   decreaseStats: ({ stat, points, baseStats }) => {
     if (!charSelectedStore.selectedCharacter) return;
@@ -227,7 +265,6 @@ export const charSelectedStore = proxy({
       char.points += maxDecrease;
     }
   },
-
   // ✅ NUEVO: Actualizar skill del 3rd tree y blue stats
   update3rdTreeSkill: ({ skillId, level, valueType, values }) => {
     if (!charSelectedStore.selectedCharacter) return;
@@ -300,4 +337,8 @@ export const charSelectedStore = proxy({
       char.points -= actualAmount;
     }
   },
+  // ✅ NUEVA función para cargar datos sin resetear
+  loadCharacterData: (characterData) => {
+    charSelectedStore.selectedCharacter = { ...characterData };
+  }
 });

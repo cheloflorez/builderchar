@@ -8,12 +8,6 @@ const charactersData = {
     level: 1,
     points: 0,
     fruits: 0,
-    stats: {
-      strength: 18,
-      agility: 18,
-      stamina: 15,
-      energy: 30
-    },
     baseStats: {
       strength: 18,
       agility: 18,
@@ -27,12 +21,6 @@ const charactersData = {
     level: 1,
     points: 0,
     fruits: 0,
-    stats: {
-      strength: 28,
-      agility: 20,
-      stamina: 25,
-      energy: 10
-    },
     baseStats: {
       strength: 28,
       agility: 20,
@@ -46,12 +34,6 @@ const charactersData = {
     level: 1,
     points: 0,
     fruits: 0,
-    stats: {
-      strength: 22,
-      agility: 25,
-      stamina: 20,
-      energy: 15
-    },
     baseStats: {
       strength: 22,
       agility: 25,

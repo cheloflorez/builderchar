@@ -17,7 +17,8 @@ export const useSelectedCharacter = () => {
     update3rdTreeSkill: charSelectedStore.update3rdTreeSkill,
     updateStatsBar: charSelectedStore.updateStatsBar, // <- Nuevo método
     increaseFruits: charSelectedStore.increaseFruits, // ← Agregar esta línea
-    decreaseFruits: charSelectedStore.decreaseFruits  // ← Agregar
+    decreaseFruits: charSelectedStore.decreaseFruits,  // ← Agregar
+    loadCharacterData: charSelectedStore.loadCharacterData,  // ← Agregar
   };
 };
 

@@ -3,12 +3,15 @@ import { useEffect, useState } from "react";
 import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import formulasStr from "../../../functions/formulas/formulasStrength";
 import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
+import formulasAgi from "../../../functions/formulas/formulasAgility";
 
 export default function Strength() {
   const { character, increaseStats, decreaseStats } = useSelectedCharacter();
 
   const [formulasStrength, setFormulasStrength] = useState({});
   const [specialization, setSpecialization] = useState({});
+  const [specializationAgi, setSpecializationAgi] = useState({});
+  const [formulasAgility, setFormulasAgility] = useState({});
   const [combatpower, setCombatPower] = useState({});
 
   // Click izquierdo - SUMAR (cambio aquí)
@@ -29,7 +32,9 @@ export default function Strength() {
     }
   };
   useEffect(() => {
-    if (character) formulasStr(character, setFormulasStrength, setSpecialization, setCombatPower);
+    if (character)
+      formulasStr(character, setFormulasStrength, setSpecialization, setCombatPower);
+    formulasAgi(character, setFormulasAgility, setSpecializationAgi);
   }, [character]);
 
   // Early return DESPUÉS de hooks
@@ -83,7 +88,6 @@ export default function Strength() {
       </dd>
 
       <dd className="text-center">
-        {/* 🔥 MOSTRAR BONUS DEL 3RD TREE */}
         <span className="text-blue-300">
           -
         </span>
@@ -109,15 +113,22 @@ export default function Strength() {
       )}
 
       <dt>* Attack Power</dt>
-      <dd className="col-span-2">
+      <dd>
         <span className="text-amber-300">
           {formulasStrength.attackMin} ~ {formulasStrength.attackMax}
         </span>
       </dd>
+      
+      <dd className="text-center">
+        <span className="text-amber-300">+{combatpower.CPL}</span>
+      </dd>
 
       <dt>* Atk Succ rate</dt>
       <dd>
-        <span className="text-amber-300">{formulasStrength.attackRate}</span>
+        {specializationAgi.splAtkRate >= 0 ?
+          <span className="text-amber-300">{formulasStrength.attackRate + specializationAgi.splAtkRate}</span>
+          : <span className="text-amber-300">{formulasStrength.attackRate}</span>
+        }
       </dd>
       <dd className="text-center">
         <span className="text-amber-300">-</span>
@@ -125,7 +136,11 @@ export default function Strength() {
 
       <dt>* PVP Atk rate</dt>
       <dd>
-        <span className="text-amber-300">{formulasStrength.attackRatePVP}</span>
+        {specializationAgi.splPVPAtkRate >= 0 ?
+          <span className="text-amber-300">{formulasStrength.attackRatePVP + specializationAgi.splPVPAtkRate}</span>
+          : <span className="text-amber-300">{formulasStrength.attackRatePVP}</span>
+        }
+
       </dd>
       <dd className="text-center">
         <span className="text-amber-300">-</span>
@@ -134,7 +149,7 @@ export default function Strength() {
       {combatpower.CombatPower >= 0 && (
         <>
           <dt>
-           * Combat Power
+            * Combat Power
           </dt>
           <dd className="col-span-2">
             <span className="text-amber-300">{combatpower.CombatPower} %</span>
