@@ -195,48 +195,43 @@ const BlueTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =
         return grid;
     }, [skills, skillLevels, canIncreaseSkillMemo, isSkillLockedMemo, handleSkillClick]);
 
-    return (
-        <div
-            className="p-2 flex flex-col relative overflow-visible"
-            style={{
-                backgroundImage: 'url(/3rd/Tree4002.png)',
-                backgroundSize: '100% 100%',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                width: '300px',
-                height: '600px',
-                minWidth: '300px',
-                minHeight: '600px',
-            }}
-        >
-            {/* Overlay de "Coming Soon" */}
-            <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                <div className="text-center p-6 bg-gray-800/80 border border-blue-500/50 rounded-xl backdrop-blur-sm">
-                    <div className="text-4xl mb-3">🔒</div>
-                    <h3 className="text-blue-300 font-bold text-lg mb-2">Blue Skills</h3>
-                    <p className="text-gray-300 text-sm mb-3 leading-relaxed">
-                        Advanced blue skill tree<br />
-                        with defensive abilities
-                    </p>
-                    <div className="px-3 py-1 bg-blue-600/20 border border-blue-600/50 rounded-full">
-                        <span className="text-blue-300 text-xs font-medium">Proximamente</span>
-                    </div>
-
-                    {/* Efecto de construcción */}
-                    <div className="flex justify-center mt-3 space-x-1">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-100"></div>
-                        <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-200"></div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Contenido original del árbol (opacidad reducida) */}
-            <div className="relative z-10 flex flex-col h-full opacity-30">
-                {/* ... resto del contenido original */}
+return (
+    <div 
+        className="p-2 flex flex-col relative overflow-visible"
+        style={{
+            backgroundImage: 'url(/3rd/Tree4002.png)',
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            width: '300px',
+            height: '600px',
+            minWidth: '300px',
+            minHeight: '600px',
+        }}
+    >   
+        {/* Overlay sutil de "Próximamente" */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+            <div className="bg-black/40 backdrop-blur-sm px-6 py-3 rounded-lg border border-gray-600/50">
+                <span className="text-white text-sm font-medium tracking-wide">
+                    Próximamente
+                </span>
             </div>
         </div>
-    );
+
+        {/* Contenido del árbol - con z-index para estar encima del background */}
+        <div className="relative z-10 flex flex-col h-full opacity-60">
+            {/* Header del árbol */}
+            <div className="text-center mb-2 flex-shrink-0">
+                <div className="text-xs text-gray-200 drop-shadow">Puntos: {spentPoints}</div>            
+            </div>
+
+            {/* Grid de skills - ocupa el espacio restante */}
+            <div className="grid grid-cols-4 grid-rows-9 gap-2 flex-1 min-h-0">
+                {skillGrid}
+            </div>
+        </div>
+    </div>
+);
 };
 
 export default BlueTree;

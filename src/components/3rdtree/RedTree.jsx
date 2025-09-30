@@ -209,30 +209,17 @@ const RedTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =>
                 minHeight: '600px',
             }}
         >
-            {/* Overlay de "Coming Soon" */}
-            <div className="absolute inset-0 z-20 bg-black/60 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                <div className="text-center p-6 bg-gray-800/80 border border-red-500/50 rounded-xl backdrop-blur-sm">
-                    <div className="text-4xl mb-3">🔒</div>
-                    <h3 className="text-red-300 font-bold text-lg mb-2">Red Skills</h3>
-                    <p className="text-gray-300 text-sm mb-3 leading-relaxed">
-                        Powerful offensive abilities<br />
-                        and combat skills
-                    </p>
-                    <div className="px-3 py-1 bg-red-600/20 border border-red-600/50 rounded-full">
-                        <span className="text-red-300 text-xs font-medium">Proximamente</span>
-                    </div>
-
-                    {/* Efecto de construcción */}
-                    <div className="flex justify-center mt-3 space-x-1">
-                        <div className="w-2 h-2 bg-red-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-red-400 rounded-full animate-bounce delay-100"></div>
-                        <div className="w-2 h-2 bg-red-400 rounded-full animate-bounce delay-200"></div>
-                    </div>
+            {/* Overlay sutil de "Próximamente" */}
+            <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+                <div className="bg-black/40 backdrop-blur-sm px-6 py-3 rounded-lg border border-gray-600/50">
+                    <span className="text-white text-sm font-medium tracking-wide">
+                        Próximamente
+                    </span>
                 </div>
             </div>
 
-            {/* Contenido original del árbol (opacidad reducida) */}
-            <div className="relative z-10 flex flex-col h-full opacity-30">
+            {/* Contenido del árbol - con z-index para estar encima del background */}
+            <div className="relative z-10 flex flex-col h-full opacity-60">
                 {/* Header del árbol */}
                 <div className="text-center mb-2 flex-shrink-0">
                     <div className="text-xs text-gray-200 drop-shadow">Puntos: {spentPoints}</div>
