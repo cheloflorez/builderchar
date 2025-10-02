@@ -46,7 +46,7 @@ export default function Stamina() {
 
   return (
     <>
-      <dt className="flex items-center justify-between">
+      <dt className="flex items-center justify-between bg-gray-900">
         <span>Stamina</span>
         <button
           onClick={handleLeftClick}
@@ -78,11 +78,11 @@ export default function Stamina() {
         </button>
       </dt>
 
-      <dd>
+      <dd className="bg-gray-900">
         <span className="text-amber-300">{staminaBonus > 0 ? `${staminaBonus + character.stats.stamina}` : character.stats.stamina}</span>
       </dd>
 
-      <dd className="text-center">
+      <dd className="text-center bg-gray-900">
         <span className="text-blue-300">
           -
         </span>

@@ -49,7 +49,7 @@ export default function Agility() {
 
   return (
     <>
-      <dt className="flex items-center justify-between">
+      <dt className="flex items-center justify-between bg-gray-900">
         <span>Agility</span>
         <button
           onClick={handleLeftClick}
@@ -65,7 +65,6 @@ export default function Agility() {
             height: 'auto'
           }}
         >
-          {/* Imagen del botón */}
           <img
             src="/windows-stats/button.png"
             alt="stat button"
@@ -81,11 +80,11 @@ export default function Agility() {
         </button>
       </dt>
 
-      <dd>
+      <dd className="bg-gray-900">
         <span className="text-amber-300">{agilityBonus > 0 ? `${agilityBonus + character.stats.agility}` : character.stats.agility}</span>
       </dd>
 
-      <dd className="text-center">
+      <dd className="text-center bg-gray-900">
         <span className="text-blue-300">
           -
         </span>
@@ -301,6 +300,24 @@ export default function Agility() {
             </dt>
             <dd className="col-span-2">
               <span className="text-violet-500">{specialization.splDef < 1 ? "-" : specialization.splDef}</span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "Alchemist" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S)ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splAtkRate < 1 ? "-" : specialization.splAtkRate}</span>
+            </dd>
+            <dt>
+              <span className="text-violet-500">* (S)PvP ATK Rate</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splPVPAtkRate < 1 ? "-" : specialization.splPVPAtkRate}</span>
             </dd>
           </>
         )

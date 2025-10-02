@@ -11,9 +11,9 @@ export default function formulasEne(character, setFormulasEnergy, setSpecializat
   // ✅ Usar blue stats directamente del character
   const energyStatsBlue = character.stats.energyBlue || 0;
 
-  const strength = totalStats.strength 
-  const agility = totalStats.agility 
-  const stamina = totalStats.stamina 
+  const strength = totalStats.strength
+  const agility = totalStats.agility
+  const stamina = totalStats.stamina
   const energy = totalStats.energy
   const classChar = character.class[0];
 
@@ -172,5 +172,16 @@ export default function formulasEne(character, setFormulasEnergy, setSpecializat
         skillPwr: 200 + Math.floor(strength / 30) + Math.floor(agility / 30),
       });
       break;
+    case "Alchemist":
+      setFormulasEnergy({
+        energyStatsBlue,
+        wizMin: Math.floor(30 + (Math.floor((energy / 4) * (specialization + 1)) + wizDmg) * wizDmgRate),
+        wizMax: Math.floor(45 + (Math.floor((energy / 3) * (specialization + 1)) + wizDmg) * wizDmgRate),
+        magicPower: Math.floor(165 + energy / 65),
+      });
+      setSpecialization({
+        splWizMin: Math.floor((energy / 5) * specialization),
+        splWizMax: Math.floor((energy / 3) * specialization),
+      });
   }
 }

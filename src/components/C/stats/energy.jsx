@@ -44,7 +44,7 @@ export default function Energy() {
 
   return (
     <>
-      <dt className="flex items-center justify-between">
+      <dt className="flex items-center justify-between bg-gray-900">
         <span>Energy</span>
         <button
           onClick={handleLeftClick}
@@ -76,17 +76,17 @@ export default function Energy() {
         </button>
       </dt>
 
-      <dd>
+      <dd className="bg-gray-900">
         <span className="text-amber-300">{energyBonus > 0 ? `${energyBonus + character.stats.energy}` : character.stats.energy}</span>
       </dd>
 
-      <dd className="text-center">
+      <dd className="text-center bg-gray-900">
         <span className="text-blue-300">
           -
         </span>
       </dd>
 
-      {formulasEnergy.wizMin && (
+      {/* {formulasEnergy.wizMin && (
         <>
           <dt>
             <span className="text-violet-500">* SPl Wiz Dmg</span>
@@ -122,7 +122,77 @@ export default function Energy() {
             <span className="text-amber-300">{formulasEnergy.skillPwr}%</span>
           </dd>
         </>
+      )} */}
+
+      {
+        character.class[0] === "Alchemist" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* (S)Magic DMG</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">{specialization.splAtkRate < 1 ? "-" : specialization.splAtkRate}</span>
+            </dd>
+            <dt>* Wizardry Dmg</dt>
+            <dd>
+              <span className="text-amber-300">
+                {formulasEnergy.wizMin} ~ {formulasEnergy.wizMax}
+              </span>
+            </dd>
+            <dd>
+              <span className="text-amber-300"></span>
+            </dd>
+            <dt>* Magic ATK</dt>
+            <dd>
+              <span className="text-amber-300">
+                 {formulasEnergy.magicPower} %
+              </span>
+            </dd>
+            <dd>
+              <span className="text-amber-300"></span>
+            </dd>
+          </>
+        )
+      }
+      {
+        character.class[0] === "Dark Wizard" && (
+          <>
+            <dt>
+              <span className="text-violet-500">* SPl Wiz Dmg</span>
+            </dt>
+            <dd className="col-span-2">
+              <span className="text-violet-500">
+                {specialization.splWizMax < 1 ? (
+                  "-"
+                ) : (
+                  <>
+                    {specialization.splWizMin} ~ {specialization.splWizMax}
+                  </>
+                )}
+              </span>
+            </dd>
+
+            <dt>* Wizardry Dmg</dt>
+            <dd>
+              <span className="text-amber-300">
+                {formulasEnergy.wizMin} ~ {formulasEnergy.wizMax}
+              </span>
+            </dd>
+            <dd>
+              <span className="text-amber-300"></span>
+            </dd>
+          </>
+        )
+      }
+      {formulasEnergy.skillPwr && (
+        <>
+          <dt>* Skill Atk Pwr(%)</dt>
+          <dd className="col-span-2">
+            <span className="text-amber-300">{formulasEnergy.skillPwr}%</span>
+          </dd>
+        </>
       )}
+
     </>
   );
 }

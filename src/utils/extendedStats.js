@@ -1,100 +1,106 @@
 // utils/extendedStatsSystem.js
-import { getAllEquippedItems, calculateItemStats, calculateAncientSetBonuses , calculateMasterySetBonuses } from '../helpers/itemHelpers.js';
+import { getAllEquippedItems, calculateItemStats, calculateAncientSetBonuses, calculateMasterySetBonuses } from '../helpers/itemHelpers.js';
 
 // ✅ DEFINICIÓN DE TODAS LAS OPCIONES EXTENDIDAS
 export const EXTENDED_STATS_CONFIG = {
   criticalDamageRate: {
-    label: "*Crit dmg (%)",
+    label: "*Critical DMG (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items', 'sets']
   },
   excellentDamageRate: {
-    label: "*Exc dmg (%)",
+    label: "*Excellent DM (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items', 'sets']
   },
   doubleDamageRate: {
-    label: "*Double dmg (%)",
+    label: "*Double DMG (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
   },
   tripleDamageRate: {
-    label: "*Triple dmg (%)",
+    label: "*Triple DMG (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
   },
   defenseIgnoreRate: {
-    label: "*Def ign (%)",
+    label: "*Def ignore (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items', 'sets']
   },
   returnDamageRate: {
-    label: "*Return dmg (%)",
+    label: "*Return DMG (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
   },
   skillDamage: {
-    label: "*Skill Atk dmg inc",
+    label: "*Skill ATK DMG inc",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   criticalDamage: {
-    label: "*Crit dmg inc",
+    label: "*Crit DMG inc",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   excellentDamage: {
-    label: "*Exc dmg inc",
+    label: "*Exc DMG inc",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   damageIncreaseRate: {
-    label: "*Dmg inc (%)",
+    label: "*DMG inc (%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items', 'sets']
   },
   damageReduceRate: {
-    label: "*Dmg Redc (%)",
+    label: "*DMG Reduction (%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items', 'sets']
   },
   damageReduce: {
-    label: "*Reduccion de daños",
+    label: "*DMG Reduc",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   damageReflect: {
-    label: "*Dmg Reflc (%)",
+    label: "*DMG Reflect (%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   damageAbsorb: {
-    label: "*Dmg Absorb (%)",
+    label: "*DMG Absorb (%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
-  lifeRecoveryRate: {
-    label: "*HP rec (%)",
+  damageCorrect: {
+    label: "*DMG Correction",
+    suffix: "",
+    decimal: false,
+    sources: ['3rdTree', '4thTree', 'items']
+  },
+  AutomaticHPRecoveryIncreaseRate: {
+    label: "*HP recovery",
     suffix: "",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
   },
   lifeRecoveryForKillMonster: {
-    label: "*Mob Atk HP rec",
+    label: "*Mob Atk HP recovery",
     suffix: "",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
@@ -111,8 +117,8 @@ export const EXTENDED_STATS_CONFIG = {
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
-  manaRecoveryRate: {
-    label: "*MP rec (%)",
+  autoManaRecoveryRate: {
+    label: "*MP recovery",
     suffix: "",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
@@ -135,20 +141,20 @@ export const EXTENDED_STATS_CONFIG = {
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
-  recoveryAGRate: {
+  AutomaticAGRecoveryIncreaseRate: {
     label: "*AG rec (%)",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   reduceAGusedRate: {
-    label: "*AG usage red (%)",
+    label: "*AG usage reduction (%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
-  recoverySDRate: {
-    label: "*SD rec (%)",
+  SDRecoverySpeedIncreaseRate: {
+    label: "*SD recovery (%)",
     suffix: "",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
@@ -160,7 +166,7 @@ export const EXTENDED_STATS_CONFIG = {
     sources: ['3rdTree', '4thTree', 'items']
   },
   restoreAllSDRate: {
-    label: "*Res all SD (%)",
+    label: "*Restore all SD (%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
@@ -172,13 +178,13 @@ export const EXTENDED_STATS_CONFIG = {
     sources: ['3rdTree', '4thTree', 'items']
   },
   sdRateWhenAttack: {
-    label: "*SD(%) when atckd",
+    label: "*SD(%) when attacked",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   sdRateWhenAttack2: {
-    label: "*SD % when atk",
+    label: "*SD % when attacking",
     suffix: "",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
@@ -196,7 +202,7 @@ export const EXTENDED_STATS_CONFIG = {
     sources: ['3rdTree', '4thTree', 'items']
   },
   stunResistenceRate: {
-    label: "*Stun res (%)",
+    label: "*Stun resistance (%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
@@ -214,13 +220,13 @@ export const EXTENDED_STATS_CONFIG = {
     sources: ['3rdTree', '4thTree', 'items']
   },
   shieldBlockRate: {
-    label: "*Shield blck(%)",
+    label: "*Shield block(%)",
     suffix: "%",
     decimal: false,
     sources: ['3rdTree', '4thTree', 'items']
   },
   weaponBlockRate: {
-    label: "*Weapon blck(%)",
+    label: "*Weapon block(%)",
     suffix: "%",
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
@@ -231,6 +237,35 @@ export const EXTENDED_STATS_CONFIG = {
     decimal: true,
     sources: ['3rdTree', '4thTree', 'items']
   },
+};
+
+// ✅ FÓRMULAS PARA STATS QUE NECESITAN CÁLCULOS ADICIONALES
+const STAT_FORMULAS = {
+  autoManaRecoveryRate: (value, character) => {
+    const baseManaRecRate = 3.7;
+    const manaFlask = character.statsBar?.mana || 0;
+    return ((baseManaRecRate + value) / 100) * manaFlask;
+  },
+
+  AutomaticHPRecoveryIncreaseRate: (value, character) => {
+    const baseLifeRecRate = 1;
+    const lifeFlask = character.statsBar?.hp || 0;
+    return ((baseLifeRecRate + value) / 100) * lifeFlask;
+  },
+
+  SDRecoverySpeedIncreaseRate: (value, character) => {
+    const sdFlask = character.statsBar?.sd || 0;
+    const baseRate = sdFlask * 0.003344; // 0.3344%
+    const cartaBonus = value; // El % que viene de carta/3rd tree/items
+    return baseRate * (1 + cartaBonus / 100);
+  },
+
+AutomaticAGRecoveryIncreaseRate: (value, character) => {
+    const agFlask = character.statsBar?.ag || 0;
+    const baseRate = 0.0368; // 6.78%
+    const cartaBonus = value / 100; // Convertir % a decimal
+    return Math.floor(agFlask * (baseRate + cartaBonus));
+  }
 };
 
 // ✅ FUNCIÓN PRINCIPAL PARA CALCULAR TODAS LAS EXTENDED STATS
@@ -291,6 +326,12 @@ export const calculateExtendedStats = (character) => {
       }
     });
   }
+  // ✅ 4. APLICAR FÓRMULAS A STATS QUE LO NECESITEN
+  Object.keys(STAT_FORMULAS).forEach(statKey => {
+    if (extendedStats.hasOwnProperty(statKey)) {
+      extendedStats[statKey] = STAT_FORMULAS[statKey](extendedStats[statKey], character);
+    }
+  });
 
   return extendedStats;
 };
@@ -339,18 +380,6 @@ const getExtendedStatKey = (valueType) => {
   };
 
   return mapping[valueType] || null;
-};
-
-// ✅ AGREGAR BONUSES DE ITEMS
-const addItemBonuses = (item, extendedStats) => {
-  // Aquí mapeas las propiedades de los items a las extended stats
-  if (item.criticalDamageRate) extendedStats.criticalDamageRate += item.criticalDamageRate;
-  if (item.excellentDamageRate) extendedStats.excellentDamageRate += item.excellentDamageRate;
-  if (item.defenseIgnoreRate) extendedStats.defenseIgnoreRate += item.defenseIgnoreRate;
-  if (item.skillDamage) extendedStats.skillDamage += item.skillDamage;
-  if (item.damageIncreaseRate) extendedStats.damageIncreaseRate += item.damageIncreaseRate;
-  if (item.lifeRecoveryRate) extendedStats.lifeRecoveryRate += item.lifeRecoveryRate;
-  // ... agregar más según necesites
 };
 
 // ✅ FORMATEAR VALOR PARA DISPLAY

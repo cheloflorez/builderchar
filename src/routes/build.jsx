@@ -222,7 +222,7 @@ export default function Build() {
 
   if (isLoading || !selectedCharacter || !buildData) {
     return (
-      <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+      <div className="min-h-screen overflow-x-auto overflow-y-auto bg-gradient-to-br from-slate-900 via-gray-900 to-black">
         <div className="absolute inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen">
           <CharacterLoadingState />
@@ -231,11 +231,11 @@ export default function Build() {
     );
   }
   return (
-    <div className="min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-gray-900 to-black">
+    <div className="min-h-screen overflow-x-auto overflow-y-auto bg-gradient-to-br from-slate-900 via-gray-900 to-black">
       {/* Fondo único que cubre toda la página */}
       <div className="fixed inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-black"></div>
       <div className="fixed inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
-      <div className="hidden xl:flex min-h-screen relative z-10">
+      <div className="flex min-h-screen relative z-10 min-w-fit">
         {/* Contenido principal existente */}
         <div className="flex-1  from-slate-900 via-gray-900 to-black">
           {/* Overlay con textura sutil */}

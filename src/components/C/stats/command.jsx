@@ -37,7 +37,7 @@ export default function Command() {
 
   return (
     <>
-      <dt className="flex items-center justify-between">
+      <dt className="flex items-center justify-between bg-gray-900">
         <span>Command</span>
         <button
           onClick={handleLeftClick}
@@ -69,11 +69,11 @@ export default function Command() {
         </button>
       </dt>
 
-      <dd>
+      <dd className="bg-gray-900">
         <span className="text-amber-300">{commandBonus > 0 ? `${commandBonus + character.stats.command}` : character.stats.command}</span>
       </dd>
 
-      <dd className="text-center">
+      <dd className="text-center bg-gray-900">
         <span className="text-blue-300">
           -
         </span>

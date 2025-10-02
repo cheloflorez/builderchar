@@ -3,7 +3,7 @@ import { calculateTotalLifeBonuses, getLifeBonus } from '../../helpers/itemHelpe
 
 
 
-export default function formulasAgi(character, setFormulasAgility , setSpecializationAgi) {
+export default function formulasAgi(character, setFormulasAgility, setSpecializationAgi) {
   let defense = 0,
     defenseRate = 1;
 
@@ -53,7 +53,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor((agility / 3) * (specialization + 1)) + defense,
         speed: Math.floor(agility / 15),
         defenseRate: Math.floor(agility / 3 + ((agility / 3) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 2),
+        defenseRatePVP: Math.floor(level * 2 + agility / 2) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splDef: Math.floor((agility / 3) * specialization),
@@ -64,7 +64,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 10) + defense,
         speed: Math.floor(agility / 50),
         defenseRate: Math.floor((agility / 4) * (specialization + 1) + ((agility / 4) * (specialization + 1) * defenseSussRate)),
-        defenseRatePVP: Math.floor((level * 2 + agility / 10) * (specialization + 1)),
+        defenseRatePVP: Math.floor((level * 2 + agility / 10) * (specialization + 1)) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splAtkMin: Math.floor((strength / 14 + Math.floor(agility / 7)) * specialization),
@@ -78,7 +78,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 4) + defense,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor(agility / 3 + ((agility / 3) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 4),
+        defenseRatePVP: Math.floor(level * 2 + agility / 4) + defenseRatePVPBonus,
       });
       break;
     case "Dark Lord":
@@ -86,7 +86,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor((agility / 7) * (specialization + 1)) + defense,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor(agility / 7 + ((agility / 7) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 2),
+        defenseRatePVP: Math.floor(level * 2 + agility / 2) + defenseRatePVPBonus,
       });
       setSpecializationAgi({ splDef: Math.floor((agility / 7) * specialization) });
       break;
@@ -95,7 +95,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 3) + defense,
         speed: Math.floor(agility / 20),
         defenseRate: Math.floor(agility / 4 + ((agility / 4) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 2),
+        defenseRatePVP: Math.floor(level * 2 + agility / 2) + defenseRatePVPBonus,
       });
       break;
     case "Rage Fighter":
@@ -103,7 +103,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 8) + defense,
         speed: Math.floor(agility / 8),
         defenseRate: Math.floor(agility / 10 + ((agility / 10) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 3 + agility / 10),
+        defenseRatePVP: Math.floor(level * 3 + agility / 10) + defenseRatePVPBonus,
       });
       break;
     case "Grow Lancer":
@@ -111,7 +111,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor((agility / 7) * (specialization + 1)) + defense,
         speed: Math.floor(agility / 20),
         defenseRate: Math.floor(agility / 4 + ((agility / 4) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 5),
+        defenseRatePVP: Math.floor(level * 2 + agility / 5) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splDef: Math.floor((agility / 7) * specialization),
@@ -122,7 +122,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 5) + defense,
         speed: Math.floor(agility / 12),
         defenseRate: Math.floor(agility / 3 + ((agility / 3) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 3),
+        defenseRatePVP: Math.floor(level * 2 + agility / 3) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splAtkRate: Math.floor((level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4)) * specialization2),
@@ -134,7 +134,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 5) + defense,
         speed: Math.floor(agility / 12),
         defenseRate: Math.floor((agility / 3) * (specialization + 1) + ((agility / 3) * (specialization + 1) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 3),
+        defenseRatePVP: Math.floor(level * 2 + agility / 3) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splAtkMin: Math.floor((Math.floor(strength / 9) + Math.floor(agility / 20)) * specialization),
@@ -147,7 +147,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 4) + defense,
         speed: Math.floor(agility / 20),
         defenseRate: Math.floor(agility / 4 + ((agility / 4) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 3),
+        defenseRatePVP: Math.floor(level * 2 + agility / 3) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splAtkRate: Math.floor((level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4)) * specialization2),
@@ -159,7 +159,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 3) + defense,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor(agility / 3 + ((agility / 3) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 4),
+        defenseRatePVP: Math.floor(level * 2 + agility / 4) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splAtkRate: Math.floor((level * 5 + Math.floor(agility * 1.5 + strength / 4)) * specialization2),
@@ -171,7 +171,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 4) + defense,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor((agility / 3) + ((agility / 3) * specialization2) + ((agility / 3) * (specialization + 1) * defenseSussRate)),
-        defenseRatePVP: Math.floor((level * 2 + agility / 4) + (level * 2 + agility / 4) * specialization2),
+        defenseRatePVP: Math.floor((level * 2 + agility / 4) + (level * 2 + agility / 4) * specialization2) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splDefRate: Math.floor((agility / 3) * specialization2),
@@ -183,7 +183,7 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         defense: Math.floor(agility / 7) + defense,
         speed: Math.floor(agility / 10),
         defenseRate: Math.floor(agility / 3 + ((agility / 3) * defenseSussRate)),
-        defenseRatePVP: Math.floor(level * 2 + agility / 4),
+        defenseRatePVP: Math.floor(level * 2 + agility / 4) + defenseRatePVPBonus,
       });
       setSpecializationAgi({
         splAtkMin: Math.floor((Math.floor(strength / 9) + Math.floor(agility / 20)) * specialization),
@@ -191,5 +191,43 @@ export default function formulasAgi(character, setFormulasAgility , setSpecializ
         splDef: Math.floor((agility / 120) + (strength / 140)),
       });
       break;
+    case "Alchemist":
+      setFormulasAgility({
+        defense: Math.floor(agility / 2) + defense + totalDefenseBonus,
+        speed: Math.floor(agility / 10),
+        defenseRate: Math.floor(Math.floor(agility / 3) * defenseRate + ((agility / 3) * defenseSussRate)),
+        defenseRatePVP: Math.floor(level * 2 + agility / 4 ) + defenseRatePVPBonus,
+      });
+      setSpecializationAgi({
+        splAtkRate: Math.floor((level * 5 + agility * 1.5 + strength / 4) * specialization2),
+        splPVPAtkRate: Math.floor((level * 3 + agility * 4) * specialization2),
+      });
+  }
+}
+
+// Al final del archivo, después del switch
+export function calculateDefense(character) {
+  const totalStats = getTotalStats(character);
+  const agility = totalStats.agility;
+  const totalDefenseBonus = getLifeBonus(character, 'defense');
+  const classChar = character.class[0];
+
+  let defense = 0;
+  let specialization = 0;
+
+  // Calcular specialization si es necesario
+  if (agility <= 1800) specialization = agility / 18000;
+  if (agility > 1800 && agility <= 2500) specialization = 0.1 + (agility - 1800) / 3500;
+  if (agility > 2500 && agility <= 3000) specialization = 0.3 + (agility - 2000) / 3333;
+
+  switch (classChar) {
+    case "Dark Wizard":
+      return Math.floor(agility / 4) + defense + totalDefenseBonus;
+    case "Dark Knight":
+      return Math.floor((agility / 3) * (specialization + 1)) + defense;
+    case "Mage":
+      return Math.floor(agility / 4) + defense;
+    default:
+      return 0;
   }
 }

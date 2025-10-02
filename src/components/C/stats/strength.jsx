@@ -51,7 +51,7 @@ export default function Strength() {
 
   return (
     <>
-      <dt className="flex items-center justify-between">
+      <dt className="flex items-center justify-between bg-gray-900">
         <span>Strength</span>
         <button
           onClick={handleLeftClick}
@@ -83,11 +83,11 @@ export default function Strength() {
         </button>
       </dt>
 
-      <dd>
+      <dd className="bg-gray-900">
         <span className="text-amber-300">{strengthBonus > 0 ? `${strengthBonus + character.stats.strength}` : character.stats.strength}</span>
       </dd>
 
-      <dd className="text-center">
+      <dd className="text-center bg-gray-900">
         <span className="text-blue-300">
           -
         </span>

@@ -252,13 +252,32 @@ const charactersData = {
       energy: 15
     },
     maxSpeed: 350
+  },
+  alchemist: {
+    class: ["Alchemist", "Alchemic Master", "Alchemic Force", "Creator"],
+    level: 1,
+    points: 0,
+    fruits: 0,
+    stats: {
+      strength: 15,
+      agility: 20,
+      stamina: 23,
+      energy: 15
+    },
+    baseStats: {
+      strength: 15,
+      agility: 20,
+      stamina: 23,
+      energy: 15
+    },
+    maxSpeed: 304
   }
 };
 
 // Crear el proxy state para los personajes
 export const charactersStore = proxy({
   characters: charactersData,
-  
+
   // Obtener personaje por key
   getCharacter: (charKey) => {
     return charactersStore.characters[charKey];

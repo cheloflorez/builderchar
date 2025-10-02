@@ -3,6 +3,7 @@ import { getTotalStats, calculate3rdTreeBonus } from '../../utils/3rdTreeUtils.j
 
 
 export default function formulasStr(character, setFormulasStrength, setSpecialization, setCombatPower) {
+
   // ✅ CENTRALIZADO: Obtener todos los bonus de una vez
   const bonus = calculate3rdTreeBonus(character);
   const totalStats = getTotalStats(character);
@@ -183,6 +184,14 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
         attackMax: Math.floor(strength / 9) + Math.floor(agility / 6) + Dmg,
         attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
         attackRatePVP: level * 3 + Math.floor(agility * 2.5),
+      });
+      break;
+    case "Alchemist":
+      setFormulasStrength({
+        attackMin: Math.floor(strength / 8) + Dmg,
+        attackMax: Math.floor(strength / 4) + Dmg,
+        attackRate: Math.floor((level * 5) + ((agility * 3) / 2) + (strength / 4)),
+        attackRatePVP: Math.floor((level * 3 + agility * 4)),
       });
       break;
   }

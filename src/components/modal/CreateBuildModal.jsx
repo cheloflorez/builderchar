@@ -15,7 +15,8 @@ const chars = [
   { key: "gunCrusher", name: "Gun Crusher", img: "gun-crusher" },
   { key: "whiteWizard", name: "White Wizard", img: "white-wizard" },
   { key: "mage", name: "Mage", img: "mage" },
-  { key: "illusionKnight", name: "Illusion Knight", img: "illusion-knight" }
+  { key: "illusionKnight", name: "Illusion Knight", img: "illusion-knight" },
+  { key: "alchemist", name: "Alchemist", img: "alchemist" },
 ];
 
 export default function CreateBuildModal({ onClose, onCreateBuild }) {
@@ -26,12 +27,12 @@ export default function CreateBuildModal({ onClose, onCreateBuild }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!buildName.trim()) {
       setError("Build name is required");
       return;
     }
-    
+
     if (!selectedChar) {
       setError("Please select a character");
       return;
@@ -47,7 +48,7 @@ export default function CreateBuildModal({ onClose, onCreateBuild }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-auto">
       <div className="bg-gradient-to-b from-gray-800 to-gray-900 border border-amber-600/50 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-        
+
         {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-amber-600/30">
           <h2 className="text-3xl font-bold text-amber-300">Create New Build</h2>
@@ -61,7 +62,7 @@ export default function CreateBuildModal({ onClose, onCreateBuild }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-          
+
           {/* Build Name */}
           <div>
             <label className="block text-amber-300 font-semibold mb-2">
@@ -88,11 +89,10 @@ export default function CreateBuildModal({ onClose, onCreateBuild }) {
                   key={char.key}
                   type="button"
                   onClick={() => setSelectedChar(char.key)}
-                  className={`flex flex-col items-center p-4 rounded-xl border-2 transition-all duration-200 transform hover:scale-105 ${
-                    selectedChar === char.key
-                      ? 'border-amber-500 bg-amber-500/20 shadow-lg'
-                      : 'border-gray-600 bg-gray-700/60 hover:border-gray-500'
-                  }`}
+                  className={`flex flex-col items-center p-4 rounded-xl border-2 transition-all duration-200 transform hover:scale-105 ${selectedChar === char.key
+                    ? 'border-amber-500 bg-amber-500/20 shadow-lg'
+                    : 'border-gray-600 bg-gray-700/60 hover:border-gray-500'
+                    }`}
                 >
                   <img
                     src={`/characters/${char.img}.png`}

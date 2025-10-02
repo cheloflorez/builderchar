@@ -1,10 +1,10 @@
 import { getTotalStats, calculate3rdTreeBonus } from '../../../utils/3rdTreeUtils.js';
+import { calculateDefense } from '../formulasAgility.js';
 
 export default function statsBar(character, updateStatsBar) {
 
   const bonus = calculate3rdTreeBonus(character);
   const totalStats = getTotalStats(character);
-
 
   // ✅ Usar stats totales incluyendo blue stats
   const strength = totalStats.strength;
@@ -16,13 +16,13 @@ export default function statsBar(character, updateStatsBar) {
   const classChar = character.class[0];
 
   // 🔥 AQUÍ TIENES EL DefenseRatePVP del 3rd tree
-  const defenseRatePVPBonus = bonus.DefenseRatePVP || 0;
-
+  const MaximumSDIncrease = bonus.MaximumSDIncrease || 0;
+  let defense = calculateDefense(character);
 
   const allStats = strength + agility + stamina + energy;
   const allStatsDL = allStats + (command || 0);
 
-  let defense = 0,
+  let
     hpMax = 0,
     manaMax = 0,
     hpRate = 1,
@@ -34,7 +34,7 @@ export default function statsBar(character, updateStatsBar) {
       defense = Math.floor((defense + Math.floor(agility / 4)) * 0.5);
       updateStatsBar({
         hp: Math.floor((Math.floor(45 + stamina + level - 1) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30))) + defense,
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30))) + defense + MaximumSDIncrease,
         mana: Math.floor((energy * 2 + (level - 1) * 2 + manaMax) * manaRate),
         ag: Math.floor(strength * 0.2 + agility * 0.4 + stamina * 0.3 + energy * 0.2) + agMax,
       })
@@ -44,7 +44,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((35 + Math.floor(stamina * 3 + (level - 1) * 2) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + level * (level / 30) + defense),
+        sd: Math.floor(allStats * 1.2 + level * (level / 30) + defense) + MaximumSDIncrease,
         mana: Math.floor((10 + energy + Math.floor((level - 1) / 2) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.15 + agility * 0.2 + stamina * 0.3 + energy) + agMax,
       })
@@ -55,7 +55,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((40 + Math.floor(stamina * 2 + level - 1) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((22.5 + Math.floor(energy * 1.5 + (level - 1) * 1.5) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.3 + agility * 0.2 + stamina * 0.3 + energy * 0.2) + agMax,
       })
@@ -66,7 +66,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((58 + Math.floor(stamina * 2 + level - 1) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((8 + Math.floor(energy * 2 + level - 1) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.2 + agility * 0.25 + stamina * 0.3 + energy * 0.15) + agMax,
       })
@@ -77,7 +77,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((50 + Math.floor(stamina * 2 + (level - 1) * 1.5) + hpMax) * hpRate),
-        sd: Math.floor(allStatsDL * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStatsDL * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((17.5 + Math.floor(energy * 1.5 + level - 1) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.3 + agility * 0.2 + stamina * 0.1 + energy * 0.15 + command * 0.3) + agMax,
       })
@@ -88,7 +88,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((34 + stamina * 2 + level - 1 + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((0.9 + Math.floor(energy * 1.7 + (level - 1) * 1.5) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.2 + agility * 0.25 + stamina * 0.3 + energy * 0.15) + agMax,
       })
@@ -99,7 +99,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((50 + Math.floor(stamina * 2 + (level - 1) * 1.3) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((14 + Math.floor(energy * 1.3 + level - 1) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.15 + agility * 0.2 + stamina * 0.3 + energy) + agMax,
       })
@@ -110,7 +110,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((85 + Math.floor(stamina + (level - 1) * 2) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((16 + Math.floor(energy + level - 1) + manaMax) * manaRate),
         ag: Math.floor(strength * 0.15 + agility * 0.2 + stamina * 0.3 + energy) + agMax,
       })
@@ -121,8 +121,8 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((32 + Math.floor(stamina * 2 + (level - 1) * 1.2) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
-        mana: Math.floor((-12 + Math.floor(energy * 1.8 + (level - 1) * 1.5) + manaMax) * manaRate),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
+        mana: Math.floor(-20 + (level - 1) * 1.8 + energy * 1.5),
         ag: Math.floor(strength * 0.2 + agility * 0.2 + stamina * 0.3 + energy * 0.75) + agMax,
       })
 
@@ -132,8 +132,8 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((85 + Math.floor(stamina * 3 + (level - 1) * 1.15) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
-        mana: Math.floor((energy + (level - 1) * 1.8  + manaMax) * manaRate),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
+        mana: Math.floor((energy + (level - 1) * 1.8 + manaMax) * manaRate),
         ag: Math.floor(4 + energy + (agility / 5) + (strength / 7))
       })
 
@@ -143,7 +143,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((60 + Math.floor(stamina * 2 + (level - 1) * 1.5) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((30 + energy * 2 + (level - 1) * 1.5 + manaMax) * manaRate),
         // AG FALTA
         ag: Math.floor(strength * 0.15 + agility * 0.2 + stamina * 0.3 + energy) + agMax,
@@ -155,7 +155,7 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((40 + Math.floor(stamina * 2 + (level - 1) * 2) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((10 + energy * 2 + (level - 1) * 2 + manaMax) * manaRate),
         ag: Math.floor(strength * 0.2 + agility * 0.4 + stamina * 0.3 + energy * 0.25) + agMax,
       })
@@ -166,9 +166,9 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((50 + Math.floor(stamina * 2 + level - 1) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((5 + Math.floor(energy * 2 + (level - 1) * 1.5) + manaMax) * manaRate),
-        ag: Math.floor(strength * 0.2 + agility * 0.3 + stamina * 0.3 + energy * 0.2) + agMax,
+        ag: Math.floor(Math.floor(strength / 5) + (agility / 4) + (stamina / 5) + (energy / 2.76))
       })
 
       break;
@@ -177,10 +177,21 @@ export default function statsBar(character, updateStatsBar) {
 
       updateStatsBar({
         hp: Math.floor((70 + Math.floor(stamina * 2 + (level - 1) * 2) + hpMax) * hpRate),
-        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
         mana: Math.floor((5 + Math.floor(energy * 1.5 + (level - 1) * 1.2) + manaMax) * manaRate),
         // AG POSIBLE FORMULA
         ag: Math.floor(strength * 0.3 + agility * 0.4 + stamina * 0.3 + energy * 0.25) + agMax,
+      })
+
+      break;
+    case "Alchemist":
+      defense = Math.floor((defense + Math.floor(agility / 3)) * 0.5);
+
+      updateStatsBar({
+        hp: Math.floor((40 + Math.floor(stamina * 3 + (level - 1) * 2) + hpMax) * hpRate),
+        sd: Math.floor(allStats * 1.2 + Math.floor(level * (level / 30)) + defense) + MaximumSDIncrease,
+        mana: Math.floor((50 + Math.floor(energy * 2 + (level - 1) * 2 ) + manaMax) * manaRate),
+        ag: Math.floor(Math.floor(strength / 5) + (agility / 4) + (stamina / 5) + (energy / 2.76))
       })
 
       break;

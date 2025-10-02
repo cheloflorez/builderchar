@@ -324,7 +324,7 @@ export const skillConfigs = {
     ],
 
   },
-  'Rune Wizard': {
+  'Rune Mage': {
     green: [
       // FILA 1 (Skills iniciales)
       { skillId: 'DefenseRatePVP', row: 0, col: 3 },
