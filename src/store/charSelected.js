@@ -250,7 +250,7 @@ export const charSelectedStore = proxy({
     }
   },
   // Decrementar stats
-  decreaseStats: ({ stat, points, baseStats }) => {
+  decreaseStats: ({ stat, points }) => {
     if (!charSelectedStore.selectedCharacter) return;
 
     const char = charSelectedStore.selectedCharacter;

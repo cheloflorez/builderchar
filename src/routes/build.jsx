@@ -13,6 +13,8 @@ import { CharacterLoadingState } from "../components/ui/LoadingStates";
 import { classChar } from '../utils/characterUtils';
 import AdSidebar from "../components/ui/AdSidebar";
 import { charSelectedStore } from "../store/charSelected";
+import HelpModal from "../components/ui/HelpModal";
+import VersionModal from "../components/ui/VersionModal";
 
 
 
@@ -33,6 +35,8 @@ export default function Build() {
 
   const currentClass = classChar(selectedCharacter);
   // Estados
+  const [helpModalOpen, setHelpModalOpen] = useState(false);
+  const [versionModalOpen, setVersionModalOpen] = useState(false);
   const [buildData, setBuildData] = useState(null);
   const [inventoryModalActive, setInventoryModalActive] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -279,6 +283,27 @@ export default function Build() {
 
                   {/* Sección derecha - Botones de acción */}
                   <div className="flex gap-2">
+                    {/* Help Button */}
+                    <button
+                      onClick={() => setHelpModalOpen(true)}
+                      className="group relative px-3 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm"
+                    >
+                      <span className="flex items-center gap-2">
+                        ❓ <span className="hidden sm:inline">Help</span>
+                      </span>
+                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    </button>
+
+                    {/* Version Button */}
+                    <button
+                      onClick={() => setVersionModalOpen(true)}
+                      className="group relative px-3 py-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-500 hover:to-purple-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm"
+                    >
+                      <span className="flex items-center gap-2">
+                        📋 <span className="hidden sm:inline">v1.0</span>
+                      </span>
+                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                    </button>
 
                     {/* Back Button */}
                     <button
@@ -487,6 +512,16 @@ export default function Build() {
           </div>
         </div> {/* Cierre del contenido principal */}
       </div> {/* Cierre del flex container */}
+
+      {/* Help Modal */}
+      {helpModalOpen && (
+        <HelpModal onClose={() => setHelpModalOpen(false)} />
+      )}
+
+      {/* Version Modal */}
+      {versionModalOpen && (
+        <VersionModal onClose={() => setVersionModalOpen(false)} />
+      )}
 
       {/* Sistema de Notificaciones */}
       <NotificationSystem

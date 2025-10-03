@@ -28,6 +28,23 @@ export default function Agility() {
     }
   };
 
+  const handleMiddleClick = (e) => {
+    e.preventDefault();
+
+    // Si tiene Shift presionado, RESTA 100
+    if (e.shiftKey) {
+      if (character?.stats.agility > character.baseStats.agility) {
+        decreaseStats({ stat: 'agility', points: 100, baseStats: character.baseStats });
+      }
+    }
+    // Sin Shift, SUMA 100
+    else {
+      if (character?.points >= 100) {
+        increaseStats({ stat: 'agility', points: 100 });
+      }
+    }
+  };
+
   // useEffect solo se ejecuta cuando character existe
   useEffect(() => {
     if (character && character.stats) {
@@ -54,9 +71,14 @@ export default function Agility() {
         <button
           onClick={handleLeftClick}
           onContextMenu={handleRightClick}
+          onMouseDown={(e) => {
+            if (e.button === 1) { // Botón central (rueda del mouse)
+              handleMiddleClick(e);
+            }
+          }}
           disabled={!canIncrease && !canDecrease}
           className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
-          title="Left: -1 | Right: +1 | Shift+Left: -10 | Shift+Right: +10"
+          title="Left: +1 | Right: -1 | Shift+Left: +10 | Shift+Right: -10 | Middle: +100 | Shift+Middle: -100"
           style={{
             background: 'none',
             border: 'none',
