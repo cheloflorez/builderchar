@@ -15,6 +15,7 @@ import AdSidebar from "../components/ui/AdSidebar";
 import { charSelectedStore } from "../store/charSelected";
 import HelpModal from "../components/ui/HelpModal";
 import VersionModal from "../components/ui/VersionModal";
+import { recommendedBuilds } from "../data/recommendedBuilds";
 
 
 
@@ -49,6 +50,8 @@ export default function Build() {
     share: false,
     analysis: false
   });
+  const [isReadOnly, setIsReadOnly] = useState(false);
+
 
   // Sistema de notificaciones
   const {
@@ -95,44 +98,62 @@ export default function Build() {
     setSkillsModalOpen(true);
   }, [selectedCharacter, notifyLevelRequired]);
 
-  // Cargar build desde localStorage
+  // Cargar build desde localStorage o recommendedBuilds
   useEffect(() => {
     const loadBuild = () => {
+      // Primero buscar en builds normales
       const savedBuilds = localStorage.getItem('mubuilds');
+      let currentBuild = null;
+      let isRecommended = false;
+
       if (savedBuilds) {
         const builds = JSON.parse(savedBuilds);
-        const currentBuild = builds.find(build => build.id === buildId);
-        if (currentBuild) {
-          setBuildData(currentBuild);
-          // Si el build tiene datos de personaje guardados, cargarlos
-          if (currentBuild.characterData) {
-            loadCharacterData(currentBuild.characterData);
-          } else {
-            // Si es un build nuevo, crear desde template
-            const template = Object.values(characters).find(char =>
-              char.class[0] === currentBuild.class
-            );
-            if (template) {
-              addChar(template);
-            }
-          }
+        currentBuild = builds.find(build => build.id === buildId);
+      }
 
-          setIsLoading(false);
-          notifySuccess(
-            'Build Loaded',
-            `${currentBuild.name} ready for building`,
-            { duration: 2000, icon: '🎮' }
-          );
-        } else {
-          window.location.href = '/';
+      // Si no se encontró, buscar en builds recomendadas
+      if (!currentBuild) {
+        currentBuild = recommendedBuilds.find(build => build.id === buildId);
+
+        if (currentBuild) {
+          isRecommended = true;
+          console.log('✅ Build recomendada cargada:', currentBuild.name);
         }
       } else {
+        console.log(currentBuild);
+      }
+
+      if (currentBuild) {
+        setBuildData(currentBuild);
+        setIsReadOnly(isRecommended); // ← IMPORTANTE: Setear explícitamente
+
+        // Cargar datos del personaje
+        if (currentBuild.characterData) {
+          loadCharacterData(currentBuild.characterData);
+        } else {
+          // Si es un build nuevo, crear desde template
+          const template = Object.values(characters).find(char =>
+            char.class[0] === currentBuild.class
+          );
+          if (template) {
+            addChar(template);
+          }
+        }
+
+        setIsLoading(false);
+        notifySuccess(
+          'Build Loaded',
+          `${currentBuild.name} ready for building`,
+          { duration: 2000, icon: currentBuild.isRecommended ? '⭐' : '🎮' }
+        );
+      } else {
+        console.error('Build no encontrada:', buildId);
         window.location.href = '/';
       }
     };
 
     loadBuild();
-  }, [buildId, addChar, characters, notifySuccess]);
+  }, [buildId, addChar, characters, notifySuccess, loadCharacterData]);
 
 
   useEffect(() => {
@@ -189,7 +210,6 @@ export default function Build() {
         ...prev,
         lastModified: new Date().toISOString()
       }));
-
       notifySuccess('Build Saved', `${buildData.name} saved successfully!`);
 
     } catch (error) {
@@ -272,13 +292,27 @@ export default function Build() {
 
                   {/* Sección central - Info adicional */}
                   <div className="flex items-center gap-3 px-3 py-2 border border-gray-600/50">
-                    <span className="text-xs text-gray-400">Last saved:</span>
-                    <span className="text-xs text-amber-300">
-                      {buildData?.lastModified
-                        ? new Date(buildData.lastModified).toLocaleTimeString()
-                        : 'Never'
-                      }
-                    </span>
+                    {isReadOnly ? (
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-purple-300 animate-pulse drop-shadow-lg">
+                          ⭐ RECOMMENDED
+                        </span>
+                        <span className="text-xs text-gray-400">-</span>
+                        <span className="text-xs font-semibold text-purple-400 animate-pulse shadow-purple-400/50">
+                          READ ONLY
+                        </span>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-xs text-gray-400">Last saved:</span>
+                        <span className="text-xs text-amber-300">
+                          {buildData?.lastModified
+                            ? new Date(buildData.lastModified).toLocaleTimeString()
+                            : 'Never'
+                          }
+                        </span>
+                      </>
+                    )}
                   </div>
 
                   {/* Sección derecha - Botones de acción */}
@@ -316,48 +350,52 @@ export default function Build() {
                       <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                     </button>
 
-                    {/* Save Button */}
-                    <button
-                      onClick={handleSave}
-                      disabled={actionLoading.save}
-                      className={`group relative px-3 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-white font-medium rounded-lg shadow-md text-sm ${actionLoading.save ? 'opacity-70 cursor-not-allowed' : ''}`}
-                    >
-                      <span className="flex items-center gap-2">
-                        {actionLoading.save ? (
-                          <>
-                            <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                            <span className="hidden sm:inline">Saving...</span>
-                          </>
-                        ) : (
-                          <>
-                            💾 <span className="hidden sm:inline">Save</span>
-                          </>
-                        )}
-                      </span>
-                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
-                    </button>
+                    {/* Save y Reset - Solo si NO es readOnly */}
+                    {!isReadOnly && (
+                      <>
+                        {/* Save Button */}
+                        <button
+                          onClick={handleSave}
+                          disabled={actionLoading.save}
+                          className={`group relative px-3 py-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-white font-medium rounded-lg shadow-md text-sm ${actionLoading.save ? 'opacity-70 cursor-not-allowed' : ''}`}
+                        >
+                          <span className="flex items-center gap-2">
+                            {actionLoading.save ? (
+                              <>
+                                <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                <span className="hidden sm:inline">Saving...</span>
+                              </>
+                            ) : (
+                              <>
+                                💾 <span className="hidden sm:inline">Save</span>
+                              </>
+                            )}
+                          </span>
+                          <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+                        </button>
 
-                    {/* Reset Button */}
-                    <button
-                      onClick={handleReset}
-                      disabled={actionLoading.reset}
-                      className={`group relative px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-sm ${actionLoading.reset ? 'opacity-70 cursor-not-allowed' : ''
-                        }`}
-                    >
-                      <span className="flex items-center gap-2">
-                        {actionLoading.reset ? (
-                          <>
-                            <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                            <span className="hidden sm:inline">Reset...</span>
-                          </>
-                        ) : (
-                          <>
-                            🔄 <span className="hidden sm:inline">Reset</span>
-                          </>
-                        )}
-                      </span>
-                      <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
-                    </button>
+                        {/* Reset Button */}
+                        <button
+                          onClick={handleReset}
+                          disabled={actionLoading.reset}
+                          className={`group relative px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 disabled:transform-none disabled:shadow-none text-sm ${actionLoading.reset ? 'opacity-70 cursor-not-allowed' : ''}`}
+                        >
+                          <span className="flex items-center gap-2">
+                            {actionLoading.reset ? (
+                              <>
+                                <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                <span className="hidden sm:inline">Resetting...</span>
+                              </>
+                            ) : (
+                              <>
+                                🔄 <span className="hidden sm:inline">Reset</span>
+                              </>
+                            )}
+                          </span>
+                          <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -371,7 +409,7 @@ export default function Build() {
 
                 {/* Panel izquierdo - Character Stats */}
                 <div className="transform transition-all duration-300 hover:scale-[1.02]">
-                  <CWindows />
+                  <CWindows readOnly={isReadOnly} />
                 </div>
 
                 {/* Panel derecho - Inventory + Helper Panel debajo */}
@@ -380,10 +418,10 @@ export default function Build() {
                   {/* Inventory arriba */}
                   <div className="transform transition-all duration-300 hover:scale-[1.02]">
                     {FEATURES.INVENTORY_ENABLED ? (
-                      <Inventory onSlotClick={handleInventorySlotClick} />
+                      <Inventory onSlotClick={handleInventorySlotClick} readOnly={isReadOnly} />
                     ) : (
                       // Mantener el mismo contenedor con la imagen de fondo
-                      <div className="relative bg-[url('./assets/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
+                      <div className="relative bg-[url('/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
                         {/* Overlay semi-transparente */}
                         <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
                           {/* Contenido "Coming Soon" */}
@@ -494,7 +532,7 @@ export default function Build() {
               {/* Stats Bar - Abajo CENTRADO con el ancho de los componentes superiores */}
               <div className="flex justify-center">
                 <div className="">
-                  <StatsBar character={selectedCharacter} />
+                  <StatsBar character={selectedCharacter} readOnly={isReadOnly} />
                 </div>
               </div>
             </div>
@@ -543,6 +581,7 @@ export default function Build() {
 
       {/* Skills Modal - se abre con tecla "A" */}
       <Main3rd
+        readOnly={isReadOnly}
         isOpen={skillsModalOpen}
         onClose={() => setSkillsModalOpen(false)}
         character={selectedCharacter}

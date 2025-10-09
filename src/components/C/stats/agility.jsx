@@ -4,7 +4,7 @@ import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import formulasAgi from "../../../functions/formulas/formulasAgility";
 import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 
-export default function Agility() {
+export default function Agility({ readOnly = false }) {
   const { character, increaseStats, decreaseStats } = useSelectedCharacter();
 
   const [formulasAgility, setFormulasAgility] = useState({});
@@ -68,38 +68,40 @@ export default function Agility() {
     <>
       <dt className="flex items-center justify-between bg-gray-900">
         <span>Agility</span>
-        <button
-          onClick={handleLeftClick}
-          onContextMenu={handleRightClick}
-          onMouseDown={(e) => {
-            if (e.button === 1) { // Botón central (rueda del mouse)
-              handleMiddleClick(e);
-            }
-          }}
-          disabled={!canIncrease && !canDecrease}
-          className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
-          title="Left: +1 | Right: -1 | Shift+Left: +10 | Shift+Right: -10 | Middle: +100 | Shift+Middle: -100"
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            width: 'auto',
-            height: 'auto'
-          }}
-        >
-          <img
-            src="/windows-stats/button.png"
-            alt="stat button"
-            className={`transition-all duration-150 ${!canIncrease && !canDecrease
-              ? 'opacity-50 grayscale'
-              : 'hover:brightness-110 active:brightness-90'
-              }`}
-            style={{
-              imageRendering: 'pixelated',
-              display: 'block'
+        {!readOnly && (
+          <button
+            onClick={handleLeftClick}
+            onContextMenu={handleRightClick}
+            onMouseDown={(e) => {
+              if (e.button === 1) {
+                handleMiddleClick(e);
+              }
             }}
-          />
-        </button>
+            disabled={!canIncrease && !canDecrease}
+            className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
+            title="Left: +1 | Right: -1 | Shift+Left: +10 | Shift+Right: -10 | Middle: +100 | Shift+Middle: -100"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              width: 'auto',
+              height: 'auto'
+            }}
+          >
+            <img
+              src="/windows-stats/button.png"
+              alt="stat button"
+              className={`transition-all duration-150 ${!canIncrease && !canDecrease
+                ? 'opacity-50 grayscale'
+                : 'hover:brightness-110 active:brightness-90'
+                }`}
+              style={{
+                imageRendering: 'pixelated',
+                display: 'block'
+              }}
+            />
+          </button>
+        )}
       </dt>
 
       <dd className="bg-gray-900">

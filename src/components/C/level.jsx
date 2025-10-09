@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { useSelectedCharacter } from "../../hooks/useCharacter";
 import { classChar } from "../../utils/characterUtils";
 
-export default function Level() {
+export default function Level({ readOnly = false }) {
   const { character, selectLevel } = useSelectedCharacter();
   const [charClass, setCharClass] = useState("");
 
   const handleChange = (e) => {
-    if (!character) return;
-    
+    if (!character || readOnly) return; // Agregar check de readOnly
+
     const regExp = /^[0-9]+$/;
     const level = e.target.value;
     const parsedLevel = parseInt(level);
@@ -29,13 +29,17 @@ export default function Level() {
       <h3 className="mb-1">
         <span className="text-amber-300">{charClass}</span>
       </h3>
-      
+
       <h2>Level</h2>
       <div className="flex flex-col">
         <input
           placeholder="1"
           onChange={(e) => handleChange(e)}
-          className="text-amber-300 bg-transparent w-16 border border-amber-600/50 rounded px-2 py-1 mb-1 focus:border-amber-400 focus:outline-none"
+          disabled={readOnly}
+          className={`text-amber-300 bg-transparent w-16 border rounded px-2 py-1 mb-1 focus:outline-none ${readOnly
+              ? 'border-gray-600 cursor-not-allowed opacity-70'
+              : 'border-amber-600/50 focus:border-amber-400'
+            }`}
           value={character.level}
           type="text"
         />

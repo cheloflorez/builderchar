@@ -53,7 +53,9 @@ const SkillSlot = ({
     isLocked,
     accentColor,
     allSkillLevels,
-    allSkills
+    allSkills,
+    readOnly = false  // <-- Agregar esta línea
+
 }) => {
     // Validación inicial - si no hay skill, retornar null
     if (!skill) {
@@ -88,38 +90,27 @@ const SkillSlot = ({
     const handleClick = (event) => {
         event.preventDefault();
 
+        if (readOnly) return; // <-- Agregar este check
+
         const isRightClick = event.button === 2;
         const isShiftPressed = event.shiftKey;
         const amount = isShiftPressed ? 10 : 1;
 
         if (isRightClick) {
-            // Click derecho = bajar
             onLevelChange && onLevelChange(safeSkill.id, false, amount);
         } else {
-            // Click izquierdo = subir
             onLevelChange && onLevelChange(safeSkill.id, true, amount);
         }
-    };
-
-    // Determinar el color del borde según el estado del skill
-    const getBorderColor = () => {
-        if (isLocked) return 'border-gray-600/50';
-        if (safeLevel > 0) return `border-${safeAccentColor}-400/70`;
-        return `border-${safeAccentColor}-600/30`;
-    };
-
-    // Determinar el color de fondo
-    const getBackgroundColor = () => {
-        if (isLocked) return 'bg-gray-800/50';
-        if (safeLevel > 0) return `bg-${safeAccentColor}-900/30`;
-        return 'bg-gray-800/50';
     };
 
     return (
         <div
             className={`
-        relative rounded cursor-pointer transition-all overflow-visible group
-        hover:scale-105 hover:shadow-lg hover:z-30
+        relative rounded transition-all overflow-visible group
+        ${readOnly
+                    ? 'cursor-not-allowed opacity-70'
+                    : 'cursor-pointer hover:scale-105 hover:shadow-lg hover:z-30'
+                }
         ${isLocked ? '' : ''}
     `}
             onClick={handleClick}
@@ -203,8 +194,10 @@ const SkillSlot = ({
                         <div className="text-gray-300 text-xs mt-1">
                             Nivel {safeLevel}/{safeSkill.maxLevel}
                             {isLocked && <span className="ml-2 text-red-400">🔒 Bloqueado</span>}
+                            {readOnly && <span className="ml-2 text-purple-400">👁️ Solo lectura</span>}
                         </div>
                     </div>
+
 
                     {/* Descripción principal */}
                     {safeSkill.description && (
@@ -258,14 +251,15 @@ const SkillSlot = ({
                             </div>
                         ) : null}
 
-                        {/* Controles */}
-                        <div className="border-t border-gray-600/50 pt-2 mt-2">
-                            <div className="text-gray-100 text-xs">
-                                <div className="font-medium mb-1">Controles:</div>
-                                <div>🖱️ Click Izq: +1 • Click Der: -1</div>
-                                <div>⇧ Shift + Click: +10/-10</div>
+                        {!readOnly && (
+                            <div className="border-t border-gray-600/50 pt-2 mt-2">
+                                <div className="text-gray-100 text-xs">
+                                    <div className="font-medium mb-1">Controles:</div>
+                                    <div>🖱️ Click Izq: +1 • Click Der: -1</div>
+                                    <div>⇧ Shift + Click: +10/-10</div>
+                                </div>
                             </div>
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>

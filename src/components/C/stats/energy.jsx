@@ -4,7 +4,7 @@ import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import formulasEne from "../../../functions/formulas/formulasEnergy";
 import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 
-export default function Energy() {
+export default function Energy({ readOnly = false }) {
   const { character, increaseStats, decreaseStats } = useSelectedCharacter();
   const [formulasEnergy, setFormulasEnergy] = useState({});
   const [specialization, setSpecialization] = useState({});
@@ -26,6 +26,25 @@ export default function Energy() {
       decreaseStats({ stat: 'energy', points: pointsToRemove, baseStats: character.baseStats });
     }
   };
+
+  const handleMiddleClick = (e) => {
+    e.preventDefault();
+
+    // Si tiene Shift presionado, RESTA 100
+    if (e.shiftKey) {
+      if (character?.stats.energy > character.baseStats.energy) {
+        decreaseStats({ stat: 'energy', points: 100, baseStats: character.baseStats });
+      }
+    }
+    // Sin Shift, SUMA 100
+    else {
+      if (character?.points >= 100) {
+        increaseStats({ stat: 'energy', points: 100 });
+      }
+    }
+  };
+
+
   useEffect(() => {
     if (character) formulasEne(character, setFormulasEnergy, setSpecialization, {});
   }, [character]);
@@ -34,6 +53,7 @@ export default function Energy() {
   if (!character || !character.stats) {
     return null;
   }
+
 
   // 🔥 CALCULAR BONUS DEL 3RD TREE
   const bonus3rdTree = calculate3rdTreeBonus(character);
@@ -46,34 +66,40 @@ export default function Energy() {
     <>
       <dt className="flex items-center justify-between bg-gray-900">
         <span>Energy</span>
-        <button
-          onClick={handleLeftClick}
-          onContextMenu={handleRightClick}
-          disabled={!canIncrease && !canDecrease}
-          className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
-          title="Left: -1 | Right: +1 | Shift+Left: -10 | Shift+Right: +10"
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            width: 'auto',
-            height: 'auto'
-          }}
-        >
-          {/* Imagen del botón */}
-          <img
-            src="/windows-stats/button.png"
-            alt="stat button"
-            className={`transition-all duration-150 ${!canIncrease && !canDecrease
-              ? 'opacity-50 grayscale'
-              : 'hover:brightness-110 active:brightness-90'
-              }`}
-            style={{
-              imageRendering: 'pixelated',
-              display: 'block'
+        {!readOnly && (
+          <button
+            onClick={handleLeftClick}
+            onContextMenu={handleRightClick}
+            onMouseDown={(e) => {
+              if (e.button === 1) {
+                handleMiddleClick(e);
+              }
             }}
-          />
-        </button>
+            disabled={!canIncrease && !canDecrease}
+            className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
+            title="Left: +1 | Right: -1 | Shift+Left: +10 | Shift+Right: -10 | Middle: +100 | Shift+Middle: -100"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              width: 'auto',
+              height: 'auto'
+            }}
+          >
+            <img
+              src="/windows-stats/button.png"
+              alt="stat button"
+              className={`transition-all duration-150 ${!canIncrease && !canDecrease
+                ? 'opacity-50 grayscale'
+                : 'hover:brightness-110 active:brightness-90'
+                }`}
+              style={{
+                imageRendering: 'pixelated',
+                display: 'block'
+              }}
+            />
+          </button>
+        )}
       </dt>
 
       <dd className="bg-gray-900">
@@ -145,7 +171,7 @@ export default function Energy() {
             <dt>* Magic ATK</dt>
             <dd>
               <span className="text-amber-300">
-                 {formulasEnergy.magicPower} %
+                {formulasEnergy.magicPower} %
               </span>
             </dd>
             <dd>

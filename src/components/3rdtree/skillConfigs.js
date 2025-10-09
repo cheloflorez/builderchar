@@ -41,7 +41,14 @@ export const skillConfigs = {
       { skillId: 'shieldBlockRate', row: 8, col: 3 },
 
     ],
-
+    blue: [
+      // FILA 1 (Skills iniciales)
+      { skillId: 'AttackSuccessRateIncrease', row: 0, col: 0 },
+            // FILA 2 (Skills que requieren fila anterior)
+      { skillId: 'FlameStrengthener', row: 1, col: 0 },
+      { skillId: 'LightningStrengthener', row: 1, col: 1 },
+      { skillId: 'ExpansionofWizardryPowerUp', row: 1, col: 2 },
+    ]
   },
   'Dark Knight': {
     green: [

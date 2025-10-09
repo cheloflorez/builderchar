@@ -6,7 +6,7 @@ import { useSelectedCharacter } from '../../hooks/useCharacter';
 // ========================================
 // 🌿 RED TREE COMPONENT - CON REQUISITOS DE FILA
 // ========================================
-const RedTree = ({ character, remainingPoints, onPointsChange, spentPoints }) => {
+const RedTree = ({ character, remainingPoints, onPointsChange, spentPoints , readOnly = false }) => {
     const [skillLevels, setSkillLevels] = useState({});
     const { update3rdTreeSkill } = useSelectedCharacter();
 
@@ -185,6 +185,7 @@ const RedTree = ({ character, remainingPoints, onPointsChange, spentPoints }) =>
                                 accentColor="red"
                                 allSkillLevels={skillLevels}
                                 allSkills={skills}
+                                readOnly={readOnly}  // <-- Agregar esta prop
                             />
                         )}
                     </div>

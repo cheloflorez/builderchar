@@ -8,7 +8,7 @@ import { classChar } from '../../utils/characterUtils';
 // ========================================
 // 🎮 MAIN 3RD SKILL TREE COMPONENT - SIN LOOP INFINITO
 // ========================================
-const Main3rd = ({ isOpen, onClose, character }) => {
+const Main3rd = ({ isOpen, onClose, character , readOnly = false}) => {
   const [availablePoints, setAvailablePoints] = useState(0);
   const [spentPoints, setSpentPoints] = useState({ green: 0, blue: 0, red: 0 });
 
@@ -158,6 +158,7 @@ const Main3rd = ({ isOpen, onClose, character }) => {
               {...treeProps}
               onPointsChange={(points) => handlePointsChange('green', points)}
               spentPoints={spentPoints.green}
+              readOnly={readOnly}
             />
 
             {/* Árbol Azul */}
@@ -165,6 +166,7 @@ const Main3rd = ({ isOpen, onClose, character }) => {
               {...treeProps}
               onPointsChange={(points) => handlePointsChange('blue', points)}
               spentPoints={spentPoints.blue}
+              readOnly={readOnly}
             />
 
             {/* Árbol Rojo */}
@@ -172,6 +174,7 @@ const Main3rd = ({ isOpen, onClose, character }) => {
               {...treeProps}
               onPointsChange={(points) => handlePointsChange('red', points)}
               spentPoints={spentPoints.red}
+              readOnly={readOnly}
             />
           </div>
         </div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelectedCharacter } from "../../../hooks/useCharacter";
 import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 
-export default function Command() {
+export default function Command({ readOnly = false }) {
   const { character, increaseStats, decreaseStats } = useSelectedCharacter();
 
   // Click izquierdo - SUMAR (cambio aquí)
@@ -24,9 +24,27 @@ export default function Command() {
     }
   };
 
-    // 🔥 CALCULAR BONUS DEL 3RD TREE
-    const bonus3rdTree = calculate3rdTreeBonus(character);
-    const commandBonus = bonus3rdTree.command;
+  const handleMiddleClick = (e) => {
+    e.preventDefault();
+
+    // Si tiene Shift presionado, RESTA 100
+    if (e.shiftKey) {
+      if (character?.stats.command > character.baseStats.command) {
+        decreaseStats({ stat: 'command', points: 100, baseStats: character.baseStats });
+      }
+    }
+    // Sin Shift, SUMA 100
+    else {
+      if (character?.points >= 100) {
+        increaseStats({ stat: 'command', points: 100 });
+      }
+    }
+  };
+
+
+  // 🔥 CALCULAR BONUS DEL 3RD TREE
+  const bonus3rdTree = calculate3rdTreeBonus(character);
+  const commandBonus = bonus3rdTree.command;
 
   const canIncrease = character.points >= 1;
   const canDecrease = character.stats.command > character.baseStats.command;
@@ -39,34 +57,40 @@ export default function Command() {
     <>
       <dt className="flex items-center justify-between bg-gray-900">
         <span>Command</span>
-        <button
-          onClick={handleLeftClick}
-          onContextMenu={handleRightClick}
-          disabled={!canIncrease && !canDecrease}
-          className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
-          title="Left: -1 | Right: +1 | Shift+Left: -10 | Shift+Right: +10"
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            width: 'auto',
-            height: 'auto'
-          }}
-        >
-          {/* Imagen del botón */}
-          <img
-            src="/windows-stats/button.png"
-            alt="stat button"
-            className={`transition-all duration-150 ${!canIncrease && !canDecrease
-              ? 'opacity-50 grayscale'
-              : 'hover:brightness-110 active:brightness-90'
-              }`}
-            style={{
-              imageRendering: 'pixelated',
-              display: 'block'
+        {!readOnly && (
+          <button
+            onClick={handleLeftClick}
+            onContextMenu={handleRightClick}
+            onMouseDown={(e) => {
+              if (e.button === 1) {
+                handleMiddleClick(e);
+              }
             }}
-          />
-        </button>
+            disabled={!canIncrease && !canDecrease}
+            className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
+            title="Left: +1 | Right: -1 | Shift+Left: +10 | Shift+Right: -10 | Middle: +100 | Shift+Middle: -100"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              width: 'auto',
+              height: 'auto'
+            }}
+          >
+            <img
+              src="/windows-stats/button.png"
+              alt="stat button"
+              className={`transition-all duration-150 ${!canIncrease && !canDecrease
+                ? 'opacity-50 grayscale'
+                : 'hover:brightness-110 active:brightness-90'
+                }`}
+              style={{
+                imageRendering: 'pixelated',
+                display: 'block'
+              }}
+            />
+          </button>
+        )}
       </dt>
 
       <dd className="bg-gray-900">

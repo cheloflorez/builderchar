@@ -752,7 +752,141 @@ export const SKILLS_DATABASE = {
             8.82   // Level 20
         ]
     },
-
+    // ========================================
+    // 🌿 BLUE TREE SKILLS
+    // ========================================
+    AttackSuccessRateIncrease: {
+        id: 25,
+        name: 'Attack Success Rate Increase',
+        maxLevel: 20,
+        requires: [], // Requisito específico
+        rowRequirements: {},
+        image: '/3rd/blue/Attack Success Rate Increase.png',
+        description: '',
+        valueType: 'AttackSuccessRateIncrease',
+        values: [
+            0,     // Level 0 (base)
+            511,   // Level 1
+            857,   // Level 2
+            1179,  // Level 3
+            1478,  // Level 4
+            1755,  // Level 5
+            2011,  // Level 6
+            2246,  // Level 7
+            2462,  // Level 8
+            2659,  // Level 9
+            2838,  // Level 10
+            3000,  // Level 11
+            3145,  // Level 12
+            3276,  // Level 13
+            3392,  // Level 14
+            3494,  // Level 15
+            3584,  // Level 16
+            3661,  // Level 17
+            3728,  // Level 18
+            3784,  // Level 19
+            3831   // Level 20
+        ]
+    },
+    FlameStrengthener: {
+        id: 26,
+        name: 'Flame Strengthener',
+        maxLevel: 20,
+        requires: [], // Requisito específico
+        rowRequirements: { minRow: 0, minLevel: 10 },
+        image: '/3rd/blue/FlameStrengthener.png',
+        description: '',
+        valueType: 'FlameStrengthener',
+        values: [
+            0,    // Level 0 (base)
+            12,   // Level 1
+            20,   // Level 2
+            27,   // Level 3
+            34,   // Level 4
+            41,   // Level 5
+            47,   // Level 6
+            52,   // Level 7
+            57,   // Level 8
+            62,   // Level 9
+            66,   // Level 10
+            70,   // Level 11
+            74,   // Level 12
+            77,   // Level 13
+            79,   // Level 14
+            82,   // Level 15
+            84,   // Level 16
+            86,   // Level 17
+            87,   // Level 18
+            89,   // Level 19
+            90    // Level 20
+        ]
+    },
+    LightningStrengthener: {
+        id: 27,
+        name: 'Lightning Strengthener',
+        maxLevel: 20,
+        requires: [], // Requisito específico
+        rowRequirements: { minRow: 0, minLevel: 10 },
+        image: '/3rd/blue/LightningStrengthener.png',
+        description: '',
+        valueType: 'LightningStrengthener',
+        values: [
+            0,    // Level 0 (base)
+            14,   // Level 1
+            24,   // Level 2
+            33,   // Level 3
+            41,   // Level 4
+            49,   // Level 5
+            56,   // Level 6
+            63,   // Level 7
+            69,   // Level 8
+            75,   // Level 9
+            80,   // Level 10
+            84,   // Level 11
+            88,   // Level 12
+            92,   // Level 13
+            95,   // Level 14
+            98,   // Level 15
+            101,  // Level 16
+            103,  // Level 17
+            105,  // Level 18
+            106,  // Level 19
+            108   // Level 20
+        ]
+    },
+    ExpansionofWizardryPowerUp: {
+        id: 28,
+        name: 'Expansion of Wizardry Power Up',
+        maxLevel: 20,
+        requires: [], // Requisito específico
+        rowRequirements: { minRow: 0, minLevel: 10 },
+        image: '/3rd/blue/ExpansionofWizardryPowerUp.png',
+        description: '',
+        valueType: 'ExpansionofWizardryPowerUp',
+        values: [
+            0,     // Level 0 (base)
+            1.20,  // Level 1
+            2.02,  // Level 2
+            2.78,  // Level 3
+            3.48,  // Level 4
+            4.13,  // Level 5
+            4.73,  // Level 6
+            5.29,  // Level 7
+            5.79,  // Level 8
+            6.26,  // Level 9
+            6.68,  // Level 10
+            7.06,  // Level 11
+            7.40,  // Level 12
+            7.71,  // Level 13
+            7.98,  // Level 14
+            8.22,  // Level 15
+            8.43,  // Level 16
+            8.62,  // Level 17
+            8.77,  // Level 18
+            8.91,  // Level 19
+            9.02   // Level 20
+        ]
+    },
 };
 
 // ========================================

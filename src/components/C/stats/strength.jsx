@@ -5,7 +5,7 @@ import formulasStr from "../../../functions/formulas/formulasStrength";
 import { calculate3rdTreeBonus } from "../../../utils/3rdTreeUtils";
 import formulasAgi from "../../../functions/formulas/formulasAgility";
 
-export default function Strength() {
+export default function Strength({ readOnly = false }) {
   const { character, increaseStats, decreaseStats } = useSelectedCharacter();
 
   const [formulasStrength, setFormulasStrength] = useState({});
@@ -31,6 +31,26 @@ export default function Strength() {
       decreaseStats({ stat: 'strength', points: pointsToRemove, baseStats: character.baseStats });
     }
   };
+
+  const handleMiddleClick = (e) => {
+    e.preventDefault();
+
+    // Si tiene Shift presionado, RESTA 100
+    if (e.shiftKey) {
+      if (character?.stats.strength > character.baseStats.strength) {
+        decreaseStats({ stat: 'strength', points: 100, baseStats: character.baseStats });
+      }
+    }
+    // Sin Shift, SUMA 100
+    else {
+      if (character?.points >= 100) {
+        increaseStats({ stat: 'strength', points: 100 });
+      }
+    }
+  };
+
+
+
   useEffect(() => {
     if (character)
       formulasStr(character, setFormulasStrength, setSpecialization, setCombatPower);
@@ -53,34 +73,40 @@ export default function Strength() {
     <>
       <dt className="flex items-center justify-between bg-gray-900">
         <span>Strength</span>
-        <button
-          onClick={handleLeftClick}
-          onContextMenu={handleRightClick}
-          disabled={!canIncrease && !canDecrease}
-          className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
-          title="Left: -1 | Right: +1 | Shift+Left: -10 | Shift+Right: +10"
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            width: 'auto',
-            height: 'auto'
-          }}
-        >
-          {/* Imagen del botón */}
-          <img
-            src="/windows-stats/button.png"
-            alt="stat button"
-            className={`transition-all duration-150 ${!canIncrease && !canDecrease
-              ? 'opacity-50 grayscale'
-              : 'hover:brightness-110 active:brightness-90'
-              }`}
-            style={{
-              imageRendering: 'pixelated',
-              display: 'block'
+        {!readOnly && (
+          <button
+            onClick={handleLeftClick}
+            onContextMenu={handleRightClick}
+            onMouseDown={(e) => {
+              if (e.button === 1) {
+                handleMiddleClick(e);
+              }
             }}
-          />
-        </button>
+            disabled={!canIncrease && !canDecrease}
+            className="relative disabled:cursor-not-allowed transition-all duration-150 hover:scale-105 active:scale-95 inline-block"
+            title="Left: +1 | Right: -1 | Shift+Left: +10 | Shift+Right: -10 | Middle: +100 | Shift+Middle: -100"
+            style={{
+              background: 'none',
+              border: 'none',
+              padding: 0,
+              width: 'auto',
+              height: 'auto'
+            }}
+          >
+            <img
+              src="/windows-stats/button.png"
+              alt="stat button"
+              className={`transition-all duration-150 ${!canIncrease && !canDecrease
+                ? 'opacity-50 grayscale'
+                : 'hover:brightness-110 active:brightness-90'
+                }`}
+              style={{
+                imageRendering: 'pixelated',
+                display: 'block'
+              }}
+            />
+          </button>
+        )}
       </dt>
 
       <dd className="bg-gray-900">
@@ -118,7 +144,7 @@ export default function Strength() {
           {formulasStrength.attackMin} ~ {formulasStrength.attackMax}
         </span>
       </dd>
-      
+
       <dd className="text-center">
         <span className="text-amber-300">+{combatpower.CPL}</span>
       </dd>
