@@ -60,6 +60,7 @@ export default function Root() {
     { id: 'slayer', name: 'Slayer' },
     { id: 'gun-crusher', name: 'Gun Crusher' },
     { id: 'white-wizard', name: 'White Wizard' },
+    { id: 'rune-wizard', name: 'Rune Mage' },
     { id: 'mage', name: 'Mage' },
     { id: 'illusion-knight', name: 'Illusion Knight' },
     { id: 'alchemist', name: 'Alchemist' }
