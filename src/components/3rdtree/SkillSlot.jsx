@@ -157,6 +157,7 @@ const SkillSlot = ({
                             <img
                                 src={safeSkill.image}
                                 alt={safeSkill.name}
+                                loading="lazy"
                                 className="w-6 h-6 object-contain"
                                 onError={(e) => { e.target.style.display = 'none'; }}
                             />
@@ -291,6 +292,7 @@ const SkillSlot = ({
                         <img
                             src={safeSkill.image}
                             alt={safeSkill.name}
+                            loading="lazy"
                             className="w-11 h-11 object-contain rounded"
                             onError={(e) => {
                                 e.target.style.display = 'none';
