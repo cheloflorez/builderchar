@@ -137,6 +137,7 @@ export default function Root() {
                 src={`/characters/${char.id}.png`}
                 alt={char.name}
                 className="w-6 h-6 object-contain"
+                loading="lazy"
               />
               <span className="whitespace-nowrap">{char.name}</span>
             </button>
@@ -183,6 +184,7 @@ export default function Root() {
                             src={`/characters/${build.character}.png`}
                             alt={build.class}
                             className="w-25 h-25 object-cover rounded-lg border-2 border-amber-500/50 bg-gray-800/50 p-2"
+                            loading="lazy"
                           />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -293,6 +295,7 @@ export default function Root() {
                           src={`/characters/${build.character}.png`}
                           alt={build.class}
                           className="w-16 h-16 object-contain rounded-lg border-2 border-purple-500/50 bg-gray-800/50 p-2"
+                          loading="lazy"
                         />
                       </div>
                       <div className="flex-1">
