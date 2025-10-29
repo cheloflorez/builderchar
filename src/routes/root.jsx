@@ -70,15 +70,17 @@ export default function Root() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-black pb-0">
       <div className="absolute inset-0"></div>
 
-      {/* Header */}
-      <div className="relative z-10 text-center py-8">
-        <h1 className="text-5xl font-bold text-amber-300 mb-4 drop-shadow-lg">
-          MU Character Builds
+      {/* Header mejorado */}
+      <div className="relative z-10 text-center py-10">
+        <h1 className="text-5xl font-bold text-amber-300 mb-3 drop-shadow-lg">
+          Mu Character Builds
         </h1>
-        <p className="text-xl text-amber-200/80 mb-8">
-          Manage your character builds
+        <p className="text-lg md:text-xl text-amber-200/80 mb-6 max-w-2xl mx-auto px-4">
+          Simulador de personajes para <span className="text-amber-400 font-semibold">Mu Online</span>.
+          Planifica y guarda tus builds como un verdadero maestro.
         </p>
       </div>
+
 
       {/* Tabs Navigation */}
       <div className="flex justify-center gap-4 mb-8">
@@ -115,8 +117,8 @@ export default function Root() {
           <button
             onClick={() => setCharacterFilter('all')}
             className={`flex-shrink-0 px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${characterFilter === 'all'
-                ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg'
-                : 'bg-gray-800/50 text-gray-400 hover:text-amber-300 hover:bg-gray-800/70'
+              ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg'
+              : 'bg-gray-800/50 text-gray-400 hover:text-amber-300 hover:bg-gray-800/70'
               }`}
           >
             All
@@ -127,8 +129,8 @@ export default function Root() {
               key={char.id}
               onClick={() => setCharacterFilter(char.id)}
               className={`flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-xs transition-all duration-200 ${characterFilter === char.id
-                  ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg scale-105'
-                  : 'bg-gray-800/50 text-gray-400 hover:text-amber-300 hover:bg-gray-800/70 hover:scale-105'
+                ? 'bg-gradient-to-r from-amber-600 to-amber-700 text-white shadow-lg scale-105'
+                : 'bg-gray-800/50 text-gray-400 hover:text-amber-300 hover:bg-gray-800/70 hover:scale-105'
                 }`}
             >
               <img
@@ -153,7 +155,7 @@ export default function Root() {
               >
                 <span className="flex items-center gap-3">
                   <span className="text-2xl">⚔️</span>
-                  <span>Create New Build</span>
+                  <span>Nueva Build</span>
                 </span>
                 <div className="absolute inset-0 rounded-lg bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               </button>
@@ -211,12 +213,12 @@ export default function Root() {
                       <div className="mb-4">
                         <div className="flex justify-between text-xs mb-1">
                           <span className="text-gray-500">Level Progress</span>
-                          <span className="text-amber-400">{build.level}/1500</span>
+                          <span className="text-amber-400">{build.level}/1700</span>
                         </div>
                         <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
                           <div
                             className="bg-gradient-to-r from-amber-500 to-amber-600 h-full rounded-full transition-all duration-500"
-                            style={{ width: `${Math.min((build.level / 1500) * 100, 100)}%` }}
+                            style={{ width: `${Math.min((build.level / 1700) * 100, 100)}%` }}
                           ></div>
                         </div>
                       </div>
@@ -251,12 +253,15 @@ export default function Root() {
                   <div className="text-8xl opacity-30 filter drop-shadow-lg">⚔️</div>
                   <div className="absolute inset-0 bg-amber-400/10 rounded-full blur-xl"></div>
                 </div>
-                <h3 className="text-3xl text-gray-400 mb-3 font-bold">No builds yet</h3>
-                <p className="text-gray-500 text-lg mb-6">Create your first character build to start your MU journey</p>
+                <h3 className="text-3xl text-gray-400 mb-3 font-bold">Aún no tienes builds</h3>
+                <p className="text-gray-500 text-lg mb-6">
+                  Crea tu primera build de personaje para comenzar tu aventura en MU
+                </p>
                 <div className="text-sm text-amber-400/60">
-                  Click "Create New Build" above to get started
+                  Haz clic en "Crear nueva build" arriba para empezar
                 </div>
               </div>
+
             )}
           </div>
         )
