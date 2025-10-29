@@ -134,7 +134,7 @@ export default function Root() {
                 }`}
             >
               <img
-                src={`/characters/${char.id}.png`}
+                src={`/characters/${char.id}.webp`}
                 alt={char.name}
                 className="w-6 h-6 object-contain"
                 loading="lazy"
@@ -181,7 +181,7 @@ export default function Root() {
                       <div className="flex items-center gap-4 mb-3">
                         <div className="relative">
                           <img
-                            src={`/characters/${build.character}.png`}
+                            src={`/characters/${build.character}.webp`}
                             alt={build.class}
                             className="w-25 h-25 object-cover rounded-lg border-2 border-amber-500/50 bg-gray-800/50 p-2"
                             loading="lazy"
@@ -292,7 +292,7 @@ export default function Root() {
                     <div className="flex items-center gap-4 mb-3">
                       <div className="relative">
                         <img
-                          src={`/characters/${build.character}.png`}
+                          src={`/characters/${build.character}.webp`}
                           alt={build.class}
                           className="w-16 h-16 object-contain rounded-lg border-2 border-purple-500/50 bg-gray-800/50 p-2"
                           loading="lazy"
