@@ -1,0 +1,15 @@
+# --- ✅ CACHEO DE IMÁGENES E ÍCONOS ---
+/*.(png|jpg|jpeg|gif|svg|webp|ico)
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- 🧱 CACHEO DE FUENTES (si las usás) ---
+/*.(woff|woff2|ttf|eot)
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- ⚙️ ARCHIVOS PRINCIPALES (sin cache fuerte) ---
+/index.html
+  Cache-Control: no-cache
+
+# --- ⚡ OPCIONAL: carpeta /3rd/ ---
+/3rd/*
+  Cache-Control: public, max-age=31536000, immutable
