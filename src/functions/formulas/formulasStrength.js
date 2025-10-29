@@ -17,15 +17,8 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
   const command = totalStats.command;
   const classChar = character.class[0];
 
-  // ✅ Para attack damage, buscar skills del 3rd tree con tipo 'AtkDmg'
-  let Dmg = 0;
-  if (character['3rdTree']) {
-    character['3rdTree'].forEach(skill => {
-      if (skill.valueType === 'AtkDmg') {
-        Dmg += skill.value;
-      }
-    });
-  }
+  // 🔥 AQUÍ TIENES EL DefenseRatePVP del 3rd tree
+  const AttackSuccessRateIncrease = bonus.AttackSuccessrateIncrease || 0;
 
   let specialization;
   if (strength <= 1500) specialization = strength / 15000;
@@ -36,17 +29,17 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
   switch (classChar) {
     case "Dark Wizard":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 8) + Dmg,
-        attackMax: Math.floor(strength / 4) + Dmg,
-        attackRate: Math.floor((level * 5 + agility * 1.5 + strength / 4) + specialization),
+        attackMin: Math.floor(strength / 8),
+        attackMax: Math.floor(strength / 4),
+        attackRate: Math.floor((level * 5 + agility * 1.5 + strength / 4) + specialization) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor((level * 3 + agility * 4)),
       });
       break;
     case "Dark Knight":
       // Primero calcular los valores en variables locales
-      const attackMin = Math.floor((strength / 6) * (specialization + 1)) + Dmg;
-      const attackMax = Math.floor((strength / 4) * (specialization + 1)) + Dmg;
-      const attackRate = Math.floor(level * 5 + agility * 1.5 + strength / 4);
+      const attackMin = Math.floor((strength / 6) * (specialization + 1));
+      const attackMax = Math.floor((strength / 4) * (specialization + 1));
+      const attackRate = Math.floor(level * 5 + agility * 1.5 + strength / 4) + AttackSuccessRateIncrease;
       const attackRatePVP = level * 3 + agility * 4.5;
 
       const combatPowerValue = Math.floor(10 + (strength / 80));
@@ -73,17 +66,17 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       break;
     case "Fairy Elf":
       setFormulasStrength({
-        attackMin: Math.floor(Math.floor(strength / 14) + Math.floor(agility / 7) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor(Math.floor(strength / 8) + Math.floor(agility / 4) * (specialization + 1)) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
+        attackMin: Math.floor(Math.floor(strength / 14) + Math.floor(agility / 7) * (specialization + 1)),
+        attackMax: Math.floor(Math.floor(strength / 8) + Math.floor(agility / 4) * (specialization + 1)),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor(level * 3 + agility * 0.6),
       });
       break;
     case "Magic Gladiator":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 6 + (energy / 12) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor(strength / 4 + (energy / 8) * (specialization + 1)) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
+        attackMin: Math.floor(strength / 6 + (energy / 12) * (specialization + 1)),
+        attackMax: Math.floor(strength / 4 + (energy / 8) * (specialization + 1)),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + agility * 3.5,
       });
       setSpecialization({
@@ -93,9 +86,9 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       break;
     case "Dark Lord":
       setFormulasStrength({
-        attackMin: Math.floor((strength / 7 + energy / 14) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor((strength / 5 + energy / 10) * (specialization + 1)) + Dmg,
-        attackRate: Math.floor(level * 5 + Math.floor(agility * 2) / 3 + Math.floor(strength / 4) + Math.floor(command / 15)),
+        attackMin: Math.floor((strength / 7 + energy / 14) * (specialization + 1)),
+        attackMax: Math.floor((strength / 5 + energy / 10) * (specialization + 1)),
+        attackRate: Math.floor(level * 5 + Math.floor(agility * 2) / 3 + Math.floor(strength / 4) + Math.floor(command / 15)) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + agility * 4,
       });
       setSpecialization({
@@ -105,17 +98,17 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       break;
     case "Summoner":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 7 + agility / 7) + Dmg,
-        attackMax: Math.floor(strength / 4 + agility / 4) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
+        attackMin: Math.floor(strength / 7 + agility / 7),
+        attackMax: Math.floor(strength / 4 + agility / 4),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor(level * 3 + agility * 3.5),
       });
       break;
     case "Rage Fighter":
       setFormulasStrength({
-        attackMin: Math.floor(Math.floor(stamina / 15) + Math.floor(strength / 7) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor(Math.floor(stamina / 12) + Math.floor(strength / 5) * (specialization + 1)) + Dmg,
-        attackRate: level * 3 + Math.floor(agility * 1.25) + Math.floor(strength / 6),
+        attackMin: Math.floor(Math.floor(stamina / 15) + Math.floor(strength / 7) * (specialization + 1)),
+        attackMax: Math.floor(Math.floor(stamina / 12) + Math.floor(strength / 5) * (specialization + 1)),
+        attackRate: level * 3 + Math.floor(agility * 1.25) + Math.floor(strength / 6) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + Math.floor(agility * 3.5),
       });
       setSpecialization({
@@ -125,9 +118,9 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       break;
     case "Grow Lancer":
       setFormulasStrength({
-        attackMin: Math.floor(Math.floor(strength / 8) + Math.floor(agility / 10) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor(Math.floor(strength / 4) + Math.floor(agility / 6) * (specialization + 1)) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.25) + Math.floor(strength / 4),
+        attackMin: Math.floor(Math.floor(strength / 8) + Math.floor(agility / 10) * (specialization + 1)),
+        attackMax: Math.floor(Math.floor(strength / 4) + Math.floor(agility / 6) * (specialization + 1)),
+        attackRate: level * 5 + Math.floor(agility * 1.25) + Math.floor(strength / 4) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + Math.floor(agility * 2.5),
       });
       setSpecialization({
@@ -137,60 +130,60 @@ export default function formulasStr(character, setFormulasStrength, setSpecializ
       break;
     case "Rune Mage":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 8) + Dmg,
-        attackMax: Math.floor(strength / 4) + Dmg,
+        attackMin: Math.floor(strength / 8),
+        attackMax: Math.floor(strength / 4),
         attackRate: Math.floor(
-          (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4))),
+          (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4))) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor((level * 3 + Math.floor(agility * 4))),
       });
       break;
     case "Slayer":
       setFormulasStrength({
-        attackMin: Math.floor((strength / 9 + agility / 20) * (specialization + 1)) + Dmg,
-        attackMax: Math.floor((strength / 5 + agility / 14) * (specialization + 1)) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
+        attackMin: Math.floor((strength / 9 + agility / 20) * (specialization + 1)),
+        attackMax: Math.floor((strength / 5 + agility / 14) * (specialization + 1)),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + Math.floor(agility * 4),
       });
       break;
     case "Gun Crusher":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 8) + Dmg,
-        attackMax: Math.floor(strength / 4) + Dmg,
+        attackMin: Math.floor(strength / 8),
+        attackMax: Math.floor(strength / 4),
         attackRate: Math.floor(
           (level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4))
-        ),
+        ) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor(level * 3 + agility * 3),
       });
       break;
     case "White Wizard":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 8) + Dmg,
-        attackMax: Math.floor(strength / 4) + Dmg,
-        attackRate: Math.floor((level * 5 + Math.floor(agility * 1.5 + strength / 4))),
+        attackMin: Math.floor(strength / 8),
+        attackMax: Math.floor(strength / 4),
+        attackRate: Math.floor((level * 5 + Math.floor(agility * 1.5 + strength / 4))) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor((level * 3 + agility * 4)),
       });
       break;
     case "Mage":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 8) + Dmg,
-        attackMax: Math.floor(strength / 4) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 2),
+        attackMin: Math.floor(strength / 8),
+        attackMax: Math.floor(strength / 4),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 2) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + Math.floor(agility * 4),
       });
       break;
     case "Illusion Knight":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 11) + Math.floor(agility / 9) + Dmg,
-        attackMax: Math.floor(strength / 9) + Math.floor(agility / 6) + Dmg,
-        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4),
+        attackMin: Math.floor(strength / 11) + Math.floor(agility / 9),
+        attackMax: Math.floor(strength / 9) + Math.floor(agility / 6),
+        attackRate: level * 5 + Math.floor(agility * 1.5) + Math.floor(strength / 4) + AttackSuccessRateIncrease,
         attackRatePVP: level * 3 + Math.floor(agility * 2.5),
       });
       break;
     case "Alchemist":
       setFormulasStrength({
-        attackMin: Math.floor(strength / 8) + Dmg,
-        attackMax: Math.floor(strength / 4) + Dmg,
-        attackRate: Math.floor((level * 5) + ((agility * 3) / 2) + (strength / 4)),
+        attackMin: Math.floor(strength / 8),
+        attackMax: Math.floor(strength / 4),
+        attackRate: Math.floor((level * 5) + ((agility * 3) / 2) + (strength / 4)) + AttackSuccessRateIncrease,
         attackRatePVP: Math.floor((level * 3 + agility * 4)),
       });
       break;
