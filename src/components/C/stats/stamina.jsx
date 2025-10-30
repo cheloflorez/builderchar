@@ -87,7 +87,7 @@ export default function Stamina({ readOnly = false }) {
             }}
           >
             <img
-              src="/windows-stats/button.png"
+              src="/windows-stats/button.webp"
               alt="stat button"
               className={`transition-all duration-150 ${!canIncrease && !canDecrease
                 ? 'opacity-50 grayscale'

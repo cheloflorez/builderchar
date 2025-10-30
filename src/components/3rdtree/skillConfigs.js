@@ -1608,7 +1608,7 @@ export const getSkillData = (skillId, row, col) => {
       maxLevel: 20,
       requires: [],
       rowRequirements: { minRow: 0, minLevel: 0 },
-      image: '/3rd/new_Master_Icon_01.png',
+      image: '/3rd/new_Master_Icon_01.webp',
       description: 'Skill no encontrado',
       valueType: 'Unknown',
       values: Array(21).fill(0)

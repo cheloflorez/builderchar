@@ -2,7 +2,7 @@
         <div 
             className="p-2 flex flex-col relative overflow-visible"
             style={{
-                backgroundImage: 'url(/3rd/Tree4002.png)',
+                backgroundImage: 'url(/3rd/Tree4002.webp)',
                 backgroundSize: '100% 100%', // Ajusta exactamente al contenedor
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -34,7 +34,7 @@
         <div 
             className=" p-2 flex flex-col relative overflow-visible"
             style={{
-                backgroundImage: 'url(/3rd/Tree4003.png)',
+                backgroundImage: 'url(/3rd/Tree4003.webp)',
                 backgroundSize: '100% 100%', // Ajusta exactamente al contenedor
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',

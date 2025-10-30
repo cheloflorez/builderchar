@@ -69,7 +69,7 @@ export default function CExtends() {
   return (
     <>
       {isActive ? (
-        <div className="relative bg-[url('./assets/windows-stats/classStatsExtends.png')] w-[295px] h-[612px] text-sm">
+        <div className="relative bg-[url('./assets/windows-stats/classStatsExtends.webp')] w-[295px] h-[612px] text-sm">
           <h2 className="absolute top-[72px] left-8 text-sm text-slate-300">Effect and options</h2>
           <div className="relative translate-x-5 translate-y-24 pt-1 w-64 h-[494px] overflow-y-scroll">
             <div>

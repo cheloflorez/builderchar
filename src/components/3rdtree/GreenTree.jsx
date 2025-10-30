@@ -201,7 +201,7 @@ const GreenTree = ({ character, remainingPoints, onPointsChange, spentPoints , r
         <div
             className="p-2 flex flex-col relative overflow-visible"
             style={{
-                backgroundImage: 'url(/3rd/Tree4001.png)',
+                backgroundImage: 'url(/3rd/Tree4001.webp)',
                 backgroundSize: '100% 100%', // Ajusta exactamente al contenedor
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',

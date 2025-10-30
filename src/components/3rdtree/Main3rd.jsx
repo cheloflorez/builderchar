@@ -120,7 +120,7 @@ const Main3rd = ({ isOpen, onClose, character , readOnly = false}) => {
         <div
           className="relative p-3 text-center"
           style={{
-            backgroundImage: 'url(/3rd/TreeHeader.png)', // Tu imagen del header
+            backgroundImage: 'url(/3rd/TreeHeader.webp)', // Tu imagen del header
             backgroundSize: '100% 100%', // Ajusta exactamente al contenedor sin distorsión
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',

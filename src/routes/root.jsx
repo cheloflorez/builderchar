@@ -133,12 +133,6 @@ export default function Root() {
                 : 'bg-gray-800/50 text-gray-400 hover:text-amber-300 hover:bg-gray-800/70 hover:scale-105'
                 }`}
             >
-              <img
-                src={`/characters/${char.id}.webp`}
-                alt={char.name}
-                className="w-6 h-6 object-contain"
-                loading="lazy"
-              />
               <span className="whitespace-nowrap">{char.name}</span>
             </button>
           ))}
@@ -181,7 +175,7 @@ export default function Root() {
                       <div className="flex items-center gap-4 mb-3">
                         <div className="relative">
                           <img
-                            src={`/characters/${build.character}.webp`}
+                            src={`/characters/thumbs/${build.character}.webp`}
                             alt={build.class}
                             className="w-25 h-25 object-cover rounded-lg border-2 border-amber-500/50 bg-gray-800/50 p-2"
                             loading="lazy"
@@ -292,7 +286,7 @@ export default function Root() {
                     <div className="flex items-center gap-4 mb-3">
                       <div className="relative">
                         <img
-                          src={`/characters/${build.character}.webp`}
+                          src={`/characters/thumbs/${build.character}.webp`}
                           alt={build.class}
                           className="w-16 h-16 object-contain rounded-lg border-2 border-purple-500/50 bg-gray-800/50 p-2"
                           loading="lazy"

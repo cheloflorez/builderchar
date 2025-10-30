@@ -309,7 +309,7 @@ export default function Inventory({ onSlotClick }) {
   return (
     <div className="flex flex-col justify-center items-center space-y-4">
       {/* Panel principal del inventario */}
-      <div className="relative bg-[url('./assets/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
+      <div className="relative bg-[url('./assets/windows-stats/inventory.webp')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
 
         {/* Slots clickeables */}
         {INVENTORY_SLOTS.map((slot) => (
