@@ -9,7 +9,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Sin requisitos específicos
         rowRequirements: { minRow: 0, minLevel: 0 }, // Fila 0, sin requisitos
-        image: '/3rd/green/DefenseRatePVP.png',
+        image: '/3rd/green/DefenseRatePVP.webp',
         description: 'PvP defense rate increases by X',
         valueType: 'DefenseratePVP',
         values: [0, 614, 1029, 1415, 1774, 2106, 2413, 2695, 2954, 3190, 3405, 3600, 3775, 3931, 4070, 4193, 4301, 4394, 4474, 4541, 4598]
@@ -20,7 +20,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: { minRow: 0, minLevel: 0 }, // Fila 0, sin requisitos
-        image: '/3rd/green/DurabilityReduction.png',
+        image: '/3rd/green/DurabilityReduction.webp',
         description: 'Durability reduction speed of the weapons and armor equipped decreases by %',
         valueType: 'DurabilityReductionRate',
         values: [0, 18.06, 30.27, 41.64, 52.19, 61.97, 70.99, 79.29, 86.90, 93.85, 100.17, 105.89, 111.03, 115.64, 119.73, 123.34, 126.50, 129.24, 131.59, 133.58, 135.24]
@@ -31,7 +31,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/MaximumSDIncrease.png',
+        image: '/3rd/green/MaximumSDIncrease.webp',
         description: 'Max SD increases by X',
         valueType: 'MaximumSDIncrease',
         values: [0, 511, 857, 1179, 1478, 1755, 2011, 2246, 2462, 2659, 2838, 3000, 3145, 3276, 3392, 3494, 3584, 3661, 3728, 3784, 3831]
@@ -42,7 +42,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/recoveryMana.png',
+        image: '/3rd/green/recoveryMana.webp',
         description: 'Automatic Mana regeneration increases by %',
         valueType: 'autoManaRecoveryRate',
         values: [
@@ -75,7 +75,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 2, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/DurabilityReduction2.png',
+        image: '/3rd/green/DurabilityReduction2.webp',
         description: 'Durability reduction speed of equipped accessories (necklace & rings) decreases by %',
         valueType: 'DurabilityReduction2Rate',
         values: [
@@ -108,7 +108,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 3, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/SDRecoverySpeedIncrease.png',
+        image: '/3rd/green/SDRecoverySpeedIncrease.webp',
         description: 'Automatic SD recovery increases by %',
         valueType: 'SDRecoverySpeedIncreaseRate',
         values: [
@@ -141,7 +141,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 4, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/recoveryHP.png',
+        image: '/3rd/green/recoveryHP.webp',
         description: 'Automatic HP recovery increases by %',
         valueType: 'AutomaticHPRecoveryIncreaseRate',
         values: [
@@ -174,7 +174,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/DefenseIncrease.png',
+        image: '/3rd/green/DefenseIncrease.webp',
         description: 'Defense Increase by X',
         valueType: 'DefenseIncrease',
         values: [
@@ -207,7 +207,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 10,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/ElementalDEFIncrease.png',
+        image: '/3rd/green/ElementalDEFIncrease.webp',
         description: 'Elemental DEF Increase by X',
         valueType: 'ElementalDEFIncrease',
         values: [
@@ -230,7 +230,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 4, requiredLevel: 10 }, { skillId: 7, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/AutomaticAGRecoveryIncrease.png',
+        image: '/3rd/green/AutomaticAGRecoveryIncrease.webp',
         description: 'Automatic AG Recovery Increase by %',
         valueType: 'AutomaticAGRecoveryIncreaseRate',
         values: [
@@ -263,7 +263,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 5, requiredLevel: 10 }, { skillId: 2, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/DurabilityReduction3.png',
+        image: '/3rd/green/DurabilityReduction3.webp',
         description: 'Durability reduction speed of the consumable items (Satan, Guardian Angel, Dinorant ,Fenrir) decreases by %',
         valueType: 'DurabilityReduction3Rate',
         values: [
@@ -296,7 +296,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 8, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/DefenseSuccessRateIncrease.png',
+        image: '/3rd/green/DefenseSuccessRateIncrease.webp',
         description: 'Defense success rate increases by %',
         valueType: 'DefenseSuccessRateIncrease',
         values: [
@@ -329,7 +329,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/ArmorSetBonusIncrease.png',
+        image: '/3rd/green/ArmorSetBonusIncrease.webp',
         description: 'Defense increases by X when a full armor set (helm, armor, pants, gloves and boots) is equipped',
         valueType: 'ArmorSetBonusIncrease',
         values: [
@@ -362,7 +362,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 13, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/Revenge.png',
+        image: '/3rd/green/Revenge.webp',
         description: 'Returns 1 incoming damage to the dealer with % chance when hit',
         valueType: 'returnDamageRate',
         values: [
@@ -395,7 +395,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/energy.png',
+        image: '/3rd/green/energy.webp',
         description: 'Energy Increase by X',
         valueType: 'energy',
         values: [
@@ -428,7 +428,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/vitality.png',
+        image: '/3rd/green/vitality.webp',
         description: 'Stamina Increase by X',
         valueType: 'stamina',
         values: [
@@ -461,7 +461,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/agility.png',
+        image: '/3rd/green/agility.webp',
         description: 'Agility Increase by X',
         valueType: 'agility',
         values: [
@@ -494,7 +494,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/strength.png',
+        image: '/3rd/green/strength.webp',
         description: 'Strength Increase by X',
         valueType: 'strength',
         values: [
@@ -527,7 +527,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/command.png',
+        image: '/3rd/green/command.webp',
         description: 'Command Increase by X',
         valueType: 'command',
         values: [
@@ -560,7 +560,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/wings3def.png',
+        image: '/3rd/green/wings3def.webp',
         description: 'Wings 3rd is equiped , defense increase by X',
         valueType: 'wings3def',
         values: [
@@ -593,7 +593,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/ProtectionShield.png',
+        image: '/3rd/green/ProtectionShield.webp',
         description: 'While equipped with a shield, you have % chance to reduce incoming damage by 1000% of shield block value. If all damage is blocked when this passive is activated, it will be shown as absorbed',
         valueType: 'ProtectionShieldRate',
         values: [
@@ -626,7 +626,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 19, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/wings3atk.png',
+        image: '/3rd/green/wings3atk.webp',
         description: 'Wings 3rd is equiped , attack increase by X',
         valueType: 'wings3atk',
         values: [
@@ -659,7 +659,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/SteelArmor.png',
+        image: '/3rd/green/SteelArmor.webp',
         description: 'You have X base armor that is impenetrable, and this armor is not ignored',
         valueType: 'SteelArmor',
         values: [
@@ -692,7 +692,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 }, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/ShieldBlock.png',
+        image: '/3rd/green/ShieldBlock.webp',
         description: 'While equipped with a shield, you have % chance to block with a shield and reduce all incoming damage. When this passive is activated, it will be shown as Block',
         valueType: 'shieldBlockRate',
         values: [
@@ -725,7 +725,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {}, // Fila 2, necesita skill +10 en fila anterior
-        image: '/3rd/green/WeaponBlockRate.png',
+        image: '/3rd/green/WeaponBlockRate.webp',
         description: 'While equipped with a Sword, Mace, Spear, Axe, etc, you have a % chance to block physical attack, and when this passive is activated, it will be shown as Parry',
         valueType: 'weaponBlockRate',
         values: [
@@ -762,7 +762,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/Attack Success Rate Increase.png',
+        image: '/3rd/blue/Attack Success Rate Increase.webp',
         description: 'Attack success rate increases by X',
         valueType: 'AttackSuccessrateIncrease',
         values: [
@@ -795,7 +795,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/FlameStrengthener.png',
+        image: '/3rd/blue/FlameStrengthener.webp',
         description: 'Flame skill damage increases by X',
         valueType: 'FlameStrengthener',
         values: [
@@ -828,7 +828,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/LightningStrengthener.png',
+        image: '/3rd/blue/LightningStrengthener.webp',
         description: 'Lightning skill damage increases by X',
         valueType: 'LightningStrengthener',
         values: [
@@ -861,7 +861,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/ExpansionofWizardryPowerUp.png',
+        image: '/3rd/blue/ExpansionofWizardryPowerUp.webp',
         description: 'Expansion of Wizardry increases max. Wizardry by X %',
         valueType: 'ExpansionofWizardryPowerUp',
         values: [
@@ -894,7 +894,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 26, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/InfernoStrengthener.png',
+        image: '/3rd/blue/InfernoStrengthener.webp',
         description: 'Inferno skill damage increases by X',
         valueType: 'InfernoStrengthener',
         values: [
@@ -927,7 +927,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 27, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/BlastStrengthener.png',
+        image: '/3rd/blue/BlastStrengthener.webp',
         description: 'Cometfall skill damage increases by X',
         valueType: 'BlastStrengthener',
         values: [
@@ -960,7 +960,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 28, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/ExpansionofWizardryMastery.png',
+        image: '/3rd/blue/ExpansionofWizardryMastery.webp',
         description: 'Expansion of Wizardry skill increases critical damage rate by X %',
         valueType: 'criticalDamageRate',
         values: [
@@ -993,7 +993,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/EvilSpiritStrengthener.png',
+        image: '/3rd/blue/EvilSpiritStrengthener.webp',
         description: 'Evil Spirit skill damage increases by X',
         valueType: 'EvilSpiritStrengthener',
         values: [
@@ -1026,7 +1026,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 32, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/MagicMastery.png',
+        image: '/3rd/blue/MagicMastery.webp',
         description: 'Wizardry increases by X',
         valueType: 'MagicMastery',
         values: [
@@ -1059,7 +1059,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/MaximumLifeIncrease.png',
+        image: '/3rd/blue/MaximumLifeIncrease.webp',
         description: 'Max HP increases by X',
         valueType: 'MaximumLifeIncrease',
         values: [
@@ -1092,7 +1092,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/DecayStrengthener.png',
+        image: '/3rd/blue/DecayStrengthener.webp',
         description: 'Decay skill damage increases by X',
         valueType: 'DecayStrengthener',
         values: [
@@ -1126,7 +1126,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/HellfireStrengthener.png',
+        image: '/3rd/blue/HellfireStrengthener.webp',
         description: 'Hellfire skill damage increases by X',
         valueType: 'HellfireStrengthener',
         values: [
@@ -1159,7 +1159,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 34, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/MaximumManaIncrease.png',
+        image: '/3rd/blue/MaximumManaIncrease.webp',
         description: 'Max Mana increases by X',
         valueType: 'MaximumManaIncrease',
         values: [0, 102, 171, 235, 295, 351, 402, 449, 492, 531, 567, 600, 629, 655, 678, 698, 716, 732, 745, 756, 766]
@@ -1170,7 +1170,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/IceStrengthener.png',
+        image: '/3rd/blue/IceStrengthener.webp',
         description: 'Ice skill damage increases by X',
         valueType: 'IceStrengthener',
         values: [0, 14, 24, 33, 41, 49, 56, 63, 69, 75, 80, 84, 88, 92, 95, 98, 101, 103, 105, 106, 108]
@@ -1181,7 +1181,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/MeteorStrengthener.png',
+        image: '/3rd/blue/MeteorStrengthener.webp',
         description: 'Meteor skill damage increases by X',
         valueType: 'MeteorStrengthener',
         values: [0, 14, 24, 33, 41, 49, 56, 63, 69, 75, 80, 84, 88, 92, 95, 98, 101, 103, 105, 106, 108]
@@ -1192,7 +1192,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 37, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/MaximumAGIncrease.png',
+        image: '/3rd/blue/MaximumAGIncrease.webp',
         description: 'Max AG increases by X',
         valueType: 'MaximumAGIncrease',
         values: [0, 27, 46, 63, 80, 95, 108, 121, 133, 143, 153, 162, 170, 177, 183, 189, 193, 198, 201, 204, 207]
@@ -1204,7 +1204,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/IceStormStrengthener.png',
+        image: '/3rd/blue/IceStormStrengthener.webp',
         description: 'Ice Storm skill damage increases by X',
         valueType: 'IceStormStrengthener',
         values: [0, 12, 20, 27, 34, 41, 47, 52, 57, 62, 66, 70, 74, 77, 79, 82, 84, 86, 87, 89, 90]
@@ -1215,7 +1215,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 36, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/NovaStrengthener.png',
+        image: '/3rd/blue/NovaStrengthener.webp',
         description: '',
         valueType: 'NovaStrengthener',
         values: [0, 12, 20, 27, 34, 41, 47, 52, 57, 62, 66, 70, 74, 77, 79, 82, 84, 86, 87, 89, 90]
@@ -1226,7 +1226,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/MaxHPBoost.png',
+        image: '/3rd/blue/MaxHPBoost.webp',
         description: 'Boosts HP to increase Max HP by X',
         valueType: 'MaxHPBoost',
         values: [0, 189, 285, 375, 460, 539, 613, 682, 746, 806, 862, 913, 960, 1003, 1042, 1078, 1111, 1140, 1166, 1189, 1209]
@@ -1237,7 +1237,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/EarthPrison.png',
+        image: '/3rd/blue/EarthPrison.webp',
         description: 'Learn Earth Prison. Inflicts strong damage upon targets and immobilizes them for 5 sec. Cooldown 5 sec. Proper skill for sorcery-type characters.',
         valueType: 'EarthPrison',
         values: []
@@ -1248,7 +1248,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 },
-        image: '/3rd/blue/Illusion.png',
+        image: '/3rd/blue/Illusion.webp',
         description: 'Learns Illusion. Creates the alter ego identical to yourself and attack together. Your alter ego has 30% chance to absorb the damage you receive. Your alter ego disappears after its HP is consumed or duration is over. Cooldown 2 mins',
         valueType: 'Illusion',
         values: []
@@ -1259,7 +1259,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 43, requiredLevel: 10 }], // Requisito específico
         rowRequirements: { minRow: 8, minLevel: 10 },
-        image: '/3rd/blue/IllusEarthPrisonStrengtheneron.png',
+        image: '/3rd/blue/IllusEarthPrisonStrengtheneron.webp',
         description: 'Increases Earth Prison damage by X, and changes Cooldown to 3 sec',
         valueType: 'IllusEarthPrisonStrengtheneron',
         values: [0, 8, 15, 21, 27, 32, 37, 41, 45, 49, 52, 55, 58, 60, 63, 64, 66, 68, 69, 70, 71]
@@ -1271,7 +1271,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/SwordsFuryMastery.png',
+        image: '/3rd/blue/SwordsFuryMastery.webp',
         description: 'When using Swords Fury the range of blow skill attack skill is increased by 1',
         valueType: 'SwordsFuryMastery',
         values: []
@@ -1282,7 +1282,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/TwistingSlashStrengthener.png',
+        image: '/3rd/blue/TwistingSlashStrengthener.webp',
         description: 'Twisting Slash skill damage increases by X',
         valueType: 'TwistingSlashStrengthener',
         values: [0, 14, 24, 33, 41, 49, 56, 63, 69, 75, 80, 84, 88, 92, 95, 98, 101, 103, 105, 106, 108]
@@ -1293,7 +1293,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/StrongBeliefStrengthener.png',
+        image: '/3rd/blue/StrongBeliefStrengthener.webp',
         description: 'When using a Strong Belief skill the basic defense is increased by X',
         valueType: 'StrongBeliefStrengthener',
         values: [0, 5, 9, 13, 16, 19, 22, 25, 27, 29, 32, 34, 35, 37, 39, 40, 41, 42, 43, 44, 45]
@@ -1304,7 +1304,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/AngerBlowStrengthener.png',
+        image: '/3rd/blue/AngerBlowStrengthener.webp',
         description: 'Anger Blow skill damage increases by X',
         valueType: 'AngerBlowStrengthener',
         values: [0, 5, 9, 13, 16, 19, 22, 25, 27, 29, 32, 34, 35, 37, 39, 40, 41, 42, 43, 44, 45]
@@ -1315,7 +1315,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/WeaponMastery.png',
+        image: '/3rd/blue/WeaponMastery.webp',
         description: 'Physical attack power increases by X',
         valueType: 'WeaponMastery',
         values: [0, 5, 9, 13, 16, 19, 22, 25, 27, 29, 32, 34, 35, 37, 39, 40, 41, 42, 43, 44, 45]
@@ -1326,7 +1326,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/SolidProtectionStrengthener.png',
+        image: '/3rd/blue/SolidProtectionStrengthener.webp',
         description: 'HP conversion rate increased by X % when using Solid Protection',
         valueType: 'SolidProtectionStrengthener',
         values: [0, 2.24, 2.79, 3.46, 4.23, 5.08, 6.01, 6.99, 8.04, 9.13, 10.28, 11.48, 12.72, 14.00, 15.32, 16.68, 18.08, 19.51, 20.98, 22.48, 24.01]
@@ -1337,7 +1337,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/DeathStabStrengthener.png',
+        image: '/3rd/blue/DeathStabStrengthener.webp',
         description: 'The blow skills damage is increased by X, and the usable distance is increased to 4',
         valueType: 'DeathStabStrengthener',
         values: [0, 5, 9, 13, 16, 19, 22, 25, 27, 29, 32, 34, 35, 37, 39, 40, 41, 42, 43, 44, 45]
@@ -1348,7 +1348,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 51, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/SolidProtectionProficiency.png',
+        image: '/3rd/blue/SolidProtectionProficiency.webp',
         description: 'The damage taken instead of (Damage Conversion Rate) is increased by X %',
         valueType: 'SolidProtectionProficiency',
         values: [
@@ -1362,7 +1362,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 52, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/DeathStabProficiency.png',
+        image: '/3rd/blue/DeathStabProficiency.webp',
         description: 'Death Stab skill damage increased by X',
         valueType: 'DeathStabProficiency',
         values: [
@@ -1376,7 +1376,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 53, requiredLevel: 10 }], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/SolidProtectionMastery.png',
+        image: '/3rd/blue/SolidProtectionMastery.webp',
         description: 'Increases the attack damage/power of party members by X when using Solid Protection',
         valueType: 'SolidProtectionMastery',
         values: [
@@ -1390,7 +1390,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [], // Requisito específico
         rowRequirements: {},
-        image: '/3rd/blue/ComboStrengthener.png',
+        image: '/3rd/blue/ComboStrengthener.webp',
         description: 'The combo DMG increases by X %',
         valueType: 'ComboStrengthener',
         values: [
@@ -1404,7 +1404,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20, // no tiene valores de niveles
         requires: [{ skillId: 55, requiredLevel: 10 }], // requisitos específicos se pueden agregar si es necesario
         rowRequirements: {},
-        image: '/3rd/blue/StrikeofDestructionStrengthener.png',
+        image: '/3rd/blue/StrikeofDestructionStrengthener.webp',
         description: 'Strike of Destruction attack motion is shortened, and the damage increases according to the energy stat. The damage count is additionally increases by 1',
         valueType: 'StrikeofDestructionStrengthener',
         values: []
@@ -1415,7 +1415,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/Rush.png',
+        image: '/3rd/blue/Rush.webp',
         description: "Learns the 'Rush' skill. Quickly rushes to an enemy target within 7 tiles, dealing damage with a powerful blow. Cooldown: 1 second",
         valueType: 'Rush',
         values: []
@@ -1426,7 +1426,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 57, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/StrikeofDestructionMastery.png',
+        image: '/3rd/blue/StrikeofDestructionMastery.webp',
         description: "Strike of Destruction damage range is increased and the ice effect is removed. Skill attack power is increased by 'X'",
         valueType: 'StrikeofDestructionMastery',
         values: [
@@ -1440,7 +1440,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BloodStorm.png',
+        image: '/3rd/blue/BloodStorm.webp',
         description: "Learns 'Blood Storm' skill. Inflict DMG to the target within 3 tiles from the caster and those around the target. This skill can be used again after 5 seconds. (Blade Master can be used as a combo and it is recommended for a melee-type character)",
         valueType: 'BloodStorm',
         values: []
@@ -1451,7 +1451,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 60, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BloodStormStrengthener.png',
+        image: '/3rd/blue/BloodStormStrengthener.webp',
         description: "Increase Blood Storm DMG by 'X' and change the cooldown time to 3 seconds",
         valueType: 'BloodStormStrengthener',
         values: [
@@ -1466,7 +1466,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/HealStrengthener.png',
+        image: '/3rd/blue/HealStrengthener.webp',
         description: "Healing increases by 'X'%",
         valueType: 'HealStrengthener',
         values: [
@@ -1480,7 +1480,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/TripleShotStrengthener.png',
+        image: '/3rd/blue/TripleShotStrengthener.webp',
         description: "Triple Shot skill damage increases by 'X'",
         valueType: 'TripleShotStrengthener',
         values: [
@@ -1494,7 +1494,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/SummonedMonsterPowerUp1.png',
+        image: '/3rd/blue/SummonedMonsterPowerUp1.webp',
         description: "Summoned monster's HP increases by 'X'%",
         valueType: 'SummonedMonsterPowerUp1',
         values: [
@@ -1508,7 +1508,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PenetrationStrengthener.png',
+        image: '/3rd/blue/PenetrationStrengthener.webp',
         description: "Penetration skill damage increases by 'X'",
         valueType: 'PenetrationStrengthener',
         values: [
@@ -1522,7 +1522,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DefenseIncreaseStrengthener.png',
+        image: '/3rd/blue/DefenseIncreaseStrengthener.webp',
         description: "Defense buff effect increases by 'X'%",
         valueType: 'DefenseIncreaseStrengthener',
         values: [
@@ -1536,7 +1536,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 63, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/TripleShotMastery.png',
+        image: '/3rd/blue/TripleShotMastery.webp',
         description: "One more arrow will be fired with Triple Shot skill. (Consumed at once by 10 points, you will learn this skill)",
         valueType: 'TripleShotMastery',
         values: []
@@ -1547,7 +1547,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 64, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/SummonedMonsterPowerUp2.png',
+        image: '/3rd/blue/SummonedMonsterPowerUp2.webp',
         description: "Summoned monster's Defense increases by 'X'%",
         valueType: 'SummonedMonsterPowerUp2',
         values: [
@@ -1561,7 +1561,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/AttackIncreaseStrengthener.png',
+        image: '/3rd/blue/AttackIncreaseStrengthener.webp',
         description: "Damage buff effect increases by 'X'%",
         valueType: 'AttackIncreaseStrengthener',
         values: [
@@ -1575,7 +1575,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 69, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/AttackIncreaseMastery.png',
+        image: '/3rd/blue/AttackIncreaseMastery.webp',
         description: "Attack increase skill effect increases by 'X'%, and skill duration increases per skill level",
         valueType: 'AttackIncreaseMastery',
         values: [
@@ -1589,7 +1589,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 66, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DefenseIncreaseMastery.png',
+        image: '/3rd/blue/DefenseIncreaseMastery.webp',
         description: "Defense increase skill effect increases by 'X'%, and skill duration increases per skill level",
         valueType: 'DefenseIncreaseMastery',
         values: [
@@ -1603,7 +1603,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/IceStrengthener.png',
+        image: '/3rd/blue/IceStrengthener.webp',
         description: "Ice Arrow skill damage increases by 'X'",
         valueType: 'IceArrowStrengthener',
         values: [
@@ -1617,7 +1617,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/HolyBoltStrengthener.png',
+        image: '/3rd/blue/HolyBoltStrengthener.webp',
         description: "Holy Bolt skill damage is increased by 'X'",
         valueType: 'HolyBoltStrengthener',
         values: [
@@ -1631,7 +1631,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 71, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/Cure.png',
+        image: '/3rd/blue/Cure.webp',
         description: "Learns the 'Cure' skill. Removes the target's abnormal status effect with a certain probability. Reusable after 3 seconds",
         valueType: 'Cure',
         values: [],
@@ -1642,7 +1642,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: ["Multi-Shot"],
         rowRequirements: {},
-        image: '/3rd/blue/MultiShotStrengthener.png',
+        image: '/3rd/blue/MultiShotStrengthener.webp',
         description: "Increases your Multi-Shot skill damage by 'X'",
         valueType: 'MultiShotStrengthener',
         values: [
@@ -1656,7 +1656,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PartyHealing.png',
+        image: '/3rd/blue/PartyHealing.webp',
         description: "Learns 'Party Healing'. Additional 3 party members around the target gets healed. The amount healed decreases by 20% every time the target changes. Cooldown: 10 seconds",
         valueType: 'PartyHealing',
         values: [],
@@ -1667,7 +1667,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/SummonedMonsterPowerUp3.png',
+        image: '/3rd/blue/SummonedMonsterPowerUp3.webp',
         description: "Summoned monster's attack power increases by 'X'%",
         valueType: 'SummonedMonsterPowerUp3',
         values: [
@@ -1681,7 +1681,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 76, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/PartyHealingStrengthener.png',
+        image: '/3rd/blue/PartyHealingStrengthener.webp',
         description: "Party Heal amount increases by 'X'%",
         valueType: '%',
         values: [
@@ -1695,7 +1695,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/Bless.png',
+        image: '/3rd/blue/Bless.webp',
         description: "Learns 'Bless' skill. This skill increases all of your target's stats (By 1 for every 100 your energy)",
         valueType: 'Bless',
         values: [],
@@ -1706,7 +1706,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PoisonArrow.png',
+        image: '/3rd/blue/PoisonArrow.webp',
         description: "Learns 'Poison Arrow'. Inflicts strong damage and poisons the target. Poison effect causes damage (Min. Damage/5) every second and lasts for 10 seconds. Cooldown: 1 sec",
         valueType: 'PoisonArrow',
         values: [],
@@ -1717,7 +1717,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 77, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/SummonSatyros.png',
+        image: '/3rd/blue/SummonSatyros.webp',
         description: "Learns 'Summon Satyros'. Summons a Satyros to fight for the summoner",
         valueType: 'SummonSatyros',
         values: [],
@@ -1728,7 +1728,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ShadowStep.png',
+        image: '/3rd/blue/ShadowStep.webp',
         description: "Learn 'Shadow Step'. Moves swiftly as far as 5 tiles toward the direction you've chosen. Cooldown: 3 sec",
         valueType: 'ShadowStep',
         values: [],
@@ -1739,7 +1739,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 79, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BlessStrengthener.png',
+        image: '/3rd/blue/BlessStrengthener.webp',
         description: "Bless skill increases stats by 'X'",
         valueType: 'BlessStrengthener',
         values: [
@@ -1753,7 +1753,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 80, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/PoisonArrowStrengthener.png',
+        image: '/3rd/blue/PoisonArrowStrengthener.webp',
         description: "Increases Poison Arrow damage and poison damage by 'X', and changes Cooldown to 0.5 sec",
         valueType: 'PoisonArrowStrengthener',
         values: [
@@ -1767,7 +1767,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/Evasion.png',
+        image: '/3rd/blue/Evasion.webp',
         description: "Learns the skill 'Evasion'. The skill increases the basic defense success rate by 50% for 7 seconds. This skill can be used again after 60 seconds",
         valueType: 'Evasion',
         values: [],
@@ -1779,7 +1779,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/CycloneStrengthener.png',
+        image: '/3rd/blue/CycloneStrengthener.webp',
         description: "Cyclone skill damage increases by 'X'",
         valueType: 'CycloneStrengthener',
         values: [
@@ -1793,7 +1793,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PowerSlashStrengthener.png',
+        image: '/3rd/blue/PowerSlashStrengthener.webp',
         description: "Power Slash skill damage increases by 'X'",
         valueType: 'PowerSlashStrengthener',
         values: [
@@ -1807,7 +1807,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/FireSlashStrengthener.png',
+        image: '/3rd/blue/FireSlashStrengthener.webp',
         description: "Blood Attack skill damage increased by 'X'",
         valueType: 'FireSlashStrengthener',
         values: [
@@ -1821,7 +1821,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 88, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/FireSlashMastery.png',
+        image: '/3rd/blue/FireSlashMastery.webp',
         description: "Fire Slash skill's defense reduction increases by 'X'%",
         valueType: 'FireSlashMastery',
         values: [
@@ -1835,7 +1835,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/GiganticStormStrengthener.png',
+        image: '/3rd/blue/GiganticStormStrengthener.webp',
         description: "Gigantic Storm skill damage increases by 'X'",
         valueType: 'GiganticStormStrengthener',
         values: [
@@ -1849,7 +1849,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/SpiralChargeStrengthener.png',
+        image: '/3rd/blue/SpiralChargeStrengthener.webp',
         description: "The damage caused by using the two-handed sword skill three times increases by 'X'",
         valueType: 'SpiralChargeStrengthener',
         values: [
@@ -1863,7 +1863,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/CrusherChargeStrengthener.png',
+        image: '/3rd/blue/CrusherChargeStrengthener.webp',
         description: "Increases the damage caused by the explosion of swords when using a one-handed sword skill three times by 'X'",
         valueType: 'CrusherChargeStrengthener',
         values: [
@@ -1877,7 +1877,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ElementalChargeStrengthener.png',
+        image: '/3rd/blue/ElementalChargeStrengthener.webp',
         description: "Nova damage incurred when using the Havok Spear skill three times increases by 'X'",
         valueType: 'ElementalChargeStrengthener',
         values: [
@@ -1891,7 +1891,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 91, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/SpiralChargeMastery.png',
+        image: '/3rd/blue/SpiralChargeMastery.webp',
         description: 'Added 1 sword explosion damage that occurs when you use two-handed sword skills three times',
         valueType: 'SpiralChargeMastery',
         values: []
@@ -1902,7 +1902,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 92, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/CrusherChargeMastery.png',
+        image: '/3rd/blue/CrusherChargeMastery.webp',
         description: '1 additional sword damage that occurs when use a one-handed sword skill three times',
         valueType: 'CrusherChargeMastery',
         values: []
@@ -1913,7 +1913,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 93, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/ElementalChargeMastery.png',
+        image: '/3rd/blue/ElementalChargeMastery.webp',
         description: 'Adds 1 Nova damage that occurs when you use the Havok Spear skill three times',
         valueType: 'ElementalChargeMastery',
         values: []
@@ -1925,7 +1925,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/FireBurstStrengthener.png',
+        image: '/3rd/blue/FireBurstStrengthener.webp',
         description: "Fire Burst skill damage increases by 'X'",
         valueType: 'FireBurstStrengthener',
         values: [
@@ -1939,7 +1939,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ForceWaveStrengthener.png',
+        image: '/3rd/blue/ForceWaveStrengthener.webp',
         description: "Force Wave skill damage increases by 'X'",
         valueType: 'ForceWaveStrengthener',
         values: [
@@ -1953,7 +1953,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DarkHorseStrengthener.png',
+        image: '/3rd/blue/DarkHorseStrengthener.webp',
         description: "Defense increases by 'X' while equipping Dark Horse",
         valueType: 'DarkHorseStrengthener',
         values: [
@@ -1967,7 +1967,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/CriticalDMGIncreasePowUp.png',
+        image: '/3rd/blue/CriticalDMGIncreasePowUp.webp',
         description: "Critical Damage Increase skill increases critical damage by 'X'",
         valueType: 'CriticalDMGIncreasePowUp',
         values: [
@@ -1981,7 +1981,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 99, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/EarthshakeStrengthener.png',
+        image: '/3rd/blue/EarthshakeStrengthener.webp',
         description: "Earthshake skill damage increases by 'X'",
         valueType: 'EarthshakeStrengthener',
         values: [
@@ -1995,7 +1995,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 100, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/CriticalDMGIncreasePowUp2.png',
+        image: '/3rd/blue/CriticalDMGIncreasePowUp2.webp',
         description: "Effect duration increases by 'X'",
         valueType: 'CriticalDMGIncreasePowUp2',
         values: [
@@ -2009,7 +2009,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 102, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/CriticalDMGIncreasePowUp3.png',
+        image: '/3rd/blue/CriticalDMGIncreasePowUp3.webp',
         description: "Critical Damage Increase skill increases Critical damage rate by additional 'X'%",
         valueType: 'CriticalDMGIncreasePowUp3',
         values: [
@@ -2023,7 +2023,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/FireScreamStrengthener.png',
+        image: '/3rd/blue/FireScreamStrengthener.webp',
         description: "Fire Scream skill damage increases by 'X'",
         valueType: 'FireScreamStrengthener',
         values: [
@@ -2037,7 +2037,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ElectricSparkStrengthener.png',
+        image: '/3rd/blue/ElectricSparkStrengthener.webp',
         description: "Electric Spark skill damage increases by 'X'",
         valueType: 'ElectricSparkStrengthener',
         values: [
@@ -2051,7 +2051,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 104, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/FireScreamMastery.png',
+        image: '/3rd/blue/FireScreamMastery.webp',
         description: "The explosive damage of Fire Scream skill increases by 'X'",
         valueType: 'FireScreamMastery',
         values: [
@@ -2065,7 +2065,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 103, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/CriticalDMGIncreaseMastery.png',
+        image: '/3rd/blue/CriticalDMGIncreaseMastery.webp',
         description: "Critical Damage Increase skill increases Excellent damage rate by additional 'X'%",
         valueType: 'CriticalDMGIncreaseMastery',
         values: [
@@ -2079,7 +2079,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ChaoticDiseierStrengthener.png',
+        image: '/3rd/blue/ChaoticDiseierStrengthener.webp',
         description: "Chaotic Diseier skill damage increases by 'X'",
         valueType: 'ChaoticDiseierStrengthener',
         values: [
@@ -2096,7 +2096,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ExplosionStrengthener.png',
+        image: '/3rd/blue/ExplosionStrengthener.webp',
         description: "Increases damage Explosion skill by 'X'",
         valueType: 'ExplosionStrengthener',
         values: [
@@ -2110,7 +2110,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/RequiemStrengthener.png',
+        image: '/3rd/blue/RequiemStrengthener.webp',
         description: "Increases damage of Requiem skill by 'X'",
         valueType: 'RequiemStrengthener',
         values: [
@@ -2125,7 +2125,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PollutionStrengthener.png',
+        image: '/3rd/blue/PollutionStrengthener.webp',
         description: "Increases damage of Pollution skill by 'X'",
         valueType: 'PollutionStrengthener',
         values: [
@@ -2140,7 +2140,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ChainLightningStrengthener.png',
+        image: '/3rd/blue/ChainLightningStrengthener.webp',
         description: "Chain Lightning skill damage increases by 'X'",
         valueType: 'ChainLightningStrengthener',
         values: [
@@ -2155,7 +2155,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 111, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/PollutionStrengthener2.png',
+        image: '/3rd/blue/PollutionStrengthener2.webp',
         description: "Increases attack distance of Pullution skill by 1 tile and increases its damage by 'X'",
         valueType: 'PollutionStrengthener2',
         values: [
@@ -2170,7 +2170,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/SleepStrengthener.png',
+        image: '/3rd/blue/SleepStrengthener.webp',
         description: "The success rate of sleep skill increases by 'X'%",
         valueType: 'SleepStrengthener',
         values: [
@@ -2185,7 +2185,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 113, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/PollutionMastery.png',
+        image: '/3rd/blue/PollutionMastery.webp',
         description: "Increases number of targets of Pollution skill by 1 and increases its damage by 'X'",
         valueType: 'PollutionMastery',
         values: [
@@ -2199,7 +2199,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/LightningShockStrengthener.png',
+        image: '/3rd/blue/LightningShockStrengthener.webp',
         description: "Lightning Shock skill damage increases by 'X'",
         valueType: 'LightningShockStrengthener',
         values: [
@@ -2212,7 +2212,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DrainLifeStrengthener.png',
+        image: '/3rd/blue/DrainLifeStrengthener.webp',
         description: "Drain Life skill damage and the amount of health absorbed increases by 'X'",
         valueType: 'DrainLifeStrengthener',
         values: [
@@ -2225,7 +2225,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/WeaknessStrengthener.png',
+        image: '/3rd/blue/WeaknessStrengthener.webp',
         description: "The attack penalty is increased by 'X' when using Weakness and its duration is increased in stages",
         valueType: 'WeaknessStrengthener',
         values: [
@@ -2239,7 +2239,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/InnovationStrengthener.png',
+        image: '/3rd/blue/InnovationStrengthener.webp',
         description: "Innovation skill's defense reduction increases by 'X' and duration increase in stages",
         valueType: 'InnovationStrengthener',
         values: [
@@ -2252,7 +2252,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 118, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/GreatnessMastery.png',
+        image: '/3rd/blue/GreatnessMastery.webp',
         description: "Elemental damage reduction is increased by 'X' when using Weakness skill",
         valueType: 'GreatnessMastery',
         values: [
@@ -2266,7 +2266,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 119, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/InnovationMastery.png',
+        image: '/3rd/blue/InnovationMastery.webp',
         description: "Elemental defense reductionn effect is increased by 'X' when using Innovation skill",
         valueType: 'InnovationMastery',
         values: [
@@ -2279,7 +2279,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/Blind.png',
+        image: '/3rd/blue/Blind.webp',
         description: "Learns 'Blind' skill. The skill inflicts DMG to and blinds the target to block its view, greatly reducing its attack success rate with a certain chance. This skill can be used again after 5 seconds",
         valueType: 'Blind',
         values: [],
@@ -2293,7 +2293,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/KillingBlowStrengthener.png',
+        image: '/3rd/blue/KillingBlowStrengthener.webp',
         description: "Increases Killing Blow attack power by 'X'",
         valueType: 'KillingBlowStrengthener',
         values: [
@@ -2307,7 +2307,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BeastUppercutStrengthener.png',
+        image: '/3rd/blue/BeastUppercutStrengthener.webp',
         description: "Increases Beast Uppercut attack power by 'X'",
         valueType: 'BeastUppercutStrengthener',
         values: [
@@ -2321,7 +2321,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PhoenixShotStrengthener.png',
+        image: '/3rd/blue/PhoenixShotStrengthener.webp',
         description: "Increases the DMG of Phoenix Shot by 'X'",
         valueType: 'PhoenixShotStrengthener',
         values: [
@@ -2334,7 +2334,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 123, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/KillingBlowMastery.png',
+        image: '/3rd/blue/KillingBlowMastery.webp',
         description: "The Killing Blow skill has a chance of reducing your target's attack rate by 'X'%",
         valueType: 'KillingBlowMastery',
         values: [
@@ -2348,7 +2348,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 124, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BeastUppercutMastery.png',
+        image: '/3rd/blue/BeastUppercutMastery.webp',
         description: "The Beast Uppercut skill has a chance of reducing the target's defense rate by 'X'%",
         valueType: 'BeastUppercutMastery',
         values: [
@@ -2362,7 +2362,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 125, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/PhoenixShotMastery.png',
+        image: '/3rd/blue/PhoenixShotMastery.webp',
         description: "Phoenix Shot increases the defense success rate reduction effect by 'X'%",
         valueType: 'PhoenixShotMastery',
         values: [
@@ -2376,7 +2376,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ChainDriveStrengthener.png',
+        image: '/3rd/blue/ChainDriveStrengthener.webp',
         description: "Increases Chain Drive attack power by 'X'",
         valueType: 'ChainDriveStrengthener',
         values: [
@@ -2390,7 +2390,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DarkSideStrengthener.png',
+        image: '/3rd/blue/DarkSideStrengthener.webp',
         description: "Increases Dark Side attack power by 'X'",
         valueType: 'DarkSideStrengthener',
         values: [
@@ -2404,7 +2404,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DragonRoarStrengthener.png',
+        image: '/3rd/blue/DragonRoarStrengthener.webp',
         description: "Increases Dragon Roar attack power by 'X'",
         valueType: 'DragonRoarStrengthener',
         values: [
@@ -2418,7 +2418,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 130, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DarkSideMastery.png',
+        image: '/3rd/blue/DarkSideMastery.webp',
         description: "Increases the range of Dark Side skill by 1 tile. 10 points are required for skill investment",
         valueType: 'DarkSideMastery',
         values: [
@@ -2432,7 +2432,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DragonSlasherStrengthener.png',
+        image: '/3rd/blue/DragonSlasherStrengthener.webp',
         description: "Increases Dragon Slasher attack power by 'X'",
         valueType: 'DragonSlasherStrengthener',
         values: [
@@ -2446,7 +2446,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BloodHowling.png',
+        image: '/3rd/blue/BloodHowling.webp',
         description: "Learns 'Blood Howling' skill. When the skill is active, other attack skills inflict 200 bleed DMG to the target every 0,5 seconds for 10 seconds with a 1% chance. This skill can be used again after 2 minutes",
         valueType: 'BloodHowling',
         values: [
@@ -2460,7 +2460,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 134, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BloodHowlingStrengthener.png',
+        image: '/3rd/blue/BloodHowlingStrengthener.webp',
         description: "Increases Blood Howling's bleeding effect by 'X'%",
         valueType: 'BloodHowlingStrengthener',
         values: [
@@ -2474,7 +2474,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/LungeStrengthener.png',
+        image: '/3rd/blue/LungeStrengthener.webp',
         description: "Lunge skill damage increases by 'X'",
         valueType: 'LungeStrengthener',
         values: [
@@ -2488,7 +2488,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/SpinStepPowUp.png',
+        image: '/3rd/blue/SpinStepPowUp.webp',
         description: "Spin Step skill damage increases by 'X'",
         valueType: 'SpinStepPowUp',
         values: [
@@ -2502,7 +2502,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/HarshStrikePowUp.png',
+        image: '/3rd/blue/HarshStrikePowUp.webp',
         description: "Harsh Strike skill damage increases by 'X'",
         valueType: 'HarshStrikePowUp',
         values: [
@@ -2515,7 +2515,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 137, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/SpinStepMastery.png',
+        image: '/3rd/blue/SpinStepMastery.webp',
         description: "The explosive damage of Spin Step skill increases by 'X'",
         valueType: 'SpinStepMastery',
         values: [
@@ -2529,7 +2529,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 138, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/HarshStrikeMastery.png',
+        image: '/3rd/blue/HarshStrikeMastery.webp',
         description: "Harsh Strike skill's hit damage increases once. (Spends 10 points at once to learn the skill)",
         valueType: 'HarshStrikeMastery',
         values: [
@@ -2542,7 +2542,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ObsidianPowUp.png',
+        image: '/3rd/blue/ObsidianPowUp.webp',
         description: "Increases skill DMG Boost effect by 'X'%",
         valueType: 'ObsidianPowUp',
         values: [
@@ -2555,7 +2555,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/MagicPinPowUp.png',
+        image: '/3rd/blue/MagicPinPowUp.webp',
         description: "Magic Pin skill damage increases by 'X'",
         valueType: 'MagicPinPowUp',
         values: [
@@ -2569,7 +2569,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BrechePowUp.png',
+        image: '/3rd/blue/BrechePowUp.webp',
         description: "Breche skill damage increases by 'X'",
         valueType: 'BrechePowUp',
         values: [
@@ -2582,7 +2582,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ShiningPeakPowUp.png',
+        image: '/3rd/blue/ShiningPeakPowUp.webp',
         description: "Shining Peak skill damage increases by 'X'",
         valueType: 'ShiningPeakPowUp',
         values: [
@@ -2596,7 +2596,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 142, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/MagicPinMastery.png',
+        image: '/3rd/blue/MagicPinMastery.webp',
         description: "Increases the range of Magic Pin to 3",
         valueType: 'MagicPinMastery',
         values: [
@@ -2610,7 +2610,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 143, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BrecheMastery.png',
+        image: '/3rd/blue/BrecheMastery.webp',
         description: "Increases the range of Breche to 4. (Spends 10 points at once to learn the skill)",
         valueType: 'BrecheMastery',
         values: [
@@ -2623,7 +2623,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 146, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/WildBrecheStr.png',
+        image: '/3rd/blue/WildBrecheStr.webp',
         description: "Wild Breche skill power increse by 'X'%",
         valueType: 'WildBrecheStr',
         values: [
@@ -2636,7 +2636,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 145, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/OverstingStrengthener.png',
+        image: '/3rd/blue/OverstingStrengthener.webp',
         description: "Oversting skill power increse by 'X'%",
         valueType: 'OverstingStrengthener',
         values: [
@@ -2649,7 +2649,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/Burst.png',
+        image: '/3rd/blue/Burst.webp',
         description: "Learns 'Burst' skill. Temporarily increases the chance of True Damage by 5%. Cooldown 60 sec. (Spends 10 points at once to learn the skill)",
         valueType: 'Burst',
         values: [
@@ -2661,7 +2661,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 149, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BurstPowUp.png',
+        image: '/3rd/blue/BurstPowUp.webp',
         description: "Reduces the Cooldown time of Burst skill by 'X' sec",
         valueType: 'BurstPowUp',
         values: [
@@ -2675,7 +2675,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/MagicArrowStrengthener.png',
+        image: '/3rd/blue/MagicArrowStrengthener.webp',
         description: "Magic Arrow skill damage increases by 'X'",
         valueType: 'MagicArrowStrengthener',
         values: [
@@ -2688,7 +2688,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 150, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/MagicArrowMastery.png',
+        image: '/3rd/blue/MagicArrowMastery.webp',
         description: "Magic Arrow skill damage increases by 'X', and the projectile increases by 1",
         valueType: 'MagicArrowMastery',
         values: [
@@ -2701,7 +2701,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BurstStrengthener.png',
+        image: '/3rd/blue/BurstStrengthener.webp',
         description: "Increase the duration of Burst by 'X' sec",
         valueType: 'BurstStrengthener',
         values: [
@@ -2715,7 +2715,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/HasteStrengthener.png',
+        image: '/3rd/blue/HasteStrengthener.webp',
         description: "Increase the duration of Haste by 'X' sec",
         valueType: 'HasteStrengthener',
         values: [
@@ -2729,7 +2729,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 152, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BurstMastery.png',
+        image: '/3rd/blue/BurstMastery.webp',
         description: "Decrease the cooldown of Burst by 'X' sec",
         valueType: 'BurstMastery',
         values: [
@@ -2743,7 +2743,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 153, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/HasteMastery.png',
+        image: '/3rd/blue/HasteMastery.webp',
         description: "Decrease the cooldown of Haste by 'X' sec",
         valueType: 'HasteMastery',
         values: [
@@ -2756,7 +2756,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/PlasmaBallStrengthener.png',
+        image: '/3rd/blue/PlasmaBallStrengthener.webp',
         description: "Plasma Ball skill damage increases by 'X'",
         valueType: 'PlasmaBallStrengthener',
         values: [
@@ -2769,7 +2769,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 156, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/PlasmaBallMastery.png',
+        image: '/3rd/blue/PlasmaBallMastery.webp',
         description: "Plasma Ball skill damage increases by 'X' and the movement distance increases by 1 tile",
         valueType: 'PlasmaBallMastery',
         values: [
@@ -2785,7 +2785,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/SwordInertiaStrengthener.png',
+        image: '/3rd/blue/SwordInertiaStrengthener.webp',
         description: "Increases Sword Inertia damage by 'X'",
         valueType: 'SwordInertiaStrengthener',
         values: [
@@ -2798,7 +2798,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 158, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/SwordInertiaMastery.png',
+        image: '/3rd/blue/SwordInertiaMastery.webp',
         description: "Sword Inertia skill range increased to 7. (Spends 10 points at once to learn the skill",
         valueType: 'SwordInertiaMastery',
         values: [
@@ -2811,7 +2811,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BatFlockStrengthener.png',
+        image: '/3rd/blue/BatFlockStrengthener.webp',
         description: "Increases damage of Bat Flock skill by 'X'",
         valueType: 'BatFlockStrengthener',
         values: [
@@ -2824,7 +2824,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 160, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BatFlockMastery.png',
+        image: '/3rd/blue/BatFlockMastery.webp',
         description: "Increases time a damage is dealt of Bat Flock by 10 seconds. (Spends 10 points at once to learn the skill",
         valueType: 'BatFlockMastery',
         values: [
@@ -2837,7 +2837,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DetectionStrengthener.png',
+        image: '/3rd/blue/DetectionStrengthener.webp',
         description: "The range of the detection skill is extended to around 150 tiles. (Spends 10 points at once to learn the skill",
         valueType: 'DetectionStrengthener',
         values: [
@@ -2851,7 +2851,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DemolishStrengthener.png',
+        image: '/3rd/blue/DemolishStrengthener.webp',
         description: "Demolish skill cooldown reduced by 'X' second(s)",
         valueType: 'DemolishStrengthener',
         values: [
@@ -2864,7 +2864,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 163, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DemolishMastery.png',
+        image: '/3rd/blue/DemolishMastery.webp',
         description: "Demolish skill's ignore defensive effect increased by 'X'",
         valueType: 'DemolishMastery',
         values: [
@@ -2880,7 +2880,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/IceBreakStrengthener.png',
+        image: '/3rd/blue/IceBreakStrengthener.webp',
         description: "Ice Break skill attack power is increased by 'X'",
         valueType: 'IceBreakStrengthener',
         values: [
@@ -2894,7 +2894,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DeathFireStrengthener.png',
+        image: '/3rd/blue/DeathFireStrengthener.webp',
         description: "Death Fire skill attack power increases by 'X' and attack speed increases by 10. (It does not stack with the attack speed increase effect of Enhanced Death Fire)",
         valueType: 'DeathFireStrengthener',
         values: [
@@ -2908,7 +2908,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DeathIceStrengthener.png',
+        image: '/3rd/blue/DeathIceStrengthener.webp',
         description: "Death Ice skill attack power increases by 'X' and attack speed increases by 10. (It does not stack with the attack speed increase effect of Enhanced Death Ice)",
         valueType: 'DeathIceStrengthener',
         values: [
@@ -2921,7 +2921,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 166, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/IceBreakMastery.png',
+        image: '/3rd/blue/IceBreakMastery.webp',
         description: "Ice Break skill attack power increased by 'X' and skill range increased by 1 tile",
         valueType: 'IceBreakMastery',
         values: [
@@ -2935,7 +2935,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 167, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DeathFireMastery.png',
+        image: '/3rd/blue/DeathFireMastery.webp',
         description: "Death Fire skill attack power increases by 'X', and the range and distance used increase by 1 tile",
         valueType: 'DeathFireMastery',
         values: [
@@ -2949,7 +2949,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 168, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DeathIceMastery.png',
+        image: '/3rd/blue/DeathIceMastery.webp',
         description: "Death Ice skill attack power increases by 'X', and the range and distance used increase by 1 tile",
         valueType: 'DeathIceMastery',
         values: [
@@ -2962,7 +2962,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/FixedFireStrengthener.png',
+        image: '/3rd/blue/FixedFireStrengthener.webp',
         description: "Magical Power is increased by 'X' when using the Fixed Fire buff",
         valueType: 'FixedFireStrengthener',
         values: [
@@ -2977,7 +2977,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DarkPlasmaStrengthener.png',
+        image: '/3rd/blue/DarkPlasmaStrengthener.webp',
         description: "Number of targets that can be attacked by Dark Plasma skills increased by 1",
         valueType: 'DarkPlasmaStrengthener',
         values: [
@@ -2990,7 +2990,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 172, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/FixedFireMastery.png',
+        image: '/3rd/blue/FixedFireMastery.webp',
         description: "Attack speed increases by 'X' when using the Fixed Fire buff",
         valueType: 'FixedFireMastery',
         values: [
@@ -3004,7 +3004,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 173, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DarkPlasmaProficiency.png',
+        image: '/3rd/blue/DarkPlasmaProficiency.webp',
         description: "Dark Plasma duration increased by 'X' seconds",
         valueType: 'DarkPlasmaProficiency',
         values: [
@@ -3017,7 +3017,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 175, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DarkPlasmaMastery.png',
+        image: '/3rd/blue/DarkPlasmaMastery.webp',
         description: "Dark Plasma skill attack power increased by 'X' and attack range increased by 1 tile",
         valueType: 'DarkPlasmaMastery',
         values: [
@@ -3033,7 +3033,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ShiningBirdStrengthener.png',
+        image: '/3rd/blue/ShiningBirdStrengthener.webp',
         description: "Increases the damage of Shining Bird skill by 'X'",
         valueType: 'ShiningBirdStrengthener',
         values: [
@@ -3046,7 +3046,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 177, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/ShiningBirdMastery.png',
+        image: '/3rd/blue/ShiningBirdMastery.webp',
         description: "The usable range of the Shining Bird skill is increased to 7. 10 points are required for skill investment",
         valueType: 'ShiningBirdMastery',
         values: [
@@ -3059,7 +3059,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/DragonViolentStrenghtener.png',
+        image: '/3rd/blue/DragonViolentStrenghtener.webp',
         description: "Increases the damage of Dragon Violent skills by 'X'",
         valueType: 'DragonViolentStrenghtener',
         values: [
@@ -3072,7 +3072,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 179, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/DragonViolentMastery.png',
+        image: '/3rd/blue/DragonViolentMastery.webp',
         description: "The usable range of the Dragon Violent skill is increased to 7. 10 points are required for skill investment",
         valueType: 'DragonViolentMastery',
         values: [
@@ -3088,7 +3088,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/MarvelBurstStrengthener.png',
+        image: '/3rd/blue/MarvelBurstStrengthener.webp',
         description: "Increases the damage of Marvel Burst skills by 'X'",
         valueType: 'MarvelBurstStrengthener',
         values: [
@@ -3102,7 +3102,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/IntensiveCareStrengthener.png',
+        image: '/3rd/blue/IntensiveCareStrengthener.webp',
         description: "Healing is increased by 'X'%",
         valueType: 'IntensiveCareStrengthener',
         values: [
@@ -3115,7 +3115,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 181, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/MarvelBurstMastery.png',
+        image: '/3rd/blue/MarvelBurstMastery.webp',
         description: "The damage range of the Marble Burst skill increases by 1 tile. 10 points are required for skill investment",
         valueType: 'MarvelBurstMastery',
         values: [
@@ -3129,7 +3129,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BeginnerDefenseImprovementStrengthener.png',
+        image: '/3rd/blue/BeginnerDefenseImprovementStrengthener.webp',
         description: "Beginner armor bonus increased by 'X'%",
         valueType: 'BeginnerDefenseImprovementStrengthener',
         values: [
@@ -3143,7 +3143,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BeginnerAttackPowerImprovementStrengthener.png',
+        image: '/3rd/blue/BeginnerAttackPowerImprovementStrengthener.webp',
         description: "Beginner damage bonus increased by 'X'%",
         valueType: 'BeginnerAttackPowerImprovementStrengthener',
         values: [
@@ -3157,7 +3157,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 184, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BeginnerDefenseImprovementMastery.png',
+        image: '/3rd/blue/BeginnerDefenseImprovementMastery.webp',
         description: "Beginner defense enhancement effect is increased by 'X'%, and the duration increases step by step",
         valueType: 'BeginnerDefenseImprovementMastery',
         values: [
@@ -3170,7 +3170,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 185, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BeginnerAttackImprovementMastery.png',
+        image: '/3rd/blue/BeginnerAttackImprovementMastery.webp',
         description: "Beginner damage boost effect is increased by 'X'%, and the duration increases step by step",
         valueType: 'BeginnerAttackImprovementMastery',
         values: [
@@ -3183,7 +3183,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/UnleashMarvelStrenghtener.png',
+        image: '/3rd/blue/UnleashMarvelStrenghtener.webp',
         description: "Increases the damage of Unleashed Marble skill by 'X'",
         valueType: 'UnleashMarvelStrenghtener',
         values: [
@@ -3196,7 +3196,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 188, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/UnleashMarvelMastery.png',
+        image: '/3rd/blue/UnleashMarvelMastery.webp',
         description: "The usable range of the Unleashed Marble skill is increased to 7. 10 points are required for skill investment",
         valueType: 'UnleashMarvelMastery',
         values: [
@@ -3209,7 +3209,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BeginnerBlessStrengthener.png',
+        image: '/3rd/blue/BeginnerBlessStrengthener.webp',
         description: "The stat increase effect of Beginner Bless skills is increased by 'X'",
         valueType: 'BeginnerBlessStrengthener',
         values: [
@@ -3225,7 +3225,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ChargeSlashStrengthener.png',
+        image: '/3rd/blue/ChargeSlashStrengthener.webp',
         description: "Increases the damage of Charge Slash skill by 'X'",
         valueType: 'ChargeSlashStrengthener',
         values: [
@@ -3238,7 +3238,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 191, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/ChargeSlashMastery.png',
+        image: '/3rd/blue/ChargeSlashMastery.webp',
         description: "The usable range of the Charge Slash skill is increased to 7.",
         valueType: 'ChargeSlashMastery',
         values: [
@@ -3252,7 +3252,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/WindGlaiveStrengthener.png',
+        image: '/3rd/blue/WindGlaiveStrengthener.webp',
         description: "Wind Glaive skill damage increased by 'X'",
         valueType: 'WindGlaiveStrengthener',
         values: [
@@ -3266,7 +3266,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/IllusionBladeStrengthener.png',
+        image: '/3rd/blue/IllusionBladeStrengthener.webp',
         description: "When using Illusion Blade, skill attack power is additionally increased by 'X'",
         valueType: 'IllusionBladeStrengthener',
         values: [
@@ -3280,7 +3280,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 193, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/WindGlaiveMastery.png',
+        image: '/3rd/blue/WindGlaiveMastery.webp',
         description: "The usable range of the Wind Glaive skill is increased to 6.",
         valueType: 'WindGlaiveMastery',
         values: [
@@ -3293,7 +3293,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 194, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/IllusionBladeMastery.png',
+        image: '/3rd/blue/IllusionBladeMastery.webp',
         description: "When using Illusion Blade, attack speed is additionally increased by 'X'",
         valueType: 'IllusionBladeMastery',
         values: [
@@ -3307,7 +3307,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/IllusionAvatarStrengthener.png',
+        image: '/3rd/blue/IllusionAvatarStrengthener.webp',
         description: "The damage range of the Illusion Avatar skill increases by 1 tile.",
         valueType: 'IllusionAvatarStrengthener',
         values: [
@@ -3321,7 +3321,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 196, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/IllusionBladeMastery2.png',
+        image: '/3rd/blue/IllusionBladeMastery2.webp',
         description: "When using Illusion Blade, when you deal damage to a monster, all damage received by the monster is increased by 5%",
         valueType: 'IllusionBladeMastery2',
         values: [
@@ -3335,7 +3335,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 197, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/IllusionAvatarMastery.png',
+        image: '/3rd/blue/IllusionAvatarMastery.webp',
         description: "Increases the damage of Illusion Avatar skills by 'X'",
         valueType: 'IllusionAvatarMastery',
         values: [
@@ -3348,7 +3348,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/BladeStormStrengthener.png',
+        image: '/3rd/blue/BladeStormStrengthener.webp',
         description: "Blade Storm skill damage increased by 'X'",
         valueType: 'BladeStormStrengthener',
         values: [
@@ -3361,7 +3361,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 200, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/BladeStormMastery.png',
+        image: '/3rd/blue/BladeStormMastery.webp',
         description: "Blade Storm skill damage coverage increases by 1 tile.",
         valueType: 'BladeStormMastery',
         values: [
@@ -3377,7 +3377,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/AngelHomunculusStrengthener.png',
+        image: '/3rd/blue/AngelHomunculusStrengthener.webp',
         description: "Increases the damage of Angel Homunculus skill by 'X'",
         valueType: 'AngelHomunculusStrengthener',
         values: [
@@ -3390,7 +3390,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 202, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/AngelHomunculusMastery.png',
+        image: '/3rd/blue/AngelHomunculusMastery.webp',
         description: "The number of targets the Angel Homunculus skill can attack increases by 1",
         valueType: 'AngelHomunculusMastery',
         values: [
@@ -3403,7 +3403,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/IgnitionBomberStrengthener.png',
+        image: '/3rd/blue/IgnitionBomberStrengthener.webp',
         description: "The damage of the Ignition Bomber skill increases by 'X'",
         valueType: 'IgnitionBomberStrengthener',
         values: [
@@ -3416,7 +3416,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 204, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/IgnitionBomberMastery.png',
+        image: '/3rd/blue/IgnitionBomberMastery.webp',
         description: "The usable range of the Ignition Bomber skill is increased to 7",
         valueType: 'IgnitionBomberMastery',
         values: [
@@ -3429,7 +3429,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/blue/ConfusionStoneStrengthener.png',
+        image: '/3rd/blue/ConfusionStoneStrengthener.webp',
         description: "The time for monsters to be summoned is reduced.",
         valueType: 'ConfusionStoneStrengthener',
         values: [
@@ -3442,7 +3442,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 206, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/blue/ConfusionStoneMastery.png',
+        image: '/3rd/blue/ConfusionStoneMastery.webp',
         description: "Alchemy rate increases by 'X'% (The alchemy rate affects the experience gained by summoned monsters)",
         valueType: 'ConfusionStoneMastery',
         values: [
@@ -3460,7 +3460,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/AttackRate.png',
+        image: '/3rd/red/AttackRate.webp',
         description: "PvP attack success rate increases by 'X'",
         valueType: 'Attackrate',
         values: [
@@ -3473,7 +3473,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/OneHandedStaffStrengthener.png',
+        image: '/3rd/red/OneHandedStaffStrengthener.webp',
         description: "Wizardry increases by 'X' while equipping One-Handed Staff",
         valueType: 'OneHandedStaffStrengthener',
         values: [
@@ -3487,7 +3487,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/TwohandedStaffStrengthener.png',
+        image: '/3rd/red/TwohandedStaffStrengthener.webp',
         description: "Wizardry is increased by 'X' when equipped with a Two-handed Staff",
         valueType: 'TwohandedStaffStrengthener',
         values: [
@@ -3501,7 +3501,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/ShieldStrengthener.png',
+        image: '/3rd/red/ShieldStrengthener.webp',
         description: "Defense increases by 'X' while equipping Shield",
         valueType: 'ShieldStrengthener',
         values: [
@@ -3514,7 +3514,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 210, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/OnehandedStaffMastery.png',
+        image: '/3rd/red/OnehandedStaffMastery.webp',
         description: "Attack speed increases by 'X' while equipping One-handed Staff",
         valueType: 'OnehandedStaffMastery',
         values: [
@@ -3528,7 +3528,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 211, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/TwoHandedStaffMastery.png',
+        image: '/3rd/red/TwoHandedStaffMastery.webp',
         description: "PvP attack power increases by additional 'X' while equipping Two-Handed Staff",
         valueType: 'TwoHandedStaffMastery',
         values: [
@@ -3542,7 +3542,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 212, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/ShieldMastery.png',
+        image: '/3rd/red/ShieldMastery.webp',
         description: "Defense Rate increases by 'X' while equipping a Shield",
         valueType: 'ShieldMastery',
         values: [
@@ -3555,7 +3555,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/SoulBarrierStrengthener.png',
+        image: '/3rd/red/SoulBarrierStrengthener.webp',
         description: "Damage Reduction increases by additional 'X'%",
         valueType: 'SoulBarrierStrengthener',
         values: [
@@ -3569,7 +3569,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/ManaReduction.png',
+        image: '/3rd/red/ManaReduction.webp',
         description: "Mana cost decreases by 'X'%",
         valueType: 'ManaReduction',
         values: [
@@ -3583,7 +3583,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MonsterAttackSDIncrement.png',
+        image: '/3rd/red/MonsterAttackSDIncrement.webp',
         description: "Recovers SD by max SD/'X' when killing a monster",
         valueType: 'MonsterAttackSDIncrement',
         values: [
@@ -3597,7 +3597,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MonsterAttackLifeIncrement.png',
+        image: '/3rd/red/MonsterAttackLifeIncrement.webp',
         description: "Restores HP by max HP/'X' when killing a monster",
         valueType: 'MonsterAttackLifeIncrement',
         values: [
@@ -3611,7 +3611,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 216, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/SoulBarrierProficiency.png',
+        image: '/3rd/red/SoulBarrierProficiency.webp',
         description: "Skill duration increases by 'X' second(s)",
         valueType: 'SoulBarrierProficiency',
         values: [
@@ -3625,7 +3625,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MinimumWizardryIncrease.png',
+        image: '/3rd/red/MinimumWizardryIncrease.webp',
         description: "Min. Wizardry increases by 'X'",
         valueType: 'MinimumWizardryIncrease',
         values: [
@@ -3639,7 +3639,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 219, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/MonsterAttackManaIncrement.png',
+        image: '/3rd/red/MonsterAttackManaIncrement.webp',
         description: "Recovers Mana by Max mana/'X' when killing a monster",
         valueType: 'MonsterAttackManaIncrement',
         values: [
@@ -3653,7 +3653,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 220, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/SoulBarrierMastery.png',
+        image: '/3rd/red/SoulBarrierMastery.webp',
         description: "Soul Barrier skill increases max. Mana by additional 'X'%",
         valueType: 'SoulBarrierMastery',
         values: [
@@ -3667,7 +3667,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 221, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/MaximumWizardryIncrease.png',
+        image: '/3rd/red/MaximumWizardryIncrease.webp',
         description: "Max. Wizardry increases by 'X'",
         valueType: 'MaximumWizardryIncrease',
         values: [
@@ -3681,7 +3681,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/IncreasesCriticalDamageRate.png',
+        image: '/3rd/red/IncreasesCriticalDamageRate.webp',
         description: "Critical damage rate increases by 'X'%",
         valueType: 'IncreasesCriticalDamageRate',
         values: [
@@ -3695,7 +3695,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/RestoresAllMana.png',
+        image: '/3rd/red/RestoresAllMana.webp',
         description: "You have a 'X'% chance to fully recover your mana any time you take damage",
         valueType: 'RestoresAllMana',
         values: [
@@ -3709,7 +3709,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/RestoresAllHP.png',
+        image: '/3rd/red/RestoresAllHP.webp',
         description: "You have a 'X'% chance to fully recover your HP any time you take damage",
         valueType: 'RestoresAllHP',
         values: [
@@ -3723,7 +3723,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/AbsorbLife.png',
+        image: '/3rd/red/AbsorbLife.webp',
         description: "When attacking the target, there is a 50% change of recovering 'X' life for each successful attack",
         valueType: 'AbsorbLife',
         values: [
@@ -3737,7 +3737,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 225, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/IncreasesExcellentDamageRate.png',
+        image: '/3rd/red/IncreasesExcellentDamageRate.webp',
         description: "Excellent damage rate increases by 'X'%",
         valueType: 'IncreasesExcellentDamageRate',
         values: [
@@ -3750,7 +3750,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/GrandMagicPowUp.png',
+        image: '/3rd/red/GrandMagicPowUp.webp',
         description: "Increases magical damage by 'X' when attacking an enemy over 4 tiles away",
         valueType: 'GrandMagicPowUp',
         values: [
@@ -3764,7 +3764,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 227, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/RestoresAllSD.png',
+        image: '/3rd/red/RestoresAllSD.webp',
         description: "'X'% chance to fully recover SD when attacking a target",
         valueType: 'RestoresAllSD',
         values: [
@@ -3778,7 +3778,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/IncreasesDoubleDamageRate.png',
+        image: '/3rd/red/IncreasesDoubleDamageRate.webp',
         description: "Double damage rate increases by 'X'%",
         valueType: 'IncreasesDoubleDamageRate',
         values: [
@@ -3791,7 +3791,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 228, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/AbsorbShield.png',
+        image: '/3rd/red/AbsorbShield.webp',
         description: "When attacking the target, there is a 50% chance to recover 'X' SD for each successful attack",
         valueType: 'AbsorbShield',
         values: [
@@ -3805,7 +3805,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 232, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/IncreasesChanceofIgnoreDef.png',
+        image: '/3rd/red/IncreasesChanceofIgnoreDef.webp',
         description: "Chance to inflict damage ignoring enemy's defense increases by 'X'%",
         valueType: 'IncreasesChanceofIgnoreDef',
         values: [
@@ -3822,7 +3822,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/TwoHandedSwordStrengthener.png',
+        image: '/3rd/red/TwoHandedSwordStrengthener.webp',
         description: "Physical attack power increases by 'X' when equipped with a two-handed sword",
         valueType: 'Two-HandedSwordStrengthener',
         values: [
@@ -3836,7 +3836,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/OneHandedSwordStrengthener.png',
+        image: '/3rd/red/OneHandedSwordStrengthener.webp',
         description: "Physical attack power increases by 'X' while equipping One-handed Sword. (When equipping 2 swords, 50% increment will be applied to each one)",
         valueType: 'One-HandedSwordStrengthener',
         values: [
@@ -3850,7 +3850,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MaceStrengthener.png',
+        image: '/3rd/red/MaceStrengthener.webp',
         description: "Physical attack power increases by 'X' while equipping Mace. (When equipping 2 maces, 50% increment will be applied to each one)",
         valueType: 'MaceStrengthener',
         values: [
@@ -3864,7 +3864,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/SpearStrengthener.png',
+        image: '/3rd/red/SpearStrengthener.webp',
         description: "Physical attack power increases by 'X' while equipping Spear",
         valueType: 'SpearStrengthener',
         values: [
@@ -3877,7 +3877,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 235, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/TwoHandedSwordMastery.png',
+        image: '/3rd/red/TwoHandedSwordMastery.webp',
         description: "'X' PvP attack power bonus will be added while equiping Two-Handed Sword",
         valueType: 'TwoHandedSwordMastery',
         values: [
@@ -3891,7 +3891,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 236, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/OneHandedSwordMastery.png',
+        image: '/3rd/red/OneHandedSwordMastery.webp',
         description: "Attack speed increases by 'X' while equipping One-handed Sword",
         valueType: 'OneHandedSwordMastery',
         values: [
@@ -3905,7 +3905,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 237, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/MaceMastery.png',
+        image: '/3rd/red/MaceMastery.webp',
         description: "Increases a chance to ignore enemy defenses by 'X'% while equipping Mace",
         valueType: 'MaceMastery',
         values: [
@@ -3919,7 +3919,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 238, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/SpearMastery.png',
+        image: '/3rd/red/SpearMastery.webp',
         description: "Double Damage rate increases by 'X'% while equipping Spear",
         valueType: 'SpearMastery',
         values: [
@@ -3932,7 +3932,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/SwellLifeStrengthener.png',
+        image: '/3rd/red/SwellLifeStrengthener.webp',
         description: "Stamina buff effect increases by 'X'%",
         valueType: 'SwellLifeStrengthener',
         values: [
@@ -3945,7 +3945,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 243, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/SwellLifeProficiency.png',
+        image: '/3rd/red/SwellLifeProficiency.webp',
         description: "Swell Life skill increases Max Mana by additional 'X'%",
         valueType: 'SwellLifeProficiency',
         values: [
@@ -3959,7 +3959,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MinimumAttackPowerIncrease.png',
+        image: '/3rd/red/MinimumAttackPowerIncrease.webp',
         description: "Min. attack power increases by 'X'",
         valueType: 'MinimumAttackPowerIncrease',
         values: [
@@ -3972,7 +3972,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 244, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/SwellLifeMastery.png',
+        image: '/3rd/red/SwellLifeMastery.webp',
         description: "Swell Life additionally increases max AG by 'X'",
         valueType: 'SwellLifeMastery',
         values: [
@@ -3986,7 +3986,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 245, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/MaximumAttackPowerIncrease.png',
+        image: '/3rd/red/MaximumAttackPowerIncrease.webp',
         description: "Max. attack power increases by 'X'",
         valueType: 'MaximumAttackPowerIncrease',
         values: [
@@ -3999,7 +3999,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/BattleMind.png',
+        image: '/3rd/red/BattleMind.webp',
         description: "Increases damage by 'X' when attacking an enemy within 2 tiles",
         valueType: 'BattleMind',
         values: [
@@ -4015,7 +4015,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/BowStrengthener.png',
+        image: '/3rd/red/BowStrengthener.webp',
         description: "Damage increases by 'X' while equipping Bow",
         valueType: 'BowStrengthener',
         values: [
@@ -4029,7 +4029,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/CrossbowStrengthener.png',
+        image: '/3rd/red/CrossbowStrengthener.webp',
         description: "Damage increases by 'X' while equipping Crossbow",
         valueType: 'CrossbowStrengthener',
         values: [
@@ -4043,7 +4043,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 249, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/BowMastery.png',
+        image: '/3rd/red/BowMastery.webp',
         description: "Attack speed increases by 'X' while equipping Bow",
         valueType: 'BowMastery',
         values: [
@@ -4057,7 +4057,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 250, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/CrossbowMastery.png',
+        image: '/3rd/red/CrossbowMastery.webp',
         description: "PvP attack power increases by additional 'X' while equipping Crossbow",
         valueType: 'CrossbowMastery',
         values: [
@@ -4070,7 +4070,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/InfinityArrowStrengthener.png',
+        image: '/3rd/red/InfinityArrowStrengthener.webp',
         description: "Infinity Arrow damage increases by 'X'%",
         valueType: 'InfinityArrowStrengthener',
         values: [
@@ -4086,7 +4086,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/Marksman.png',
+        image: '/3rd/red/Marksman.webp',
         description: "Increases damage by 'X' when attacking an enemy over 4 tiles away",
         valueType: 'Marksman',
         values: [
@@ -4099,7 +4099,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/DarkSpiritStrengthener.png',
+        image: '/3rd/red/DarkSpiritStrengthener.webp',
         description: "Dark Spirit's attack power increases by 'X'",
         valueType: 'DarkSpiritStrengthener',
         values: [
@@ -4113,7 +4113,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/ScepterStrengthener.png',
+        image: '/3rd/red/ScepterStrengthener.webp',
         description: "Attack power increases by 'X' while equipping Scepter",
         valueType: 'ScepterStrengthener',
         values: [
@@ -4127,7 +4127,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/UseScepterPetStrengthener.png',
+        image: '/3rd/red/UseScepterPetStrengthener.webp',
         description: "Dark Spirit's attack power increases by 'X' while equipping Scepter",
         valueType: 'UseScepterPetStrengthener',
         values: [
@@ -4140,7 +4140,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 255, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/DarkSpiritStrengthener2.png',
+        image: '/3rd/red/DarkSpiritStrengthener2.webp',
         description: "Dark Spirit's critical damage rate increases by additional 'X'%",
         valueType: 'DarkSpiritStrengthener2',
         values: [
@@ -4154,7 +4154,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 256, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/ScepterMastery.png',
+        image: '/3rd/red/ScepterMastery.webp',
         description: "PvP attack power increases by additional 'X' while equipping Scepter",
         valueType: 'ScepterMastery',
         values: [
@@ -4168,7 +4168,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 257, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/CommandAttackIncrease.png',
+        image: '/3rd/red/CommandAttackIncrease.webp',
         description: "When a scepter is equipped, DMG increases by 1 for every 'X' Cmd stat",
         valueType: 'CommandAttackIncrease',
         values: [
@@ -4181,7 +4181,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 258, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/DarkSpiritStrengthener3.png',
+        image: '/3rd/red/DarkSpiritStrengthener3.webp',
         description: "Dark Spirit's excellent damage rate increases by additional 'X'%",
         valueType: 'DarkSpiritStrengthener3',
         values: [
@@ -4194,7 +4194,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/DarkSpiritStrengthener5.png',
+        image: '/3rd/red/DarkSpiritStrengthener5.webp',
         description: "Dark Spirit's double damage rate increases by additional 'X'%",
         valueType: 'DarkSpiritStrengthener5',
         values: [
@@ -4208,7 +4208,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/PetDurabilityStrengthener.png',
+        image: '/3rd/red/PetDurabilityStrengthener.webp',
         description: "Pet's life reduction speed decreases by 'X'%",
         valueType: 'PetDurabilityStrengthener',
         values: [
@@ -4221,7 +4221,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 262, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/SpiritLord.png',
+        image: '/3rd/red/SpiritLord.webp',
         description: "Dark Spirit's chance to inflict dmg ignoring enemy's defense increases by additional 'X'%",
         valueType: 'SpiritLord',
         values: [
@@ -4235,7 +4235,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/DarkSpiritStrengthener4.png',
+        image: '/3rd/red/DarkSpiritStrengthener4.webp',
         description: "Dark Spirit's attack speed increases by additional 'X'",
         valueType: 'DarkSpiritStrengthener4',
         values: [
@@ -4251,7 +4251,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/StickStrengthener.png',
+        image: '/3rd/red/StickStrengthener.webp',
         description: "Wizardry increases by 'X' while equipping Stick",
         valueType: 'StickStrengthener',
         values: [
@@ -4265,7 +4265,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/OtherWorldTomeStrengthener.png',
+        image: '/3rd/red/OtherWorldTomeStrengthener.webp',
         description: "Curse increase by 'X' while equipping the Other World Tome",
         valueType: 'OtherWorldTomeStrengthener',
         values: [
@@ -4278,7 +4278,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 266, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/StickMastery.png',
+        image: '/3rd/red/StickMastery.webp',
         description: "PvP attack power increases by additional 'X' while equipping Stick",
         valueType: 'StickMastery',
         values: [
@@ -4292,7 +4292,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 267, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/OtherWorldMastery.png',
+        image: '/3rd/red/OtherWorldMastery.webp',
         description: "Attack speed increases by 'X' while equipping the Other World Tome",
         valueType: 'OtherWorldMastery',
         values: [
@@ -4305,7 +4305,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/BerserkerStrengthener.png',
+        image: '/3rd/red/BerserkerStrengthener.webp',
         description: "Berserker skill increases Wizardry by additional 'X'",
         valueType: 'BerserkerStrengthener',
         values: [
@@ -4319,7 +4319,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/DarknessStrengthener.png',
+        image: '/3rd/red/DarknessStrengthener.webp',
         description: "Increases Curse Damage by 'X' when using Darkness skill",
         valueType: 'DarknessStrengthener',
         values: [
@@ -4333,7 +4333,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MinimumWizardryCurseIncrease.png',
+        image: '/3rd/red/MinimumWizardryCurseIncrease.webp',
         description: "Minimum Wizardry and Curse increases by 'X'",
         valueType: 'MinimumWizardryCurseIncrease',
         values: [
@@ -4346,7 +4346,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 270, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/BerserkerMastery.png',
+        image: '/3rd/red/BerserkerMastery.webp',
         description: "Berserker skill increases attack speed by 'X', additionally reduces HP and Defense Decrease effect",
         valueType: 'BerserkerMastery',
         values: [
@@ -4360,7 +4360,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 271, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/DarknessMastery.png',
+        image: '/3rd/red/DarknessMastery.webp',
         description: "Increases defense by 'X' when using Darkness skill and removes HP drop effect",
         valueType: 'DarknessMastery',
         values: [
@@ -4374,7 +4374,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 272, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/MaximumWizardryCurseIncrease.png',
+        image: '/3rd/red/MaximumWizardryCurseIncrease.webp',
         description: "Maximum Wizardry and Curse increase by 'X'",
         valueType: 'MaximumWizardryCurseIncrease',
         values: [
@@ -4387,7 +4387,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/PainofCurse.png',
+        image: '/3rd/red/PainofCurse.webp',
         description: "Increases Wizardry and Curse by 'X' when attacking an enemy over 4 tiles away",
         valueType: 'PainofCurse',
         values: [
@@ -4402,7 +4402,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/EquippedWeaponStrengthener.png',
+        image: '/3rd/red/EquippedWeaponStrengthener.webp',
         description: "Equipping the fist weapon increases attack power by 'X'",
         valueType: 'EquippedWeaponStrengthener',
         values: [
@@ -4416,7 +4416,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/DefenseSuccessRateIncreasePowUp.png',
+        image: '/3rd/red/DefenseSuccessRateIncreasePowUp.webp',
         description: "Increases defense success rate by 'X'%",
         valueType: 'DefenseSuccessRateIncreasePowUp',
         values: [
@@ -4429,7 +4429,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 277, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/EquippedWeaponMastery.png',
+        image: '/3rd/red/EquippedWeaponMastery.webp',
         description: "Equipping the fist weapon increases the chance of dealing double damage by 'X'%",
         valueType: 'EquippedWeaponMastery',
         values: [
@@ -4443,7 +4443,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 278, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/DefSuccessRateIncreaseMastery.png',
+        image: '/3rd/red/DefSuccessRateIncreaseMastery.webp',
         description: "The increase defense success rate skill increases your defense rate by 'X'",
         valueType: 'DefSuccessRateIncreaseMastery',
         values: [
@@ -4457,7 +4457,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/StaminaIncreaseStrengthener.png',
+        image: '/3rd/red/StaminaIncreaseStrengthener.webp',
         description: "The increase HP skill increases 'STA' by 'X'",
         valueType: 'StaminaIncreaseStrengthener',
         values: [
@@ -4470,7 +4470,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/LancePowUp.png',
+        image: '/3rd/red/LancePowUp.webp',
         description: "Physical attack power increases by 'X' while equipping Lance",
         valueType: 'LancePowUp',
         values: [
@@ -4484,7 +4484,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/CircleShieldPowUp.png',
+        image: '/3rd/red/CircleShieldPowUp.webp',
         description: "Increase Enemy's AG reduction effect by 'X'",
         valueType: 'CircleShieldPowUp',
         values: [
@@ -4497,7 +4497,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 282, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/LanceMastery.png',
+        image: '/3rd/red/LanceMastery.webp',
         description: "Double Damage rate increases by 'X'% while equipping Lance",
         valueType: 'LanceMastery',
         values: [
@@ -4511,7 +4511,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 283, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/CircleShieldMastery.png',
+        image: '/3rd/red/CircleShieldMastery.webp',
         description: "Increase the chance of AG reduction effect by 'X'% Point(s)",
         valueType: 'CircleShieldMastery',
         values: [
@@ -4524,7 +4524,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/WrathPowUp.png',
+        image: '/3rd/red/WrathPowUp.webp',
         description: "Skill duration increases by 'X' second(s)",
         valueType: 'WrathPowUp',
         values: [
@@ -4563,7 +4563,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/IncreasesRetaliationDMG.png',
+        image: '/3rd/red/IncreasesRetaliationDMG.webp',
         description: "Increases the DMG of Retribution by 'X'%",
         valueType: 'IncreasesRetaliationDMG',
         values: [
@@ -4577,7 +4577,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/IncreasesRageDMG.png',
+        image: '/3rd/red/IncreasesRageDMG.webp',
         description: "Increases the DMG of rage by 'X'%",
         valueType: 'IncreasesRageDMG',
         values: [
@@ -4593,7 +4593,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/RuneMaceStrengthener.png',
+        image: '/3rd/red/RuneMaceStrengthener.webp',
         description: "Wizardry increases by 'X' when Rune Mace is equipped",
         valueType: 'RuneMaceStrengthener',
         values: [
@@ -4607,7 +4607,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 291, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/RuneMaceMastery.png',
+        image: '/3rd/red/RuneMaceMastery.webp',
         description: "Increase Double DMG chance by 'X'% when Rune Mace is equipped",
         valueType: 'RuneMaceMastery',
         values: [
@@ -4621,7 +4621,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/GrandMagicPowUp.png',
+        image: '/3rd/red/GrandMagicPowUp.webp',
         description: "Increases magical damage by 'X' when attacking an enemy over 4 tiles away",
         valueType: 'GrandMagicPowUp',
         values: [
@@ -4637,7 +4637,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/ShortSwordStrengthener.png',
+        image: '/3rd/red/ShortSwordStrengthener.webp',
         description: "While equipped with a Short Sword, the damage is increased by 'X'. A 50% per two short swords",
         valueType: 'ShortSwordStrengthener',
         values: [
@@ -4651,7 +4651,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 294, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/ShortSwordMastery.png',
+        image: '/3rd/red/ShortSwordMastery.webp',
         description: "While equipped with a Short Sword the attack speed is increased by 'X'",
         valueType: 'ShortSwordMastery',
         values: [
@@ -4667,7 +4667,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MagicGunStrengthener.png',
+        image: '/3rd/red/MagicGunStrengthener.webp',
         description: "Magical Power increased by 'X' when equipped with a Magic Gun. (When 2 magic items are equipped, 50% is applied)",
         valueType: 'MagicGunStrengthener',
         values: [
@@ -4681,7 +4681,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 297, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/MagicGunMastery.png',
+        image: '/3rd/red/MagicGunMastery.webp',
         description: "Increases the chance of double damage by 'X'% when equipped with a Magic Gun",
         valueType: 'MagicGunMastery',
         values: [
@@ -4697,7 +4697,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MagicBookStrengthener.png',
+        image: '/3rd/red/MagicBookStrengthener.webp',
         description: "Attack speed is increased by 'X' while wearing Magic Book",
         valueType: 'MagicBookStrengthener',
         values: [
@@ -4711,7 +4711,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/MagicBookMastery.png',
+        image: '/3rd/red/MagicBookMastery.webp',
         description: "Double damage chance increases by 'X' when wearing Magic Book",
         valueType: 'MagicBookMastery',
         values: [
@@ -4724,7 +4724,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/ReflectionBarrierStrengthener.png',
+        image: '/3rd/red/ReflectionBarrierStrengthener.webp',
         description: "Damage reflectance increased by an additional 'X'%",
         valueType: 'ReflectionBarrierStrengthener',
         values: [
@@ -4738,7 +4738,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 300, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/ReflectionBarrierSkills.png',
+        image: '/3rd/red/ReflectionBarrierSkills.webp',
         description: "Duration increased by 'X' seconds",
         valueType: 'ReflectionBarrierSkills',
         values: [
@@ -4752,7 +4752,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 301, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/ReflectionBarrierMastery.png',
+        image: '/3rd/red/ReflectionBarrierMastery.webp',
         description: "The maximum mana is increased by an additional 'X'% while using the Reflection Barrier skill",
         valueType: 'ReflectionBarrierMastery',
         values: [
@@ -4768,7 +4768,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/OrbStrengthener.png',
+        image: '/3rd/red/OrbStrengthener.webp',
         description: "Increases magic power by 'X' while wearing an orb",
         valueType: 'OrbStrengthener',
         values: [
@@ -4782,7 +4782,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 303, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/OrbMastery.png',
+        image: '/3rd/red/OrbMastery.webp',
         description: "Attack speed increased by 'X' while wearing an orb",
         valueType: 'OrbMastery',
         values: [
@@ -4796,7 +4796,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/BladeStrengthener.png',
+        image: '/3rd/red/BladeStrengthener.webp',
         description: "While equipped with a Blade, the damage is increased by 'X'.",
         valueType: 'BladeStrengthener',
         values: [
@@ -4810,7 +4810,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 306, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/BladeMastery.png',
+        image: '/3rd/red/BladeMastery.webp',
         description: "Double damage chance increases by 'X'% when wearing a blade",
         valueType: 'BladeMastery',
         values: [
@@ -4826,7 +4826,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/WandStrengthener.png',
+        image: '/3rd/red/WandStrengthener.webp',
         description: "Wizardry increases by 'X' when wearing a wand",
         valueType: 'WandStrengthener',
         values: [
@@ -4840,7 +4840,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [],
         rowRequirements: {},
-        image: '/3rd/red/ElixirStrengthener.png',
+        image: '/3rd/red/ElixirStrengthener.webp',
         description: "Attack speed is increased by 'X' when wearing an Elixir",
         valueType: 'ElixirStrengthener',
         values: [
@@ -4853,7 +4853,7 @@ export const SKILLS_DATABASE = {
         maxLevel: 20,
         requires: [{ skillId: 308, requiredLevel: 10 }],
         rowRequirements: {},
-        image: '/3rd/red/ElixirMastery.png',
+        image: '/3rd/red/ElixirMastery.webp',
         description: "Double damage chance increases by 'X' when wearing an Elixir",
         valueType: 'ElixirMastery',
         values: [

@@ -276,7 +276,7 @@ export default function Build() {
                   {/* Sección izquierda - Info del build y personaje */}
                   <div className="flex items-center gap-4">
                     <img
-                      src={`/characters/${buildData.character}.png`}
+                      src={`/characters/thumbs/${buildData.character}.webp`}
                       alt={currentClass}
                       className="w-12 h-12 sm:w-17 sm:h-14 object-contain rounded-lg border-2 border-amber-500/50 p-1"
                     />
@@ -421,7 +421,7 @@ export default function Build() {
                       <Inventory onSlotClick={handleInventorySlotClick} readOnly={isReadOnly} />
                     ) : (
                       // Mantener el mismo contenedor con la imagen de fondo
-                      <div className="relative bg-[url('/windows-stats/inventory.png')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
+                      <div className="relative bg-[url('/windows-stats/inventory.webp')] w-[310px] h-[345px] border border-amber-600/30 rounded-lg">
                         {/* Overlay semi-transparente */}
                         <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px] rounded-lg flex items-center justify-center">
                           {/* Contenido "Coming Soon" */}

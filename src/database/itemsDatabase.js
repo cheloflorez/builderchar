@@ -12,7 +12,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Wizard"],
     durability: 20,
-    url: "/items/sets/Bloodangel/BloodangelWizardHelm.png",
+    url: "/items/sets/Bloodangel/BloodangelWizardHelm.webp",
     baseStats: { defense: 8 },
     upgradeValues: {
       defense: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
@@ -37,7 +37,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Wizard"],
     durability: 25,
-    url: "/items/sets/Bloodangel/BloodangelWizardArmor.png",
+    url: "/items/sets/Bloodangel/BloodangelWizardArmor.webp",
     baseStats: { defense: 12 },
     upgradeValues: {
       defense: [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42]
@@ -62,7 +62,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Wizard"],
     durability: 20,
-    url: "/items/sets/Bloodangel/BloodangelWizardPants.png",
+    url: "/items/sets/Bloodangel/BloodangelWizardPants.webp",
     baseStats: { defense: 10 },
     upgradeValues: {
       defense: [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40]
@@ -87,7 +87,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Wizard"],
     durability: 15,
-    url: "/items/sets/Bloodangel/BloodangelWizardGloves.png",
+    url: "/items/sets/Bloodangel/BloodangelWizardGloves.webp",
     baseStats: { defense: 6 },
     upgradeValues: {
       defense: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
@@ -112,7 +112,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Knight", "Dark Lord"],
     durability: 18,
-    url: "/items/bronze_boots.png",
+    url: "/items/bronze_boots.webp",
     baseStats: { defense: 7 },
     upgradeValues: {
       defense: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
@@ -133,7 +133,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Wizard", "Summoner", "Fairy Elf"],
     durability: 15,
-    url: "/items/leather_boots.png",
+    url: "/items/leather_boots.webp",
     baseStats: { defense: 5 },
     upgradeValues: {
       defense: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
@@ -157,7 +157,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Knight", "Dark Lord", "Magic Gladiator"],
     durability: 25,
-    url: "/items/kris.png",
+    url: "/items/kris.webp",
     baseStats: {
       attackMin: 1,
       attackMax: 4
@@ -182,7 +182,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Knight", "Dark Lord", "Magic Gladiator"],
     durability: 30,
-    url: "/items/short_sword.png",
+    url: "/items/short_sword.webp",
     baseStats: {
       attackMin: 2,
       attackMax: 6
@@ -207,7 +207,7 @@ export const ITEMS_DATABASE = {
     level: 1,
     class: ["Dark Wizard", "Summoner"],
     durability: 20,
-    url: "/items/skull_staff.png",
+    url: "/items/skull_staff.webp",
     baseStats: {
       attackMin: 1,
       attackMax: 3
@@ -235,7 +235,7 @@ export const ITEMS_DATABASE = {
     level: 15,
     class: ["Dark Wizard", "Summoner"],
     durability: 15,
-    url: "/items/ring_ice.png",
+    url: "/items/ring_ice.webp",
     baseStats: { defense: 3 },
     upgradeValues: {
       defense: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
@@ -256,7 +256,7 @@ export const ITEMS_DATABASE = {
     level: 15,
     class: ["Dark Wizard", "Summoner"],
     durability: 15,
-    url: "/items/ring_poison.png",
+    url: "/items/ring_poison.webp",
     baseStats: { defense: 3 },
     upgradeValues: {
       defense: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
@@ -280,7 +280,7 @@ export const ITEMS_DATABASE = {
     level: 15,
     class: ["Fairy Elf"],
     durability: 12,
-    url: "/items/earring_wind.png",
+    url: "/items/earring_wind.webp",
     baseStats: { defense: 2 },
     upgradeValues: {
       defense: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
@@ -304,7 +304,7 @@ export const ITEMS_DATABASE = {
     level: 180,
     class: ["Fairy Elf"],
     durability: 200,
-    url: "/items/wings_elf.png",
+    url: "/items/wings_elf.webp",
     baseStats: { defense: 40 },
     upgradeValues: {
       defense: [40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70]
@@ -325,7 +325,7 @@ export const ITEMS_DATABASE = {
     level: 180,
     class: ["Dark Wizard", "Summoner"],
     durability: 200,
-    url: "/items/wings_soul.png",
+    url: "/items/wings_soul.webp",
     baseStats: { defense: 40 },
     upgradeValues: {
       defense: [40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 70]
