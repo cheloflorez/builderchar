@@ -27,3 +27,17 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
+
+* {
+  cursor: none !important;
+}
+
+/* Fuerza ocultar el cursor en todos los elementos interactivos */
+a, button, input, textarea, select, [role="button"], [onclick] {
+  cursor: none !important;
+}
+
+/* También para elementos con hover */
+*:hover {
+  cursor: none !important;
+}

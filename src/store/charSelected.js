@@ -92,15 +92,6 @@ export const charSelectedStore = proxy({
       baseStats.command = characterData.baseStats?.command
     }
 
-    console.log('🔍 Stats al crear personaje:', {
-      characterName: characterData.name || 'Sin nombre',
-      characterClass: characterData.class[0],
-      baseStats: baseStats,
-      characterStats: characterStats,
-      hasOriginalBaseStats: !!characterData.baseStats,
-      hasOriginalStats: !!characterData.stats
-    });
-
     // IMPORTANTE: Crear el objeto completo de una vez
     charSelectedStore.selectedCharacter = {
       ...characterData,
@@ -188,8 +179,6 @@ export const charSelectedStore = proxy({
     // ✅ CALCULAR puntos según el NUEVO nivel
     let points = 0;
 
-    // ✅ Verificar si es Dark Lord o Magic Gladiator
-    console.log(char.class)
     const isDLorMG = char.class[0] === "Dark Lord" || char.class[0] === "Magic Gladiator";
 
     if (isDLorMG) {

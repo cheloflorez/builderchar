@@ -7,7 +7,7 @@ import { useSelectedCharacter } from '../../hooks/useCharacter';
 // ========================================
 // 🌿 GREEN TREE COMPONENT - CON REQUISITOS DE FILA
 // ========================================
-const GreenTree = ({ character, remainingPoints, onPointsChange, spentPoints , readOnly = false }) => {
+const GreenTree = ({ character, remainingPoints, onPointsChange, spentPoints, readOnly = false }) => {
     const [skillLevels, setSkillLevels] = useState({});
     const { update3rdTreeSkill } = useSelectedCharacter();
 
@@ -26,10 +26,20 @@ const GreenTree = ({ character, remainingPoints, onPointsChange, spentPoints , r
             // Reconstruir el estado local desde los datos guardados
             skills.forEach(skill => {
                 const savedSkill = character['3rdTree'].find(saved => saved.id === skill.id);
+
                 if (savedSkill) {
-                    // Encontrar qué nivel corresponde al valor guardado
-                    const levelIndex = skill.values.findIndex(value => value === savedSkill.value);
-                    initialSkillLevels[skill.id] = levelIndex > 0 ? levelIndex : 0;
+                    // 🔧 FIX: Priorizar savedSkill.level si existe
+                    if (savedSkill.level !== undefined && savedSkill.level !== null) {
+                        // Si tiene level guardado, usarlo directamente
+                        initialSkillLevels[skill.id] = savedSkill.level;
+                    } else if (skill.values && skill.values.length > 0) {
+                        // Si NO tiene level pero SÍ tiene values, buscar por valor
+                        const levelIndex = skill.values.findIndex(value => value === savedSkill.value);
+                        initialSkillLevels[skill.id] = levelIndex > 0 ? levelIndex : 0;
+                    } else {
+                        // Skill sin values y sin level guardado
+                        initialSkillLevels[skill.id] = 0;
+                    }
                 } else {
                     initialSkillLevels[skill.id] = 0;
                 }

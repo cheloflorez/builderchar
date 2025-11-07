@@ -37,8 +37,8 @@ const Main3rd = ({ isOpen, onClose, character , readOnly = false}) => {
 
   // ✅ CALCULAR puntos disponibles SOLO cuando cambie el nivel o character.id
   useEffect(() => {
-    if (characterLevel && characterLevel >= 400) {
-      const points = Math.min(characterLevel - 399, 400);
+    if (characterLevel && characterLevel > 400) {
+      const points = Math.min(characterLevel - 400, 400);
       setAvailablePoints(points);
     } else {
       setAvailablePoints(0);
@@ -80,7 +80,7 @@ const Main3rd = ({ isOpen, onClose, character , readOnly = false}) => {
         return prevPoints;
       });
     }
-  }, [characterId]); // ✅ Solo cuando cambia el personaje
+  }, [character?.['3rdTree'], characterId]); // ✅ Solo cuando cambia el personaje
 
   // ✅ CALCULAR puntos restantes de forma memoizada
   const totalSpentPoints = useMemo(() => {
