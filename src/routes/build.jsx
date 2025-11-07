@@ -16,6 +16,8 @@ import { charSelectedStore } from "../store/charSelected";
 import HelpModal from "../components/ui/HelpModal";
 import VersionModal from "../components/ui/VersionModal";
 import { recommendedBuilds } from "../data/recommendedBuilds";
+import { shareBuild, loadSharedBuild, isSharedBuildUrl, generateSharedBuildName } from '../utils/shareBuild';
+import ShareModal from '../components/ui/ShareModal';
 
 
 
@@ -51,6 +53,8 @@ export default function Build() {
     analysis: false
   });
   const [isReadOnly, setIsReadOnly] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
 
 
   // Sistema de notificaciones
@@ -98,10 +102,55 @@ export default function Build() {
     setSkillsModalOpen(true);
   }, [selectedCharacter, notifyLevelRequired]);
 
-  // Cargar build desde localStorage o recommendedBuilds
   useEffect(() => {
     const loadBuild = () => {
-      // Primero buscar en builds normales
+      // 🆕 PRIMERO: Verificar si es un build compartido
+      if (isSharedBuildUrl()) {
+        const sharedBuild = loadSharedBuild();
+
+        if (sharedBuild) {
+          // Crear buildData desde el shared build
+          const sharedBuildData = {
+            id: 'shared',
+            name: sharedBuild.name,
+            class: sharedBuild.class,
+            character: sharedBuild.character,
+            level: sharedBuild.level,
+            isShared: true,
+            sharedAt: sharedBuild.sharedAt,
+            characterData: sharedBuild.characterData
+          };
+
+          setBuildData(sharedBuildData);
+          setIsReadOnly(true);
+
+          // 🔧 IMPORTANTE: Asegurar que characterData tenga la propiedad 'class'
+          // Si no la tiene, agregarla desde sharedBuild
+          const characterDataWithClass = {
+            ...sharedBuild.characterData,
+            class: sharedBuild.characterData.class || [sharedBuild.class]
+          };
+
+          loadCharacterData(characterDataWithClass);
+          setIsLoading(false);
+
+          notifySuccess(
+            'Shared Build Loaded',
+            `${sharedBuild.name} is ready to view`,
+            { duration: 3000, icon: '🔗' }
+          );
+          return;
+        } else {
+          // Si el link compartido es inválido
+          notifyError('Invalid Link', 'This shared build link is corrupted or invalid');
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
+          return;
+        }
+      }
+
+      // Código ORIGINAL - buscar en builds normales
       const savedBuilds = localStorage.getItem('mubuilds');
       let currentBuild = null;
       let isRecommended = false;
@@ -119,13 +168,11 @@ export default function Build() {
           isRecommended = true;
           console.log('✅ Build recomendada cargada:', currentBuild.name);
         }
-      } else {
-        console.log(currentBuild);
       }
 
       if (currentBuild) {
         setBuildData(currentBuild);
-        setIsReadOnly(isRecommended); // ← IMPORTANTE: Setear explícitamente
+        setIsReadOnly(isRecommended);
 
         // Cargar datos del personaje
         if (currentBuild.characterData) {
@@ -244,6 +291,33 @@ export default function Build() {
     }
   };
 
+  const handleShare = async () => {
+    setActionLoading(prev => ({ ...prev, share: true }));
+
+    try {
+      // Pequeño delay para feedback visual
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Generar URL compartible
+      const url = shareBuild(buildData, selectedCharacter);
+      setShareUrl(url);
+      setShareModalOpen(true);
+
+      notifySuccess(
+        'Share Link Ready!',
+        'Your build is ready to be shared',
+        { duration: 2000, icon: '🔗' }
+      );
+    } catch (error) {
+      notifyError(
+        'Share Failed',
+        error.message || 'Could not generate share link. Build might be too large.'
+      );
+    } finally {
+      setActionLoading(prev => ({ ...prev, share: false }));
+    }
+  };
+
   if (isLoading || !selectedCharacter || !buildData) {
     return (
       <div className="min-h-screen overflow-x-auto overflow-y-auto bg-gradient-to-br from-slate-900 via-gray-900 to-black">
@@ -284,9 +358,6 @@ export default function Build() {
                       <h1 className="text-xl sm:text-2xl font-bold text-amber-300 mb-1">
                         {buildData.name}
                       </h1>
-                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm text-gray-400">
-                        <span>{currentClass} - Level {selectedCharacter.level}</span>
-                      </div>
                     </div>
                   </div>
 
@@ -294,10 +365,21 @@ export default function Build() {
                   <div className="flex items-center gap-3 px-3 py-2 border border-gray-600/50">
                     {isReadOnly ? (
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-purple-300 animate-pulse drop-shadow-lg">
-                          ⭐ RECOMMENDED
-                        </span>
-                        <span className="text-xs text-gray-400">-</span>
+                        {buildData?.isShared ? (
+                          <>
+                            <span className="text-xs font-bold text-green-300 animate-pulse drop-shadow-lg">
+                              🔗 SHARED BUILD
+                            </span>
+                            <span className="text-xs text-gray-400">-</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-xs font-bold text-purple-300 animate-pulse drop-shadow-lg">
+                              ⭐ RECOMMENDED
+                            </span>
+                            <span className="text-xs text-gray-400">-</span>
+                          </>
+                        )}
                         <span className="text-xs font-semibold text-purple-400 animate-pulse shadow-purple-400/50">
                           READ ONLY
                         </span>
@@ -314,7 +396,6 @@ export default function Build() {
                       </>
                     )}
                   </div>
-
                   {/* Sección derecha - Botones de acción */}
                   <div className="flex gap-2">
                     {/* Help Button */}
@@ -349,6 +430,28 @@ export default function Build() {
                       </span>
                       <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                     </button>
+
+                    {/* Share Button */}
+                    {!isReadOnly && (
+                      <button
+                        onClick={handleShare}
+                        disabled={actionLoading.share}
+                        className={`group relative px-3 py-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-medium rounded-lg shadow-md transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 text-sm ${actionLoading.share ? 'opacity-70 cursor-not-allowed' : ''}`}
+                      >
+                        <span className="flex items-center gap-2">
+                          {actionLoading.share ? (
+                            <>
+                              <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                              <span className="hidden sm:inline">Sharing...</span>
+                            </>
+                          ) : (
+                            <>
+                              🔗 <span className="hidden sm:inline">Share</span>
+                            </>
+                          )}
+                        </span>
+                        <div className="absolute inset-0 rounded-lg bg-white/10 opacity-0 group-hover:opacity-100 disabled:group-hover:opacity-0 transition-opacity duration-200"></div>
+                      </button>)}
 
                     {/* Save y Reset - Solo si NO es readOnly */}
                     {!isReadOnly && (
@@ -586,7 +689,15 @@ export default function Build() {
         onClose={() => setSkillsModalOpen(false)}
         character={selectedCharacter}
       />
-    </div >
 
+      {/* Share Modal */}
+      {shareModalOpen && (
+        <ShareModal
+          isOpen={shareModalOpen}
+          onClose={() => setShareModalOpen(false)}
+          shareUrl={shareUrl}
+        />
+      )}
+    </div >
   );
 }

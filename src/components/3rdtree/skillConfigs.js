@@ -1026,7 +1026,7 @@ export const skillConfigs = {
       // FILA 3
       { skillId: 'TwistingSlashStrengthener', row: 2, col: 0 },
       { skillId: 'AngerBlowStrengthener', row: 2, col: 1 },
-      { skillId: 'SwordInertiaStrengthener', row: 2, col: 3 },
+      { skillId: 'SwordInertiaMastery', row: 2, col: 3 },
       // FILA 4
       { skillId: 'MaximumLifeIncrease', row: 3, col: 2 },
       { skillId: 'WeaponMastery', row: 3, col: 3 },

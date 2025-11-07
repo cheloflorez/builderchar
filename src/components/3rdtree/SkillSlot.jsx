@@ -318,13 +318,6 @@ const SkillSlot = ({
                     </div>
                 )}
 
-                {/* Indicador de inversión completa */}
-                {safeSkill.requiresFullInvestment && safeLevel === 0 && !isLocked && (
-                    <div className="absolute -top-1 -left-1 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center shadow-lg border border-gray-900">
-                        <span className="text-white text-xs font-bold">10</span>
-                    </div>
-                )}
-
                 {/* Level indicator */}
                 {safeLevel > 0 && (
                     <div className={`absolute -bottom-1 -right-4 w-5 h-5 flex items-center justify-center text-xs font-bold text-white border-gray-900`}>
