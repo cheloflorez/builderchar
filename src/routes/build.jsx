@@ -75,7 +75,7 @@ export default function Build() {
 
     if (!currentCharacter) return;
 
-    console.log('Saving character stats:', currentCharacter.stats); // ✅ Debug
+    console.log('Saving character stats:', currentCharacter); // ✅ Debug
 
     const updatedBuildData = {
       ...buildData,
@@ -103,13 +103,23 @@ export default function Build() {
   }, [selectedCharacter, notifyLevelRequired]);
 
   useEffect(() => {
-    const loadBuild = () => {
+    let isMounted = true;
+
+    const loadBuild = async () => {
+      const startTime = Date.now();
+      setIsLoading(true);
+
+      // -------------------------------
+      // TU CÓDIGO ACTUAL TAL CUAL
+      // -------------------------------
+
+      let loadedSuccessfully = false;
+
       // 🆕 PRIMERO: Verificar si es un build compartido
       if (isSharedBuildUrl()) {
         const sharedBuild = loadSharedBuild();
 
         if (sharedBuild) {
-          // Crear buildData desde el shared build
           const sharedBuildData = {
             id: 'shared',
             name: sharedBuild.name,
@@ -124,83 +134,68 @@ export default function Build() {
           setBuildData(sharedBuildData);
           setIsReadOnly(true);
 
-          // 🔧 IMPORTANTE: Asegurar que characterData tenga la propiedad 'class'
-          // Si no la tiene, agregarla desde sharedBuild
           const characterDataWithClass = {
             ...sharedBuild.characterData,
             class: sharedBuild.characterData.class || [sharedBuild.class]
           };
 
           loadCharacterData(characterDataWithClass);
-          setIsLoading(false);
-
-          notifySuccess(
-            'Shared Build Loaded',
-            `${sharedBuild.name} is ready to view`,
-            { duration: 3000, icon: '🔗' }
-          );
-          return;
-        } else {
-          // Si el link compartido es inválido
-          notifyError('Invalid Link', 'This shared build link is corrupted or invalid');
-          setTimeout(() => {
-            window.location.href = '/';
-          }, 2000);
-          return;
+          loadedSuccessfully = true;
         }
-      }
+      } else {
+        const savedBuilds = localStorage.getItem('mubuilds');
+        let currentBuild = null;
+        let isRecommended = false;
 
-      // Código ORIGINAL - buscar en builds normales
-      const savedBuilds = localStorage.getItem('mubuilds');
-      let currentBuild = null;
-      let isRecommended = false;
+        if (savedBuilds) {
+          const builds = JSON.parse(savedBuilds);
+          currentBuild = builds.find(build => build.id === buildId);
+        }
 
-      if (savedBuilds) {
-        const builds = JSON.parse(savedBuilds);
-        currentBuild = builds.find(build => build.id === buildId);
-      }
-
-      // Si no se encontró, buscar en builds recomendadas
-      if (!currentBuild) {
-        currentBuild = recommendedBuilds.find(build => build.id === buildId);
+        if (!currentBuild) {
+          currentBuild = recommendedBuilds.find(build => build.id === buildId);
+          if (currentBuild) isRecommended = true;
+        }
 
         if (currentBuild) {
-          isRecommended = true;
-          console.log('✅ Build recomendada cargada:', currentBuild.name);
-        }
-      }
+          setBuildData(currentBuild);
+          setIsReadOnly(isRecommended);
 
-      if (currentBuild) {
-        setBuildData(currentBuild);
-        setIsReadOnly(isRecommended);
-
-        // Cargar datos del personaje
-        if (currentBuild.characterData) {
-          loadCharacterData(currentBuild.characterData);
-        } else {
-          // Si es un build nuevo, crear desde template
-          const template = Object.values(characters).find(char =>
-            char.class[0] === currentBuild.class
-          );
-          if (template) {
-            addChar(template);
+          if (currentBuild.characterData) {
+            loadCharacterData(currentBuild.characterData);
+          } else {
+            const template = Object.values(characters).find(char =>
+              char.class[0] === currentBuild.class
+            );
+            if (template) addChar(template);
           }
-        }
 
-        setIsLoading(false);
-        notifySuccess(
-          'Build Loaded',
-          `${currentBuild.name} ready for building`,
-          { duration: 2000, icon: currentBuild.isRecommended ? '⭐' : '🎮' }
-        );
-      } else {
-        console.error('Build no encontrada:', buildId);
-        window.location.href = '/';
+          loadedSuccessfully = true;
+        }
       }
+
+      // -------------------------------
+      // ⏳ CONTROL DE DURACIÓN MÍNIMA
+      // -------------------------------
+
+      const elapsed = Date.now() - startTime;
+      const minimumDuration = 900;
+
+      const remainingTime = Math.max(minimumDuration - elapsed, 0);
+
+      setTimeout(() => {
+        if (isMounted && loadedSuccessfully) {
+          setIsLoading(false);
+        }
+      }, remainingTime);
     };
 
     loadBuild();
-  }, [buildId, addChar, characters, notifySuccess, loadCharacterData]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [buildId]);
 
 
   useEffect(() => {
@@ -318,15 +313,22 @@ export default function Build() {
     }
   };
 
-  if (isLoading || !selectedCharacter || !buildData) {
+  const handleLoadingComplete = React.useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
     return (
       <div className="min-h-screen overflow-x-auto overflow-y-auto bg-gradient-to-br from-slate-900 via-gray-900 to-black">
         <div className="absolute inset-0 bg-black/20 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_50%)]"></div>
         <div className="relative z-10 flex flex-col items-center justify-center min-h-screen">
-          <CharacterLoadingState />
+          <CharacterLoadingState onComplete={handleLoadingComplete} />
         </div>
       </div>
     );
+  }
+  if (!selectedCharacter || !buildData) {
+    return null; // o un spinner simple si querés
   }
   return (
     <div className="min-h-screen overflow-x-auto overflow-y-auto bg-gradient-to-br from-slate-900 via-gray-900 to-black">
