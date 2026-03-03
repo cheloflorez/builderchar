@@ -107,7 +107,6 @@ export default function Build() {
 
     const loadBuild = async () => {
       const startTime = Date.now();
-      setIsLoading(true);
 
       // -------------------------------
       // TU CÓDIGO ACTUAL TAL CUAL
@@ -173,21 +172,6 @@ export default function Build() {
           loadedSuccessfully = true;
         }
       }
-
-      // -------------------------------
-      // ⏳ CONTROL DE DURACIÓN MÍNIMA
-      // -------------------------------
-
-      const elapsed = Date.now() - startTime;
-      const minimumDuration = 900;
-
-      const remainingTime = Math.max(minimumDuration - elapsed, 0);
-
-      setTimeout(() => {
-        if (isMounted && loadedSuccessfully) {
-          setIsLoading(false);
-        }
-      }, remainingTime);
     };
 
     loadBuild();

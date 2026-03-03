@@ -1,36 +1,41 @@
 import React, { useEffect, useState } from "react";
 
 export const CharacterLoadingState = ({ onComplete }) => {
-  const steps = [
-    "Initializing character core...",
-    "Loading stat engine...",
-    "Syncing skill trees...",
-    "Preparing UI modules...",
-    "Finalizing build..."
-  ];
+
+  const loadingTexts = {
+    en: [
+      { main: "Initializing character core...", sub: "Inicializando núcleo del personaje..." },
+      { main: "Loading stat engine...", sub: "Cargando motor de estadísticas..." },
+      { main: "Syncing skill trees...", sub: "Sincronizando árboles de habilidades..." },
+      { main: "Preparing UI modules...", sub: "Preparando módulos de interfaz..." },
+      { main: "Finalizing build...", sub: "Finalizando configuración..." }
+    ]
+  };
+
+  const steps = loadingTexts.en;
 
   const [currentStep, setCurrentStep] = useState(0);
   const [progress, setProgress] = useState(0);
 
-useEffect(() => {
-  const interval = setInterval(() => {
-    setProgress(prev => {
-      const next = prev + 2;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        const next = prev + 2;
 
-      setCurrentStep(Math.min(Math.floor(next / 20), 4));
+        setCurrentStep(Math.min(Math.floor(next / 20), 4));
 
-      if (next >= 100) {
-        clearInterval(interval);
-        onComplete?.();
-        return 100;
-      }
+        if (next >= 100) {
+          clearInterval(interval);
+          onComplete?.();
+          return 100;
+        }
 
-      return next;
-    });
-  }, 30);
+        return next;
+      });
+    }, 120);
 
-  return () => clearInterval(interval);
-}, [onComplete]);
+    return () => clearInterval(interval);
+  }, [onComplete]);
 
   return (
     <div className="flex items-center justify-center min-h-[500px]">
@@ -41,19 +46,30 @@ useEffect(() => {
           Initializing Build System
         </h2>
 
-        {/* Fake Terminal Steps */}
-        <div className="space-y-2 mb-6 text-sm font-mono">
+        {/* Steps */}
+        <div className="space-y-4 mb-6 font-mono">
           {steps.map((step, index) => (
             <div
               key={index}
               className={`transition-all duration-500 ${
                 index <= currentStep
-                  ? "text-cyan-300 opacity-100"
-                  : "text-slate-600 opacity-40"
+                  ? "opacity-100"
+                  : "opacity-40"
               }`}
             >
-              {index < currentStep ? "✔" : index === currentStep ? "➜" : "•"}{" "}
-              {step}
+              <div className={`flex items-center gap-2 text-sm ${
+                index <= currentStep ? "text-cyan-300" : "text-slate-500"
+              }`}>
+                <span>
+                  {index < currentStep ? "✔" : index === currentStep ? "➜" : "•"}
+                </span>
+                <span>{step.main}</span>
+              </div>
+
+              {/* Sub text */}
+              <div className="ml-6 text-xs text-slate-500 tracking-wide">
+                {step.sub}
+              </div>
             </div>
           ))}
         </div>
@@ -68,8 +84,9 @@ useEffect(() => {
 
         {/* Percentage */}
         <div className="text-center mt-3 text-xs text-slate-400 tracking-wider">
-          {progress}% COMPLETE
+          {Math.floor(progress)}% COMPLETE
         </div>
+
       </div>
     </div>
   );
