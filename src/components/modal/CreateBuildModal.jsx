@@ -46,90 +46,124 @@ export default function CreateBuildModal({ onClose, onCreateBuild }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-auto">
-      <div className="bg-gradient-to-b from-gray-800 to-gray-900 border border-amber-600/50 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+
+      {/* Modal Container */}
+      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_0_60px_rgba(139,92,246,0.3)]">
 
         {/* Header */}
-        <div className="flex justify-between items-center p-6 border-b border-amber-600/30">
-          <h2 className="text-3xl font-bold text-amber-300">Create New Build</h2>
+        <div className="flex justify-between items-center p-8 border-b border-white/10">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            Create New Build
+          </h2>
+
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full bg-red-600/20 hover:bg-red-600/40 flex items-center justify-center transition-colors"
+            className="w-10 h-10 rounded-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 flex items-center justify-center transition-all"
           >
-            <span className="text-red-400 text-2xl">×</span>
+            <span className="text-red-400 text-xl">×</span>
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-8 space-y-8">
 
           {/* Build Name */}
           <div>
-            <label className="block text-amber-300 font-semibold mb-2">
+            <label className="block text-sm uppercase tracking-wider text-slate-400 mb-3">
               Build Name
             </label>
+
             <input
               type="text"
               value={buildName}
               onChange={(e) => setBuildName(e.target.value)}
               placeholder="Enter build name..."
-              className="w-full p-4 bg-gray-700 border border-gray-600 rounded-lg text-white focus:border-amber-500 focus:ring-2 focus:ring-amber-500/30 outline-none text-lg"
               maxLength={50}
+              className="w-full p-4 rounded-xl bg-white/5 border border-white/10 text-white 
+                         focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 
+                         outline-none transition-all"
             />
           </div>
 
           {/* Character Selection */}
           <div>
-            <label className="block text-amber-300 font-semibold mb-3">
+            <label className="block text-sm uppercase tracking-wider text-slate-400 mb-4">
               Select Character
             </label>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-h-96 overflow-y-auto p-2 bg-gray-800/50 rounded-lg border border-gray-600">
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-h-96 overflow-y-auto pr-2">
+
               {chars.map((char) => (
                 <button
                   key={char.key}
                   type="button"
                   onClick={() => setSelectedChar(char.key)}
-                  className={`flex flex-col items-center p-4 rounded-xl border-2 transition-all duration-200 transform hover:scale-105 ${selectedChar === char.key
-                    ? 'border-amber-500 bg-amber-500/20 shadow-lg'
-                    : 'border-gray-600 bg-gray-700/60 hover:border-gray-500'
+                  className={`group relative rounded-2xl p-4 transition-all duration-300 border backdrop-blur-md
+                    ${selectedChar === char.key
+                      ? "bg-white/10 border-purple-400/50 shadow-[0_0_30px_rgba(139,92,246,0.4)] scale-105"
+                      : "bg-white/5 border-white/10 hover:bg-white/10 hover:scale-105"
                     }`}
                 >
-                  <img
-                    src={`/characters/thumbs/${char.img}.webp`}
-                    alt={char.name}
-                    className="w-24 h-24 md:w-28 md:h-28 object-contain mb-2"
-                    style={{ imageRendering: 'pixelated' }}
-                  />
-                  <p className="text-sm md:text-base text-white font-medium text-center">
-                    {char.name}
-                  </p>
+
+                  {/* Glow */}
+                  {selectedChar === char.key && (
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-500 opacity-20 blur-md"></div>
+                  )}
+
+                  <div className="relative flex flex-col items-center">
+
+                    <div className="relative w-20 h-20 mb-3">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 blur-md opacity-30 group-hover:opacity-60 transition"></div>
+
+                      <div className="relative w-20 h-20 rounded-full overflow-hidden border border-white/10">
+                        <img
+                          src={`/characters/thumbs/${char.img}.webp`}
+                          alt={char.name}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+
+                    <p className="text-sm text-white font-medium text-center">
+                      {char.name}
+                    </p>
+
+                  </div>
                 </button>
               ))}
+
             </div>
           </div>
 
-          {/* Error Message */}
+          {/* Error */}
           {error && (
-            <div className="p-3 bg-red-900/20 border border-red-600/50 rounded-lg">
-              <p className="text-red-400 text-sm">{error}</p>
+            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+              {error}
             </div>
           )}
 
           {/* Actions */}
-          <div className="flex gap-3">
+          <div className="flex gap-4 pt-4">
+
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-3 bg-gray-600/50 hover:bg-gray-600/70 text-gray-300 border border-gray-600 rounded-lg transition-colors font-semibold"
+              className="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-400 hover:bg-white/10 hover:text-white transition-all"
             >
               Cancel
             </button>
+
             <button
               type="submit"
-              className="flex-1 py-3 bg-amber-600/80 hover:bg-amber-600 text-white border border-amber-600 rounded-lg transition-colors font-semibold"
+              className="flex-1 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-600 
+                         text-white font-semibold shadow-[0_0_30px_rgba(139,92,246,0.4)]
+                         hover:scale-105 transition-all duration-300"
             >
               Create Build
             </button>
+
           </div>
         </form>
       </div>
