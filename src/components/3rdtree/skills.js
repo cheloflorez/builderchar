@@ -3684,7 +3684,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/IncreasesCriticalDamageRate.webp',
         description: "Critical damage rate increases by 'X'%",
-        valueType: 'IncreasesCriticalDamageRate',
+        valueType: 'criticalDamageRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
@@ -3698,7 +3698,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/RestoresAllMana.webp',
         description: "You have a 'X'% chance to fully recover your mana any time you take damage",
-        valueType: 'RestoresAllMana',
+        valueType: 'restoreAllManaRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
@@ -3712,7 +3712,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/RestoresAllHP.webp',
         description: "You have a 'X'% chance to fully recover your HP any time you take damage",
-        valueType: 'RestoresAllHP',
+        valueType: 'restoreAllLifeRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
@@ -3740,7 +3740,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/IncreasesExcellentDamageRate.webp',
         description: "Excellent damage rate increases by 'X'%",
-        valueType: 'IncreasesExcellentDamageRate',
+        valueType: 'excellentDamageRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
@@ -3767,7 +3767,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/RestoresAllSD.webp',
         description: "'X'% chance to fully recover SD when attacking a target",
-        valueType: 'RestoresAllSD',
+        valueType: 'restoreAllSDRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
@@ -3781,7 +3781,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/IncreasesDoubleDamageRate.webp',
         description: "Double damage rate increases by 'X'%",
-        valueType: 'IncreasesDoubleDamageRate',
+        valueType: 'doubleDamageRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
@@ -3808,7 +3808,7 @@ export const SKILLS_DATABASE = {
         rowRequirements: {},
         image: '/3rd/red/IncreasesChanceofIgnoreDef.webp',
         description: "Chance to inflict damage ignoring enemy's defense increases by 'X'%",
-        valueType: 'IncreasesChanceofIgnoreDef',
+        valueType: 'defenseIgnoreRate',
         values: [
             0, 1.02, 1.27, 1.52, 1.75, 1.97, 2.18, 2.38, 2.57, 2.75, 2.92, 3.08, 3.24, 3.38, 3.52, 3.65, 3.77, 3.88, 3.99, 4.09, 4.18
         ],
